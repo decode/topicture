@@ -1,0 +1,43 @@
+9
+
+dir
+537
+file:///home/home/develop/svn/dlues/trunk/vendor/plugins/rpcontrol/generators/authsystem/templates
+file:///home/home/develop/svn/dlues
+
+
+
+2008-12-20T09:20:01.943160Z
+453
+home
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+00cf6b37-f0dc-46f4-bea4-f3be9987bad3
+
+helpers
+dir
+
+models
+dir
+
+controllers
+dir
+
+migrate
+dir
+
+views
+dir
+

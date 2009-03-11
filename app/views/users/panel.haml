@@ -1,0 +1,13 @@
+-form_for @user, :url => {:action => "modify"}, :method => :put do |f|
+  = submit_tag "Delete", :name => "mark_delete"
+  = submit_tag "Mark as read", :name => "mark_read"
+  = submit_tag "Delete forever", :name => "forever_delete"
+
+  #message_list
+    = render :partial => 'message_list'#, :object => @user
+
+  #send_message_list
+    - for msg in @user.sent_messages
+      = link_to msg.title, message_path(msg)
+
+

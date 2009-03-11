@@ -1,0 +1,26 @@
+%p
+  %b Name:
+  = h @topic.name
+
+%p
+  %b Parent:
+  = h @topic.parent_id
+
+%p
+  %b Description:
+  = h @topic.description
+
+%table
+  %tr
+    %th Title
+    %th
+  - for message in @topic.messages
+    %tr
+      %td
+        = link_to message.title, message
+      %td
+        = link_to 'Delete', message, :confirm => 'Are you sure?', :method => :delete
+
+= link_to 'Edit', edit_topic_path(@topic) |
+= link_to 'Back', topics_path
+= link_to 'Post', :action => 'post', :id => @topic

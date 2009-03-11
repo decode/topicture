@@ -1,0 +1,26 @@
+%h1 Listing topics
+
+%table
+  %tr
+    %th Name
+    %th Parent
+    %th Description
+
+  - for topic in @topics
+    %tr
+      %td
+        = h topic.name
+      %td
+        = h topic.parent_id
+      %td
+        = h topic.description
+      %td
+        = link_to 'Show', topic
+      %td
+        = link_to 'Edit', edit_topic_path(topic)
+      %td
+        = link_to 'Destroy', topic, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New topic', new_topic_path

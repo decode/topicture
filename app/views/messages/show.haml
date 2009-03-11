@@ -1,0 +1,16 @@
+%p
+  %b Title:
+  = h @message.title
+
+%p
+  %b Body:
+  = h @message.body
+
+%p
+  %b Follow:
+  = h Message.find_by_id(@message.follow_id).title unless @message.follow_id.nil?
+
+
+= link_to 'Edit', edit_message_path(@message)
+= link_to 'Back', messages_path
+= link_to 'Reply', :action => "reply", :id => @message

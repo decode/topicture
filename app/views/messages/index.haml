@@ -1,0 +1,27 @@
+%h1 List Messages
+
+%table
+  %tr
+    %th Title
+    %th Body
+    %th Follow
+
+  - for message in @messages
+    %tr
+      %td 
+        = h message.title
+      %td
+        = h message.body
+      %td
+        = h message.follow_id
+      %td
+        = link_to 'show', message
+      %td
+        = link_to 'Edit', edit_message_path(message)
+      %td
+        = link_to 'Destroy', message, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New message', new_message_path
+
