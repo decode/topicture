@@ -30,19 +30,30 @@ Feature: Users messages
       |title|body|sender|status|
       |title1|body 1|tom|unread|
     When I am on my message list page
-    And I follow "Mark as read"
-    Then I should see "Message status changed"
+    And I check the 1st message
+    And I press "Mark as read"
+    Then I should not see "Mark as read"
 
-   Scenario: Mark messages as delete
+  Scenario: Mark messages as delete
     Given I logged in as a message user Jerry
     And the following list messages:
       |title|body|sender|status|
-      |title1|body 1|tom|open|
+      |title 1|body 1|tom|open|
     When I am on my message list page
-    And I check "messages[10]"
+    And I check the 1st message
     And I press "Delete"
-    Then I should not see "title1"
+    Then I should not see "title 1"
 
+  Scenario: Undelete messages
+    Given I logged in as a message user Jerry
+    And the following list messages:
+      |title|body|sender|status|
+      |title 1|body 1|tom|suspend|
+    When I am on my message trash page
+    And I check the 1st message
+    And I press "Move to inbox"
+    And I am on my message list page
+    Then I should see "title 1"
 
   Scenario: Reply a message from other user
     Given I logged in as a message user Jerry

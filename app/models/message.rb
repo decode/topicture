@@ -16,4 +16,12 @@ class Message < ActiveRecord::Base
       msg.save
     end
   end
+
+  def self.mark_read(messages)
+    messages.each do |msg_id|
+      msg = Messagebox.find_by_message_id(msg_id)
+      msg.read
+      msg.save
+    end
+  end
 end

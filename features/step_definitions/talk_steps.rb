@@ -51,6 +51,14 @@ When /^I delete the (\d+)(?:st|nd|rd|th) message from the list$/ do |pos|
   end
 end
 
+When /^I check the (\d+)(?:st|nd|rd|th) message$/ do |pos|
+  visit "/user/#{@user.login}/panel"
+  within("table > tr:nth-child(#{pos.to_i})") do
+    check "messages[]"
+  end
+ 
+end
+
 Then /^I should see the follwing message list:$/ do |messages|
   messages.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|

@@ -86,6 +86,10 @@ class UsersController < ApplicationController
     if params[:mark_delete] 
       Message.mark_delete(params[:messages])
     end
+    if params[:mark_read]
+      Message.mark_read(params[:messages])
+      flash[:notice] = "Message status changed"
+    end
     @user = current_user
     render :partial => "message_list", :object => current_user
   end
