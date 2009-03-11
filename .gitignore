@@ -2,4 +2,5 @@ log/*.log
 tmp/*
 coverage/*
 config/database.yml
+tags
 .gitignore.swp

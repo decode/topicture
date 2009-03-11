@@ -29,17 +29,3 @@
       %td
         = #link_to "delete", message_path(msg), :method => :delete
 
-  %tr
-    %td Deleted messages:
-  - for msg in @user.deleted_messages
-    %tr
-      %td
-        = check_box_tag "messages[#{msg.id}]", msg.id
-      %td
-        = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
-      %td
-        = link_to "Mark as read", :controller => "messages", :action => "mark_read", :id => msg
-      %td
-        = link_to "Reply", :controller => "messages", :action => "reply", :id => msg
-      %td
-        = #link_to "delete", message_path(msg), :method => :delete

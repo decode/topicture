@@ -41,7 +41,7 @@ Feature: Users messages
     When I am on my message list page
     And I check "messages[10]"
     And I press "Delete"
-    Then I should see "Message status changed"
+    Then I should not see "title1"
 
 
   Scenario: Reply a message from other user
