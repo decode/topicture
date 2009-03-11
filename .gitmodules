@@ -1,0 +1,3 @@
+[submodule "vendor/plugins/workflow"]
+	path = vendor/plugins/workflow
+	url = git://github.com/ryan-allen/workflow.git
