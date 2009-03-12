@@ -1,10 +1,3 @@
-Given /^I logged in as a message user (.*)$/ do |name|
-  Given "Role normal can access controller messages"
-  Given "Role normal can access controller users"
-  Given "I am logged in as normal named #{name}"
-end
-
-
 Given /^I am on a page about user named (.*)$/ do |name|
   @user_to = Factory :user, :login => name, :email => "#{name}@mail.org"
   visit "/user/#{@user_to.login}"
@@ -30,6 +23,7 @@ end
 Given /^I am on my message list page$/ do
   @user.login.should == "Jerry"
   visit "/user/#{@user.login}/panel"
+  click_link "Message Box"
 end
 
 Given /^the following list messages:$/ do |messages|
@@ -38,8 +32,9 @@ Given /^the following list messages:$/ do |messages|
     message = Factory.create :message, :title => m["title"], :body => m["body"]
     message.user = user
     message.receivers << @user
-    unless m[:status].nil?
 
+    unless m[:status].nil?
+      # Add code for initial message status
     end
   end
 end
@@ -53,6 +48,7 @@ end
 
 When /^I check the (\d+)(?:st|nd|rd|th) message$/ do |pos|
   visit "/user/#{@user.login}/panel"
+  click_link "Message Box"
   within("table > tr:nth-child(#{pos.to_i})") do
     check "messages[]"
   end

@@ -9,6 +9,7 @@ class Messagebox < ActiveRecord::Base
       event :read, :transitions_to => :open
       event :msg_delete, :transitions_to => :suspend
       event :delete_forever, :transitions_to => :msg_delete
+      event :move, :transitions_to => :open
     end
     state :open do
       event :msg_delete, :transitions_to => :suspend
@@ -16,6 +17,7 @@ class Messagebox < ActiveRecord::Base
     state :suspend do
       event :undelete, :transitions_to => :open
       event :delete_forever, :transitions_to => :msg_delete
+      event :move, :transitions_to => :open
     end
     state :msg_delete
     state :suspend

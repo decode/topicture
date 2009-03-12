@@ -25,14 +25,12 @@ Given /^I am logged in as (.*) named (.*)$/ do |role, name|
   #response.body.should =~ /Welcome/m
 end
 
-Given /^I am admin user$/ do
+Given /^I logged in as a admin user (.*)$/ do |name|
 end
 
-Given /^I am manage user$/ do
+Given /^I logged in as a normal user (.*)$/ do |name|
+  Given "Role normal can access controller messages"
+  Given "Role normal can access controller users"
+  Given "I am logged in as normal named #{name}"
 end
 
-Given /^I am normal user$/ do
-end
-
-Given /^I am unlogged user$/ do
-end

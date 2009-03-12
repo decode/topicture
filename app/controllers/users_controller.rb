@@ -82,7 +82,11 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def modify
+  def message
+    @user = current_user
+  end
+
+  def message_modify
     if params[:mark_delete] 
       Message.mark_delete(params[:messages])
     end
@@ -90,8 +94,34 @@ class UsersController < ApplicationController
       Message.mark_read(params[:messages])
       flash[:notice] = "Message status changed"
     end
+    if params[:move]
+      Message.move(params[:messages])
+      flash[:notice] = "Message status changed"
+    end
     @user = current_user
     render :partial => "message_list", :object => current_user
   end
+
+  def trash
+    @user = current_user
+    render :partial => "trash_message_list"
+  end
+
+  def friend
+    @user = current_user
+  end
+  
+
+  # Display a add friend box to input messages
+  def show_invite
+  end
+
+  def invite
+    @source_user = current_user
+    @dest_user = User.find_by_id(session[:target_user_id])
+    @dest_user.strangers << @source_user
+    @dest_user.save
+  end
+  
   
 end

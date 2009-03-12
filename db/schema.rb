@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090304150442) do
+ActiveRecord::Schema.define(:version => 20090312072518) do
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id",        :null => false
+    t.integer  "friend_id",      :null => false
+    t.string   "workflow_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "messageboxes", :force => true do |t|
     t.integer  "user_id",        :null => false

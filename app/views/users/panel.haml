@@ -1,15 +1,5 @@
-= link_to "Trash", :controller => "messages", :action => "trash"
-
--form_for @user, :url => {:action => "modify"}, :method => :put do |f|
-  = submit_tag "Delete", :name => "mark_delete"
-  = submit_tag "Mark as read", :name => "mark_read"
-  = submit_tag "Delete forever", :name => "forever_delete"
-
-  #message_list
-    = render :partial => 'message_list'#, :object => @user
-
-  #send_message_list
-    - for msg in @user.sent_messages
-      = link_to msg.title, message_path(msg)
-
-
+#message_container
+  = link_to "Message Box", :action => "message"
+ 
+#friend_container
+  = link_to "Friend Box", :action => "friend"

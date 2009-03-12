@@ -24,4 +24,12 @@ class Message < ActiveRecord::Base
       msg.save
     end
   end
+
+  def self.move(messages)
+    messages.each do |msg_id|
+      msg = Messagebox.find_by_message_id(msg_id)
+      msg.move
+    end
+  end
+
 end
