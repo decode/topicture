@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout "base"
+  layout "site"
   include AccessFilter
 
   active_scaffold
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   end
 
   # Display user's main page
-  def view
+  def info 
     @user = User.find_by_login(params[:name])
     session[:target_user_id] = @user.id
     if @user.nil?
@@ -113,14 +113,22 @@ class UsersController < ApplicationController
   
 
   # Display a add friend box to input messages
-  def show_invite
+  def invite
+    session[:target_user_id] = params[:id]
   end
 
-  def invite
+  def invite_request
     @source_user = current_user
     @dest_user = User.find_by_id(session[:target_user_id])
     @dest_user.strangers << @source_user
     @dest_user.save
+    
+    message = Message.new(params[:message])
+    message.receivers << @dest_user
+    message.user = @source_user
+    message.save
+    flash[:notice] = "Your request has been sent"
+    redirect_to :controller => "users", :action => "info", :name => @dest_user.login
   end
   
   

@@ -8,5 +8,5 @@ Feature: Manage relations
     And I am on a page about user named Tom
     And I follow "Add as friend"
     When I send a friend invite request
-    Then I should see "Your request has been send"
+    Then I should see "Your request has been sent"
     And user Tom should received a request from Jerry
