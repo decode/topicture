@@ -18,11 +18,12 @@ Feature: Users messages
       |title 1|body 1|tom|
       |title 2|body 2|aux|
       |title 3|body 3|feder|
-    When I delete the 2nd message from the list
-    Then I should see the follwing message list:
-      |title|body|
-      |title 1|body 1|
-      |title 3|body 3|
+    When I check the 2nd message
+    And I press "Delete"
+    Then I should see the message list:
+      |title|
+      |title 1|
+      |title 3|
 
   Scenario: Mark unread messages as read
     Given I logged in as a message user Jerry
@@ -49,7 +50,8 @@ Feature: Users messages
     And the following list messages:
       |title|body|sender|status|
       |title 1|body 1|tom|suspend|
-    When I am on my message trash page
+    When I am on my message list page
+    And I follow "Trash"
     And I check the 1st message
     And I press "Move to inbox"
     And I am on my message list page

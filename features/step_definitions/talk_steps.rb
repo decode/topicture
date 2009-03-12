@@ -56,13 +56,12 @@ When /^I check the (\d+)(?:st|nd|rd|th) message$/ do |pos|
   within("table > tr:nth-child(#{pos.to_i})") do
     check "messages[]"
   end
- 
 end
 
-Then /^I should see the follwing message list:$/ do |messages|
+Then /^I should see the message list:$/ do |messages|
   messages.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.should have_selector("table > tr:nth-child(#{i+2}) > td:nth-child(#{j+1})") { |td|
+      response.should have_selector("table > tr:nth-child(#{i+1}) > td:nth-child(#{j+2})") { |td|
         td.inner_text.chomp.strip.should == cell
       }
     end

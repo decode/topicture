@@ -125,7 +125,10 @@ class MessagesController < ApplicationController
     redirect_back_or_default messages_url
   end
 
-
+  def trash
+    @user = current_user
+  end
+  
   
   
 end

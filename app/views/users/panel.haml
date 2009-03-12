@@ -1,3 +1,5 @@
+= link_to "Trash", :controller => "messages", :action => "trash"
+
 -form_for @user, :url => {:action => "modify"}, :method => :put do |f|
   = submit_tag "Delete", :name => "mark_delete"
   = submit_tag "Mark as read", :name => "mark_read"
