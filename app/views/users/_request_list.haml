@@ -1,0 +1,24 @@
+%table
+  - for req in @user.strangers
+    %tr
+      %td
+        = check_box_tag "request_users[]", req.id
+      %td
+        = link_to req.login, user_path(req)
+        - msg = @user.request_messages.find_by_user_id(req.id)
+      %td
+        = msg.title
+      %td
+        = msg.body
+  - for rfs in @user.refused_users
+    %tr
+      %td
+        = check_box_tag "refused_users[]", rfs.id
+      %td
+        = link_to rfs.login, user_path(rfs)
+      - msg = @user.refused_users.find_by_user_id(rfs.id)
+      %td
+        = msg.title
+      %td
+        = msg.body
+
