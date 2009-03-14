@@ -10,6 +10,7 @@ class Messagebox < ActiveRecord::Base
       event :msg_delete, :transitions_to => :suspend
       event :delete_forever, :transitions_to => :msg_delete
       event :move, :transitions_to => :open
+      event :change_to_request, :transitions_to => :request
     end
     state :open do
       event :msg_delete, :transitions_to => :suspend
@@ -21,6 +22,13 @@ class Messagebox < ActiveRecord::Base
     end
     state :msg_delete
     state :suspend
+    state :request do
+      event :req_delete, :transitions_to => :req_delete
+      event :refuse, :transitions_to => :refuse
+      event :accept, :transitions_to => :req_delete
+    end
+    state :req_delete
+    state :refuse
   end
 =begin
   attr_accessor :state

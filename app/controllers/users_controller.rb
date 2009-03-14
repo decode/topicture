@@ -110,7 +110,6 @@ class UsersController < ApplicationController
   def friend
     @user = current_user
   end
-  
 
   # Display a add friend box to input messages
   def invite
@@ -130,6 +129,5 @@ class UsersController < ApplicationController
     flash[:notice] = "Your request has been sent"
     redirect_to :controller => "users", :action => "info", :name => @dest_user.login
   end
-  
   
 end
