@@ -1,4 +1,4 @@
--form_for @user, :url => {:action => "friend_modify"}, :method => :put do |f|
+-form_remote_for @user, :url => {:action => "friend_modify"}, :method => :put do |f|
   = submit_tag "Delete", :name => "delete"
   = submit_tag "Accept", :name => "accept"
   = submit_tag "Refuse", :name => "refuse"

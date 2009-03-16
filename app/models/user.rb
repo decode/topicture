@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :read_messages, :through => :messagebox, :source => :message, :conditions => "workflow_state = 'open'"
   has_many :deleted_messages, :through => :messagebox, :source => :message, :conditions => "workflow_state = 'suspend'"
   has_many :request_messages, :through => :messagebox, :source => :message, :conditions => "workflow_state = 'request'"
-  has_many :refuse_messages, :through => :messagebox, :source => :message, :conditions => "workflow_state = 'refuse'"
+  has_many :refused_messages, :through => :messagebox, :source => :message, :conditions => "workflow_state = 'refuse'"
 
   # Friend relation
   has_many :friendships, :dependent => :destroy
@@ -23,6 +23,14 @@ class User < ActiveRecord::Base
 
   def to_label
     login
+  end
+
+  def self.refuse(users)
+    users.each do |user_id|
+      user = Friendship.find_by_friend_id(user_id)
+      yield(user)
+      user.save
+    end
   end
 
 end

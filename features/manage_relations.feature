@@ -20,9 +20,9 @@ Feature: Manage relations
       |hi|there|aux|
     When I check the 1st request
     And I press "Refuse"
-    Then I should see the request list:
-      |title|body|sender|
-      |hi|there|aux|
-    And I should see the refuse list:
-      |title|body|sender|
-      |hello|my friend|tom|
+    Then I should see the user request list:
+      |sender|title|body|
+      |aux|hi|there|
+    And I should see the user refuse list:
+      |sender|title|body|
+      |tom|hello|my friend|

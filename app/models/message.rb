@@ -8,7 +8,14 @@ class Message < ActiveRecord::Base
   has_many :messagebox, :foreign_key => "message_id"
   has_many :receivers, :through => :messagebox, :source => :user
 
-
+  def self.take_action(messages)
+    messages.each do |msg_id|
+      msg = Messagebox.find_by_message_id(msg_id)
+      yield(msg)
+      msg.save
+    end
+  end
+  
   def self.mark_delete(messages)
     messages.each do |msg_id|
       msg = Messagebox.find_by_message_id(msg_id)   
@@ -29,7 +36,15 @@ class Message < ActiveRecord::Base
     messages.each do |msg_id|
       msg = Messagebox.find_by_message_id(msg_id)
       msg.move
+      msg.save
     end
+  end
+
+  # Change message type to add friend request
+  def change_to_request
+    msg = Messagebox.find_by_message_id(self.id)
+    msg.change_to_request
+    msg.save
   end
 
 end

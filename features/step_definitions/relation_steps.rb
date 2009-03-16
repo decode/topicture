@@ -23,6 +23,8 @@ Given /^the following list request:$/ do |requests|
     message = Factory.create :message, :title => m["title"], :body => m["body"]
     message.user = user
     message.receivers << @user
+    message.change_to_request
+    message.save
 
     @user.strangers << user
     @user.save
@@ -37,14 +39,14 @@ When /^I check the (\d+)(?:st|nd|rd|th) request$/ do |pos|
   visit "/user/#{@user.login}/panel"
   click_link "Friend Box"
   within("table > tr:nth-child(#{pos.to_i})") do
-    check "messages[]"
+    check "request_users[]"
   end
 end
 
-Then /^I should see the request list:$/ do |messages|
+Then /^I should see the user (.*) list:$/ do |list_type, messages|
   messages.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.should have_selector("table > tr:nth-child(#{i+1}) > td:nth-child(#{j+2})") { |td|
+      response.should have_selector(".#{list_type}_list > table > tr:nth-child(#{i+1}) > td:nth-child(#{j+2})") { |td|
         td.inner_text.chomp.strip.should == cell
       }
     end

@@ -111,6 +111,21 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def friend_modify
+    if params[:refuse]  
+      User.refuse(params[:request_users]) { |user| user.refuse }
+      @user = current_user
+      render :partial => "request_list"
+    end
+    if params[:accept]
+    end
+    if params[:block]
+    end
+    if params[:delete]
+    end
+
+  end
+  
   # Display a add friend box to input messages
   def invite
     session[:target_user_id] = params[:id]
@@ -129,5 +144,7 @@ class UsersController < ApplicationController
     flash[:notice] = "Your request has been sent"
     redirect_to :controller => "users", :action => "info", :name => @dest_user.login
   end
+  
+
   
 end

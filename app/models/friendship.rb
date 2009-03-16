@@ -6,7 +6,7 @@ class Friendship < ActiveRecord::Base
   workflow do
     state :request do
       event :approve, :transitions_to => :accept
-      event :deny, :transitions_to => :refuse
+      event :refuse, :transitions_to => :refuse
       event :block, :transitions_to => :block
     end
     state :accept do

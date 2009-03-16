@@ -3,7 +3,6 @@ class Messagebox < ActiveRecord::Base
   belongs_to :message
 
   include Workflow
-
   workflow do
     state :unread do
       event :read, :transitions_to => :open
