@@ -23,6 +23,3 @@ Feature: Manage relations
     Then I should see the user request list:
       |sender|title|body|
       |aux|hi|there|
-    And I should see the user refuse list:
-      |sender|title|body|
-      |tom|hello|my friend|
