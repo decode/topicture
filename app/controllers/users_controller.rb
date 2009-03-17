@@ -115,7 +115,14 @@ class UsersController < ApplicationController
     if params[:refuse]  
       User.refuse(params[:request_users]) { |user| user.refuse }
       @user = current_user
-      render :partial => "request_list"
+#=begin
+      render :update do |page|
+        page.replace_html 'request_list', :partial => 'request_list', :object => @user
+      end
+#=end
+=begin
+      render :partial => 'request_list'
+=end
     end
     if params[:accept]
     end

@@ -30,7 +30,7 @@ Given /^the following list request:$/ do |requests|
     @user.save
 
     unless m[:status].nil?
-      # Add code for initial message status
+      # Add code for initial friend status
     end
   end
 end
@@ -44,10 +44,11 @@ When /^I check the (\d+)(?:st|nd|rd|th) request$/ do |pos|
 end
 
 Then /^I should see the user (.*) list:$/ do |list_type, messages|
+  wait_for
   messages.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.should have_selector(".#{list_type}_list > table > tr:nth-child(#{i+1}) > td:nth-child(#{j+2})") { |td|
-        td.inner_text.chomp.strip.should == cell
+      response.should have_selector("div##{list_type}_list > table > tr:nth-child(#{i+1}) > td:nth-child(#{j+2})") { |td|
+        td.inner_text.chomp.strip.should =~ /#{cell}/m
       }
     end
   end
