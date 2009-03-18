@@ -35,11 +35,11 @@ Given /^the following list request:$/ do |requests|
   end
 end
 
-When /^I check the (\d+)(?:st|nd|rd|th) request$/ do |pos|
+When /^I check the (\d+)(?:st|nd|rd|th) (.*) on friend page$/ do |pos, page_type|
   visit "/user/#{@user.login}/panel"
   click_link "Friend Box"
   within("table > tr:nth-child(#{pos.to_i})") do
-    check "request_users[]"
+    check "#{page_type}_users[]"
   end
 end
 
@@ -53,3 +53,21 @@ Then /^I should see the user (.*) list:$/ do |list_type, messages|
   end
 end
 
+Given /^the following list friends:$/ do |friends|
+  friends.hashes.each do |m|
+    user = Factory.create :user, :login => m["friend"], :email => "#{m["friend"]}@test.net" unless m["friend"].nil?
+    @user.friends << user
+    User.handle([*user.id]) { |u| u.approve }
+    @user.save
+
+    unless m[:status].nil?
+      # Add code for initial friend status
+    end
+  end
+end
+
+
+When /^I goto my friend list page$/ do
+  visit "/user/#{@user.login}/panel"
+  click_link "Friend Box"
+end

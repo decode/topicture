@@ -112,25 +112,29 @@ class UsersController < ApplicationController
   end
 
   def friend_modify
+    @user = current_user
     if params[:refuse]  
-      User.refuse(params[:request_users]) { |user| user.refuse }
+      User.handle(params[:request_users]) { |user| user.refuse }
       @user = current_user
 #=begin
-      render :update do |page|
-        page.replace_html 'request_list', :partial => 'request_list', :object => @user
-      end
 #=end
 =begin
       render :partial => 'request_list'
 =end
     end
     if params[:accept]
+      User.handle(params[:friend_users]) { |user| user.approve }
     end
     if params[:block]
+      User.handle(params[:friend_users]) { |user| user.block}
     end
     if params[:delete]
+      User.handle(params[:friend_users]) { |user| user.delete }
     end
 
+    render :update do |page|
+      page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
+    end
   end
   
   # Display a add friend box to input messages

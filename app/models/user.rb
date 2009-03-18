@@ -25,12 +25,12 @@ class User < ActiveRecord::Base
     login
   end
 
-  def self.refuse(users)
+  def self.handle(users)
     users.each do |user_id|
       user = Friendship.find_by_friend_id(user_id)
       yield(user)
       user.save
-    end
+    end unless users.nil?
   end
 
 end

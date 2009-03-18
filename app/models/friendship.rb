@@ -12,6 +12,7 @@ class Friendship < ActiveRecord::Base
     state :accept do
       event :block, :transitions_to => :block
       event :delete, :transitions_to => :delete
+      event :approve, :transitions_to => :approve
     end
     state :refuse do
       event :block, :transitions_to => :block
@@ -21,6 +22,7 @@ class Friendship < ActiveRecord::Base
     state :block do
       event :delete, :transitions_to => :delete
       event :approve, :transitions_to => :accept
+      event :block, :transitions_to => :block
     end
     state :delete
   end
