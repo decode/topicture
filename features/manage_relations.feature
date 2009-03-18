@@ -58,3 +58,10 @@ Feature: Manage relations
     And I press "Block"
     And I goto my friend list page
     Then I should not see "tom"
+
+  Scenario: Blocked user can't send messages
+    Given I logged in as a normal user Jerry
+    And I am on my request list page
+    When the blocked user named Tom send a message
+    And I am on my message list page
+    Then I should not see "tom"

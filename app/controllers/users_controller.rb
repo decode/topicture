@@ -116,6 +116,9 @@ class UsersController < ApplicationController
     if params[:refuse]  
       User.handle(params[:request_users]) { |user| user.refuse }
       @user = current_user
+      render :update do |page|
+        page.replace_html 'request_list', :partial => 'request_list', :object => @user
+      end
 #=begin
 #=end
 =begin
@@ -124,17 +127,26 @@ class UsersController < ApplicationController
     end
     if params[:accept]
       User.handle(params[:friend_users]) { |user| user.approve }
+      render :update do |page|
+        page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
+      end
     end
     if params[:block]
       User.handle(params[:friend_users]) { |user| user.block}
+      render :update do |page|
+        page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
+      end
     end
     if params[:delete]
       User.handle(params[:friend_users]) { |user| user.delete }
+      render :update do |page|
+        page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
+      end
     end
 
-    render :update do |page|
-      page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
-    end
+    #render :update do |page|
+    #  page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
+    #end
   end
   
   # Display a add friend box to input messages
