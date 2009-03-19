@@ -1,3 +1,6 @@
 [submodule "vendor/plugins/workflow"]
 	path = vendor/plugins/workflow
 	url = git://github.com/ryan-allen/workflow.git
+[submodule "vendor/plugins/rspec"]
+	path = vendor/plugins/rspec
+	url = git://github.com/dchelimsky/rspec.git
