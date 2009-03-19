@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # Friend relation
   has_many :friendships, :dependent => :destroy
   has_many :friends, :through => :friendships, :conditions => "workflow_state = 'accept'", :source => :friend
-  has_many :blocks_users, :through => :friendships, :conditions => "workflow_state = 'block'", :source => :friend
+  has_many :blocked_users, :through => :friendships, :conditions => "workflow_state = 'block'", :source => :friend
   has_many :strangers, :through => :friendships, :conditions => "workflow_state = 'request'", :source => :friend
   has_many :refused_users, :through => :friendships, :conditions => "workflow_state = 'refuse'", :source => :friend
   has_many :relations, :through => :friendships, :source => :friend
@@ -33,4 +33,9 @@ class User < ActiveRecord::Base
     end unless users.nil?
   end
 
+  def blocked_by?(user)
+    return false if user.nil?
+    return user.blocked_users.include? self
+  end
+  
 end

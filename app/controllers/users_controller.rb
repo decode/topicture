@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-
     respond_to do |format|
       format.html
       format.xml { render :xml => @user }
@@ -82,6 +81,7 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  # Show message list
   def message
     @user = current_user
   end
@@ -157,17 +157,33 @@ class UsersController < ApplicationController
   def invite_request
     @source_user = current_user
     @dest_user = User.find_by_id(session[:target_user_id])
-    @dest_user.strangers << @source_user
-    @dest_user.save
-    
-    message = Message.new(params[:message])
-    message.receivers << @dest_user
-    message.user = @source_user
-    message.save
-    flash[:notice] = "Your request has been sent"
+    if @source_user.blocked_by?(@dest_user)
+      flash[:notice] = "You are blocked"
+      redirect_back_or_default "/user/#{@dest_user.login}"
+    else
+      @dest_user.strangers << @source_user
+      @dest_user.save
+      
+      message = Message.new(params[:message])
+      message.receivers << @dest_user
+      message.user = @source_user
+      message.save
+      flash[:notice] = "Your request has been sent"
     redirect_to :controller => "users", :action => "info", :name => @dest_user.login
+    end
   end
   
+  # Show block user list
+  def block
+    @user = current_user
+  end
 
+  def unblock
+    @user = current_user
+    unblocked_user = User.find_by_id params[:id]
+    User.handle([*unblocked_user.id]) { |u| u.approve }
+    @user.save
+    redirect_to :action => "block"
+  end
   
 end

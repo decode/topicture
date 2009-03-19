@@ -52,14 +52,20 @@ class MessagesController < ApplicationController
 
     # Record message sender's id
     @message.user_id = current_user.id unless current_user.nil?
-    @message.receivers << User.find_by_id(session[:target_user_id]) unless session[:target_user_id].nil?
+    receiver = User.find_by_id(session[:target_user_id]) unless session[:target_user_id].nil?
+    blocked = false
+    unless receiver.nil?
+      blocked = receiver.blocked_users.include?(current_user)
+      flash[:notice] = "You are blocked" if blocked
+      @message.receivers << receiver
+    end
     session[:target_user_id] = nil
  
     # Add topic reference
     @message.topic_id = session[:topic_id].to_i unless session[:topic_id].nil?
     
     respond_to do |format|
-      if @message.save
+      if @message.save and blocked == false
         flash[:notice] = 'Message was successfully created.'
         #begin
         #  redirect_to :back
@@ -72,7 +78,13 @@ class MessagesController < ApplicationController
         #format.html { redirect_to(@message) }
         format.xml  { render :xml => @message, :status => :created, :location => @message }
       else
-        format.html { render :action => "new" }
+        format.html do 
+          if blocked
+            redirect_back_or_default "/user/#{receiver.login}"
+          else
+            render :action => "new" 
+          end
+        end
         format.xml  { render :xml => @message.errors, :status => :unprocessable_entity }
       end
     end

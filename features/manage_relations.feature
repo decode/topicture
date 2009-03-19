@@ -52,16 +52,32 @@ Feature: Manage relations
     And I am on my request list page
     And the following list friends:
       |friend|
-      |tom|
+      |mary|
       |aux|
     When I check the 1st friend on friend page
     And I press "Block"
     And I goto my friend list page
-    Then I should not see "tom"
+    Then I should not see "mary"
 
   Scenario: Blocked user can't send messages
     Given I logged in as a normal user Jerry
-    And I am on my request list page
-    When the blocked user named Tom send a message
-    And I am on my message list page
-    Then I should not see "tom"
+    And I am on a page about user named Hary
+    And I was blocked by user Hary
+    When I send a message
+    Then I should see "You are blocked"
+
+  Scenario: Blocked user can't send request
+    Given I logged in as a normal user Jerry
+    And I am on a page about user named Hary
+    And I was blocked by user Hary
+    And I follow "Add as friend"
+    When I send a friend invite request
+    Then I should see "You are blocked"
+
+  Scenario: Unblock user
+    Given I logged in as a normal user Jerry
+    And I have blocked Hary 
+    When I goto my block list page
+    And I follow "Unblock"
+    And I goto my friend list page
+    Then I should see "Hary"

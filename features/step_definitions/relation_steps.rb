@@ -71,3 +71,25 @@ When /^I goto my friend list page$/ do
   visit "/user/#{@user.login}/panel"
   click_link "Friend Box"
 end
+
+Given /^I was blocked by user (.*)$/ do |friend|
+  u = User.find_by_login friend
+  user = u || Factory.create( :user, :login => friend, :email => "#{friend}@test.net" )
+  user.blocked_users << @user
+  User.handle([*@user.id]) { |u| u.block }
+  user.save
+end
+
+Given /^I have blocked (.*)$/ do |friend|
+  u = User.find_by_login friend
+  user = u || Factory.create( :user, :login => friend, :email => "#{friend}@test.net" )
+  @user.blocked_users << user
+  User.handle([*user.id]) { |u| u.block }
+  @user.save
+end
+
+When /^I goto my block list page$/ do
+  visit "/user/#{@user.login}/panel"
+  click_link "Block Box"
+end
+

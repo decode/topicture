@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
 
   has_many :messagebox, :foreign_key => "message_id"
   has_many :receivers, :through => :messagebox, :source => :user
-
+  
   def self.take_action(messages)
     messages.each do |msg_id|
       msg = Messagebox.find_by_message_id(msg_id)
