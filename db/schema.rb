@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(:version => 20090312072518) do
   create_table "messages", :force => true do |t|
     t.integer  "topic_id"
     t.integer  "user_id"
-    t.string   "title",      :null => false
+    t.string   "title",        :null => false
     t.text     "body"
     t.integer  "follow_id"
+    t.string   "message_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

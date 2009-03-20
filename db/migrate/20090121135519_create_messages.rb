@@ -6,7 +6,7 @@ class CreateMessages < ActiveRecord::Migration
       t.string :title, :null => false
       t.text :body
       t.integer :follow_id
-
+      t.string :message_type
       t.timestamps
     end
   end

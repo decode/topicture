@@ -47,12 +47,16 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
 
     # Add reply message
-    @message.follow_id = session[:target_message_id].to_i unless session[:target_message_id].nil?
-    session[:target_message_id] = nil
+    target_id = session[:target_message_id]
+    unless target_id.nil?
+      @message.follow_id = target_id 
+      @message.message_type = session[:message_type] || Message.find_by_id(target_id).message_type
+      session[:target_message_id] = nil
+    end
 
     # Record message sender's id
     @message.user_id = current_user.id unless current_user.nil?
-    receiver = User.find_by_id(session[:target_user_id]) unless session[:target_user_id].nil?
+    receiver = User.find_by_id(target_id) unless target_id.nil?
     blocked = false
     unless receiver.nil?
       blocked = receiver.blocked_users.include?(current_user)
@@ -62,8 +66,14 @@ class MessagesController < ApplicationController
     session[:target_user_id] = nil
  
     # Add topic reference
-    @message.topic_id = session[:topic_id].to_i unless session[:topic_id].nil?
-    
+    unless session[:topic_id].nil?
+      @message.topic_id = session[:topic_id].to_i
+      @message.message_type ||= 'topic'
+    end
+
+    # If not specified type, use default message_type
+    @message.message_type ||= 'blog'
+
     respond_to do |format|
       if @message.save and blocked == false
         flash[:notice] = 'Message was successfully created.'
