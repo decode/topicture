@@ -2,6 +2,8 @@ class UserSessionsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
 
+  layout 'site'
+
   def new
     @user_session = UserSession.new
   end
@@ -12,6 +14,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Login successful!"
       redirect_back_or_default "/site"
     else
+      flash[:notice] = "Login failed"
       render :action => :new
     end
   end

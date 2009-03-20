@@ -40,4 +40,13 @@ Given /^I logged in as a guest user (.*)$/ do |name|
   Given "I am logged in as anonymous named #{name}" 
 end
 
+Given /^User (.*) has role named (.*)$/ do |name, role|
+  Given "Role #{role} can access controller messages"
+  Given "Role #{role} can access controller users"
+  @user = Factory(:user, :login => name)
+  @user.roles << @role[role]
+end
 
+Given /^I am on login page$/ do
+  visit "/user_session/new"
+end
