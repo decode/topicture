@@ -34,3 +34,10 @@ Given /^I logged in as a normal user (.*)$/ do |name|
   Given "I am logged in as normal named #{name}"
 end
 
+Given /^I logged in as a guest user (.*)$/ do |name|
+  Given "Role anonymous can access controller messages"
+  Given "Role anonymous can access controller users"
+  Given "I am logged in as anonymous named #{name}" 
+end
+
+
