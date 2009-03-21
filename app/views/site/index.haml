@@ -1,8 +1,35 @@
-.container
-  .span-24 
-    %h1 TopicTrue
-  .span-24
-    News
-  .span-12 Left sidebar
-  .span-12.last Right sidebar
-  .span-24 Footer
+#news_list.span-24
+  %h2 News
+  .box
+    - if @news.size == 0
+      = "No recently news..."
+    - for n in @news
+      = link_to n.title, messages_path(n)
+      = n.body
+%hr
+
+#topic_list.span-11.colborder
+  %h2 
+    = link_to 'Topic', :controller => 'topics'
+    = "News"
+  .box
+    - if @topic_news.size == 0
+      = "No recently topic news..."
+    - for t in @topic_news
+      = link_to t.user.login, user_path(t.user)
+      = "says: "
+      = link_to t.title, message_path(t)
+      = " in "
+      - topic = Topic.find_by_id(t.topic_id)
+      = link_to topic.name, topic_path(topic)
+
+#blog_list.span-12.last
+  %h2 
+    = link_to 'Blog', :controller => 'blog'
+    = "News"
+  .box
+    - if @blog_news.size == 0
+      = "No recently blog news..."
+    - for b in @blog_news
+      = link_to b.title, messages_path(b)
+      = link_to b.user.login, users_path(b.user)

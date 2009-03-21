@@ -1,15 +1,14 @@
-%p
-  %b Name:
+.span-12
+  = "Name: "
   = h @topic.name
-
-%p
-  %b Parent:
-  = h @topic.parent_id
-
-%p
-  %b Description:
+.span-12.last
+  - unless @topic.parent_id.nil?
+    = "Parent: "
+    = h @topic.parent_id
+.span-24
+  = "Description: "
   = h @topic.description
-
+%hr
 %table
   %tr
     %th Title

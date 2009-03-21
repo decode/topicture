@@ -1,6 +1,8 @@
 class TopicsController < ApplicationController
   include AccessFilter
 
+  layout 'site'
+
   # GET /topics
   # GET /topics.xml
   def index
@@ -88,6 +90,7 @@ class TopicsController < ApplicationController
   def post
     session[:topic_id] = params[:id]
     session[:return_to] = "/topics/#{params[:id]}"
+    session[:messages_type] = "topic"
     redirect_to :controller => "messages", :action => "new"
   end
 end

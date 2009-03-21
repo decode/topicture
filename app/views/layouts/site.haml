@@ -10,7 +10,18 @@
     = javascript_include_tag :defaults
     %title ToPicTure
   %body
+    .container
+      .span-12
+        %h1 TopicTure
+      .span-12.last
+        = navigation :status
+      %hr
+      - if flash[:notice]
+        .notice
+          = flash[:notice]
 
-    - if flash[:notice]
-      = flash[:notice]
-    = yield
+      = yield
+
+      %hr
+      #footer.span-24
+        %span.quiet Topicture v0.1
