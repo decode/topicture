@@ -4,49 +4,23 @@
   .span-4.last
     = link_to 'New topic', new_topic_path
 
-  .span-8 Name
-  .span-10 Description
-  .span-6.last
+  .span-5.colborder
+    %ul
+      - for topic in @topics
+        %li
+          = link_to topic.name, topic
+        - sub_topics = Topic.find :all, :conditions => "parent_id = #{topic.id}"
+        - for sub_topic in sub_topics
+          %li
+            = link_to sub_topic.name, topic
+  .span-18.last
+    %h3 New updates
+    - for message in @topic_news
+      .box
+        = link_to message.user.login, message.user
+        = " says: " 
+        = link_to message.title, message
+        %br
+        = link_to message.topic.name
+        = h message.created_at
 
-  - for topic in @topics
-    .span-8 
-      = h topic.name
-    .span-10
-      = h topic.description
-    .span-6
-    - sub_topics = Topic.find :all, :conditions => "parent_id = #{topic.id}"
-    - for sub_topic in sub_topics
-      .span-8
-        = h sub_topic.name
-      .span-10
-        = h sub_topic.description
-      .span-6
-    %hr
-%table
-  %tr
-    %th Name
-    %th Parent
-    %th Description
-    %th
-    %th
-    %th
-
-  - for topic in @topics
-    %tr
-      %td
-        = h topic.name
-      %td
-        = h topic.parent_id
-      %td
-        = h topic.description
-      %td
-        = link_to 'Show', topic
-      %td
-        = link_to 'Edit', edit_topic_path(topic)
-      %td
-        = link_to 'Destroy', topic, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-
-= link_to 'New topic', new_topic_path

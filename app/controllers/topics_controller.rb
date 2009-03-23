@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   # GET /topics.xml
   def index
     @topics = Topic.find(:all, :conditions => 'parent_id is null')
-
+    @topic_news = Message.find :all, :conditions => "message_type = 'topic'", :order => 'created_at DESC', :limit => 20
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @topics }
