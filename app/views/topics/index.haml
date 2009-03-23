@@ -1,6 +1,27 @@
 #topic_page
-%h2 Listing topics
+  .span-20 
+    %h2 List topics
+  .span-4.last
+    = link_to 'New topic', new_topic_path
 
+  .span-8 Name
+  .span-10 Description
+  .span-6.last
+
+  - for topic in @topics
+    .span-8 
+      = h topic.name
+    .span-10
+      = h topic.description
+    .span-6
+    - sub_topics = Topic.find :all, :conditions => "parent_id = #{topic.id}"
+    - for sub_topic in sub_topics
+      .span-8
+        = h sub_topic.name
+      .span-10
+        = h sub_topic.description
+      .span-6
+    %hr
 %table
   %tr
     %th Name
@@ -26,5 +47,6 @@
         = link_to 'Destroy', topic, :confirm => 'Are you sure?', :method => :delete
 
 %br
+
 
 = link_to 'New topic', new_topic_path
