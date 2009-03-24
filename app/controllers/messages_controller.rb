@@ -147,4 +147,8 @@ class MessagesController < ApplicationController
     redirect_back_or_default messages_url
   end
   
+  def view
+    @message = Message.find params[:id] 
+  end
+  
 end
