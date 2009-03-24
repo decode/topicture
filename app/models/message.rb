@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
   belongs_to :topic
   belongs_to :follow_message, :class_name => "Message", :foreign_key => "follow_id"
-  has_many :follow_messages, :class_name => "Message", :foreign_key => "follow_id"
+  has_many :follow_messages, :class_name => "Message", :order => 'created_at DESC', :foreign_key => "follow_id"
 
   belongs_to :user, :foreign_key => :user_id
 

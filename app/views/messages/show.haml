@@ -1,16 +1,44 @@
-%p
-  %b Title:
-  = h @message.title
+- if session[:view_style] == 'singular' or @message.follow_messages.count == 0
+  %p
+    %b Title:
+    = h @message.title
 
-%p
-  %b Body:
-  = h @message.body
+  %p
+    %b Body:
+    = h @message.body
 
-%p
-  %b Follow:
-  = h Message.find_by_id(@message.follow_id).title unless @message.follow_id.nil?
+  %p
+    %b Follow:
+    = h Message.find_by_id(@message.follow_id).title unless @message.follow_id.nil?
 
 
-= link_to 'Edit', edit_message_path(@message)
-= link_to 'Back', messages_path
-= link_to 'Reply', :action => "reply", :id => @message
+  = link_to 'Edit', edit_message_path(@message)
+  = link_to 'Back', messages_path
+  = link_to 'Reply', :action => "reply", :id => @message
+- else
+  .box
+    = full_topic_path(@message.topic)
+  %table
+    %tr
+      %td
+        = h @message.created_at
+    %tr
+      %td
+        = link_to @message.user.login, @message.user
+      %td
+        = link_to @message.title, @message
+      %td
+        = link_to @message.body
+
+    - for m in @message.follow_messages
+      %tr
+        %td
+          = h m.created_at
+      %tr
+        %td
+          = link_to m.user.login, m.user
+        %td
+          = link_to m.title, m
+        %td
+          = link_to m.body
+

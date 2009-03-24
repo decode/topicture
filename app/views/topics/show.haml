@@ -10,7 +10,10 @@
   = h @topic.description
 %hr
 
-.span-24
+.span-18
+  .box
+    = full_topic_path(@topic)
+.span-6.last
   .box
     = link_to 'Edit', edit_topic_path(@topic) |
     = link_to 'Back', topics_path

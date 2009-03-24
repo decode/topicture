@@ -1,0 +1,24 @@
+%table
+  %tr
+    %td
+      = h @message.created_at
+  %tr
+    %td
+      = link_to @message.user.login, m.user
+    %td
+      = link_to @message.title, @message
+    %td
+      = link_to @message.body
+
+  - for m in @message.follow_messages
+    %tr
+      %td
+        = h m.created_at
+    %tr
+      %td
+        = link_to m.user.login, m.user
+      %td
+        = link_to m.title, m
+      %td
+        = link_to m.body
+
