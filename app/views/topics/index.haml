@@ -19,7 +19,11 @@
       .box
         = link_to message.user.login, message.user
         = " says: " 
-        = link_to message.title, message
+        - link = url_for :controller => 'messages', :action => 'show', :id => message.follow_message, :anchor=>"message-#{message.id}"
+        - if message.follow_id.nil?
+          = link_to message.title, message
+        - else
+          = link_to message.title, message.follow_message, {:href => link}
         %br
         = link_to message.topic.name
         = h message.created_at

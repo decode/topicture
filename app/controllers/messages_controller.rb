@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
   # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
-
+    session[:return_to] = message_path(@message)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @message }
@@ -71,8 +71,8 @@ class MessagesController < ApplicationController
       @message.message_type ||= 'topic'
     end
 
-    # If not specified type, use default message_type
-    @message.message_type ||= 'blog'
+    # If not specified type, use default message_type: both topic and blog
+    @message.message_type ||= 'topic|blog'
 
     respond_to do |format|
       if @message.save and blocked == false
@@ -83,7 +83,7 @@ class MessagesController < ApplicationController
         #  redirect_to messages_url
         #end
         format.html do 
-          redirect_back_or_default @message
+          redirect_back_or_default session[:return_to] #@message
         end
         #format.html { redirect_to(@message) }
         format.xml  { render :xml => @message, :status => :created, :location => @message }
@@ -133,7 +133,7 @@ class MessagesController < ApplicationController
   def reply
     unless params[:id].nil?
       session[:target_message_id] = params[:id]
-      session[:return_to] = messages_url
+      session[:return_to] = message_path(params[:id])
       redirect_to :action => "new"
     else
       redirect_to :action => "show"

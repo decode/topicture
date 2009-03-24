@@ -1,4 +1,4 @@
-- if session[:view_style] == 'singular' or @message.follow_messages.count == 0
+- if session[:view_style] == 'single' #or @message.follow_messages.count == 0
   %p
     %b Title:
     = h @message.title
@@ -11,34 +11,40 @@
     %b Follow:
     = h Message.find_by_id(@message.follow_id).title unless @message.follow_id.nil?
 
-
+  = link_to 'Back', :back
   = link_to 'Edit', edit_message_path(@message)
-  = link_to 'Back', messages_path
-  = link_to 'Reply', :action => "reply", :id => @message
+
 - else
   .box
     = full_topic_path(@message.topic)
+
+  = link_to 'Reply', :action => "reply", :id => @message
   %table
     %tr
       %td
         = h @message.created_at
     %tr
-      %td
+      %td{:rowspan => 2}
         = link_to @message.user.login, @message.user
       %td
-        = link_to @message.title, @message
+        %div{:id => "message-#{@message.id}", :class=>'message'}
+          = link_to @message.title, @message
+    %tr
       %td
-        = link_to @message.body
+        = @message.body
 
     - for m in @message.follow_messages
       %tr
         %td
           = h m.created_at
       %tr
-        %td
+        %td{:rowspan => 2}
           = link_to m.user.login, m.user
         %td
-          = link_to m.title, m
+          %div{:id => "message-#{m.id}", :class=>'message'}
+            = link_to m.title, m
+      %tr
         %td
-          = link_to m.body
+          = m.body
 
+  = link_to 'Reply', :action => "reply", :id => @message
