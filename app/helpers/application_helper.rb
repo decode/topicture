@@ -18,6 +18,22 @@ module ApplicationHelper
     path.insert 0, add_path(topic.parent_topic) unless topic.parent_topic.nil?
     return path
   end
-  
+
+  # Get sub topic list from parent topic
+  def subtopic_path(topic)
+    sub_topics = Topic.find :all, :conditions => "parent_id = #{topic.id}"
+    return '' if sub_topics.count == 0
+    content = "<ul>"
+    for sub_topic in sub_topics
+      content += "<li>"
+      url = topic_path(sub_topic)
+      path = "<a href=\"#{url}\">#{sub_topic.name}</a>"
+      content += path
+      content += subtopic_path(sub_topic)
+      content += "</li>"
+    end
+    content += "</ul>"
+    return content
+  end
   
 end

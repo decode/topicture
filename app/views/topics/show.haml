@@ -2,9 +2,9 @@
   = "Name: "
   = h @topic.name
 .span-12.last
-  - unless @topic.parent_id.nil?
+  -# unless @topic.parent_id.nil?
     = "Parent: "
-    = h @topic.parent_id
+    = h @topic.parent_topic.name
 .span-24
   = "Description: "
   = h @topic.description

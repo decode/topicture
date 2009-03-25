@@ -28,7 +28,7 @@
         = link_to @message.user.login, @message.user
       %td
         %div{:id => "message-#{@message.id}", :class=>'message'}
-          = link_to @message.title, @message
+          = @message.title
     %tr
       %td
         = @message.body
@@ -42,7 +42,7 @@
           = link_to m.user.login, m.user
         %td
           %div{:id => "message-#{m.id}", :class=>'message'}
-            = link_to m.title, m
+            = h m.title
       %tr
         %td
           = m.body

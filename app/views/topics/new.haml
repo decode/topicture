@@ -11,8 +11,8 @@
   %p 
     = f.label :parent_id
     %br
-    = f.text_field :parent_id
-
+    = select 'topic', 'parent_id', Topic.find(:all).map {|t| [t.name, t.id]}
+    
   %p
     = f.label :description
     %br

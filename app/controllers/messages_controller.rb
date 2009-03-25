@@ -18,6 +18,11 @@ class MessagesController < ApplicationController
   # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
+
+    # prevent display single message in topic mode
+    unless @message.follow_message.nil? || session[:view_style] == 'single'
+      @message = @message.follow_message
+    end
     session[:return_to] = message_path(@message)
     respond_to do |format|
       format.html # show.html.erb

@@ -7,8 +7,9 @@ class TopicsController < ApplicationController
   # GET /topics.xml
   def index
     session[:return_to] = topics_path
+    session[:view_style] = 'topic'
     @topics = Topic.find(:all, :conditions => 'parent_id is null')
-    @topic_news = Message.find :all, :conditions => "message_type = 'topic'", :order => 'created_at DESC', :limit => 20
+    @topic_news = Message.find :all, :conditions => "message_type = 'topic'", :order => 'created_at DESC', :limit => 6
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @topics }
@@ -19,7 +20,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.xml
   def show
     @topic = Topic.find(params[:id])
-
+    session[:view_style] = 'topic'
     session[:return_to] = topic_url(@topic)
     respond_to do |format|
       format.html # show.html.erb

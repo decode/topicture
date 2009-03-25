@@ -9,10 +9,7 @@
       - for topic in @topics
         %li
           = link_to topic.name, topic
-        - sub_topics = Topic.find :all, :conditions => "parent_id = #{topic.id}"
-        - for sub_topic in sub_topics
-          %li
-            = link_to sub_topic.name, topic
+          = subtopic_path(topic)
   .span-18.last
     %h3 New updates
     - for message in @topic_news
