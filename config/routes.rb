@@ -48,8 +48,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.root :controller => "site"
   map.resource :account, :controller => "users"
-  map.resources :users
+  map.resources :users do |user|
+    user.resources :articles, :controller => 'messages'
+  end
 
   map.user 'user/:name', :controller => 'users', :action => 'info', :requirements => { :name => /[a-zA-Z0-9\-\.]+/ }
   map.user 'user/:name/panel', :controller => 'users', :action => 'panel'
+
+  
 end

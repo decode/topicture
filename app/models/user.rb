@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   acts_as_user
 
   has_many :sent_messages, :class_name => "Message", :foreign_key => "user_id"
+  has_many :articles, :class_name => "Message", :foreign_key => "user_id", :conditions => "follow_id is null", :order => "created_at DESC"
 
   # Message relation
   has_many :messagebox, :foreign_key => "user_id"
