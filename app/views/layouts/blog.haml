@@ -15,5 +15,8 @@
         .prepend-20
           = link_to "message", new_message_url#:controller => "messages", :action => "new"
           = link_to "Add as friend", :controller => "users", :action => "invite", :id => @user
-
-      = yield
+      .span-24
+        %h1 
+          - @user = User.find_by_id session[:target_user_id]
+          = link_to @user.login, "/user/#{@user.login}"
+        = yield

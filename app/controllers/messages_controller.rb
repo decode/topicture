@@ -18,7 +18,12 @@ class MessagesController < ApplicationController
   # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
-
+    if session[:view_style] != 'blog'
+      render :action => 'show', :id => params[:id], :layout => 'site'
+    else
+      render :action => 'blog_view', :id => params[:id], :layout => 'blog'
+    end
+=begin
     # prevent display single message in topic mode
     unless @message.follow_message.nil? || session[:view_style] == 'single'
       @message = @message.follow_message
@@ -28,6 +33,7 @@ class MessagesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @message }
     end
+=end
   end
 
   # GET /messages/new
@@ -154,6 +160,20 @@ class MessagesController < ApplicationController
   
   def view
     @message = Message.find params[:id] 
+  end
+  
+  def blog_view
+    @message = Message.find params[:id]
+
+    # prevent display single message in topic mode
+    unless @message.follow_message.nil? || session[:view_style] == 'single'
+      @message = @message.follow_message
+    end
+    session[:return_to] = message_path(@message)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @message }
+    end
   end
   
 end

@@ -1,23 +1,23 @@
-.span-24
-  %h1 
-    = @user.login
-  .span-18
-    = render :partial => 'article_list'
 
-  .span-6.last 
-    = "Latest Articles"
-    %hr
-    %ul
-      - for article in @articles
-        %li
-          = link_to article.title, user_article_url(@user,article)
-    = "Latest comments"
-    %hr
-    %ul
-      - for comment in @latest_comments
-        %li
-          = link_to comment.user.login, user_path(comment.user)
-          = ": "
-          = comment.body
+.span-18
+  = render :partial => 'article_list'
+
+.span-6.last 
+  = "Latest Articles"
+  %hr
+  %ul
+    - for article in @articles
+      %li
+        = link_to article.title, user_article_url(@user,article)
+  = "Latest comments"
+  = @latest_comments.count
+  %hr
+  %ul
+    - for comment in @latest_comments
+      %li
+        - link = url_for :controller => 'messages', :action => 'show', :id => comment.follow_message, :anchor=>"message-#{comment.id}"
+        = link_to comment.user.login, user_article_path(@user, comment), {:href => link} 
+        = ": "
+        = comment.body
 
 

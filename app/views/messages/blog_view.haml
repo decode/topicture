@@ -1,0 +1,24 @@
+#blog_title
+  = @message.title
+#blog_time
+  = @message.created_at
+#blog_body
+  = @message.body
+%hr
+#comments_list
+  - pos = 1
+  - for comment in @message.follow_messages
+    .box
+      %div{:id=>"message-#{comment.id}"}
+        = pos
+      #commenter
+        = link_to comment.user.login, user_path(comment.user)
+        = " comment at: "
+        = comment.created_at
+      #comment_title
+        = comment.title
+
+      #comment_body
+        = comment.body
+    - pos += 1
+

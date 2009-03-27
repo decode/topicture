@@ -70,10 +70,13 @@ class UsersController < ApplicationController
 
   # Display user's main page
   def info 
+    session[:view_style] = 'blog'
     @user = User.find_by_login(params[:name])
     @articles = @user.articles
     source_ids = @articles.collect { |m| m.id }
     @latest_comments = Message.find :all, :conditions => ["follow_id='?' and user_id!=?", source_ids, @user.id], :order => 'created_at DESC', :limit => 15
+    #@latest_comments = Message.find :all, :conditions => {:follow_id=>source_ids}, :order => 'created_at DESC', :limit => 15
+
     session[:target_user_id] = @user.id
     if @user.nil?
       #redirect_to :controller => "users"        
