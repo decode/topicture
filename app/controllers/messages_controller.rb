@@ -18,9 +18,20 @@ class MessagesController < ApplicationController
   # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
+    session[:return_to] = message_path(@message)
     if session[:view_style] != 'blog'
       render :action => 'show', :id => params[:id], :layout => 'site'
+      # prevent display single message in topic mode
+      unless @message.follow_message.nil? || session[:view_style] == 'single'
+        @message = @message.follow_message
+      end
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @message }
+      end
     else
+      @article = @message
+      @comment = Message.new
       render :action => 'blog_view', :id => params[:id], :layout => 'blog'
     end
 =begin
@@ -66,15 +77,21 @@ class MessagesController < ApplicationController
     end
 
     # Record message sender's id
-    @message.user_id = current_user.id unless current_user.nil?
-    receiver = User.find_by_id(target_id) unless target_id.nil?
+    if current_user.nil?
+      @msesage.user_id = User.find_by_login 'anonymous'
+    else
+      @message.user_id = current_user.id
+    end
+
+    # Record message receiver's id
+    receiver = User.find_by_id(session[:target_user_id]) unless session[:target_user_id].nil?
     blocked = false
     unless receiver.nil?
       blocked = receiver.blocked_users.include?(current_user)
       flash[:notice] = "You are blocked" if blocked
       @message.receivers << receiver
     end
-    session[:target_user_id] = nil
+    #session[:target_user_id] = nil
  
     # Add topic reference
     unless session[:topic_id].nil?
@@ -163,17 +180,18 @@ class MessagesController < ApplicationController
   end
   
   def blog_view
-    @message = Message.find params[:id]
-
+=begin
+    @article = Message.find params[:id]
+    @comment = Message.new
     # prevent display single message in topic mode
-    unless @message.follow_message.nil? || session[:view_style] == 'single'
-      @message = @message.follow_message
+    unless @article.follow_message.nil? || session[:view_style] == 'single'
+      @article= @article.follow_message
     end
-    session[:return_to] = message_path(@message)
+    session[:return_to] = message_path(@article)
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @message }
+      format.xml  { render :xml => @article }
     end
+=end
   end
-  
 end
