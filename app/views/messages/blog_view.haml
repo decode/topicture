@@ -44,15 +44,15 @@
           %p
             = f.label "Name:"
             %br
-            = text_field_tag :name
+            = f.text_field :comment_user
           %p
             = f.label "Email:"
             %br
-            = text_field_tag :email
+            = f.text_field :comment_email
           %p
             = f.label "Website:"
             %br
-            = text_field_tag :website
+            = f.text_field :comment_website
       .span-18
         %p
           = submit_tag 'Post'

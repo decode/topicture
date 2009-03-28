@@ -82,6 +82,10 @@ class CreateAuthsystem < ActiveRecord::Migration
     user = User.new :login=> "anonymous", :password=>"1234567", :email=>"anonymous@site.org", :password_confirmation=>"1234567" 
     user.roles << anonymous
     user.save
+    
+    say 'create normal role ...'
+    normal = Role.new :name=>"normal", :description=>"role for registered user"
+    normal.save
 
     say 'fetch all controller and action to permission db ...'
     Permission.synchronize_resource
@@ -93,48 +97,89 @@ class CreateAuthsystem < ActiveRecord::Migration
     say 'assign base permission to anonymous role'
     base = Permission.find :first, :conditions => { :perm_resource=>"usersessions", :perm_type=>"C" }
     base.roles << anonymous
-    base.save
+    base.roles << normal
     base = Permission.find :first, :conditions => { :perm_resource=>"users/new", :perm_type=>"CA" }
     base.roles << anonymous
-    base.save
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"users/create", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
     base = Permission.find :first, :conditions => { :perm_resource=>"users/show", :perm_type=>"CA" }
     base.roles << anonymous
-    base.save
+    base.roles << normal
     base = Permission.find :first, :conditions => { :perm_resource=>"users/edit", :perm_type=>"CA" }
     base.roles << anonymous
-    base.save
+    base.roles << normal
     base = Permission.find :first, :conditions => { :perm_resource=>"users/index", :perm_type=>"CA" }
     base.roles << anonymous
+    base.roles << normal
     base.save
+
+    #base = Permission.find :first, :conditions => { :perm_resource=>"users/create", :perm_type=>"CA" }
+    #base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"users/info", :perm_type=>"CA" }
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"users/panel", :perm_type=>"CA" }
+    base.roles << normal
+
+    base = Permission.find :first, :conditions => { :perm_resource=>"topics/show", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"topics/index", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"messages/show", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"messages/index", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"messages/new", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"messages/create", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"messages/blog_view", :perm_type=>"CA" }
+    base.roles << anonymous
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"messages/edit", :perm_type=>"CA" }
+    base.roles << normal
+    base = Permission.find :first, :conditions => { :perm_resource=>"messages/update", :perm_type=>"CA" }
+    base.roles << normal
 
     say 'create regular permission for anonymous (also admin)'
     base = Permission.new :name=>"all index", :perm_resource=>"index", :perm_type=>"A"
     base.roles << anonymous
     base.roles << role
-    base.save
+    base.roles << normal
+    base.roles << normal
+
     base = Permission.new :name=>"all show", :perm_resource=>"show", :perm_type=>"A"
     base.roles << anonymous
     base.roles << role
-    base.save
+    base.roles << normal
+
     base = Permission.new :name=>"all table", :perm_resource=>"table", :perm_type=>"A"
     base.roles << anonymous
     base.roles << role
-    base.save
+    base.roles << normal
     base = Permission.new :name=>"all list", :perm_resource=>"list", :perm_type=>"A"
     base.roles << anonymous
     base.roles << role
-    base.save
+    base.roles << normal
     base = Permission.new :name=>"all show_search", :perm_resource=>"show_search", :perm_type=>"A"
     base.roles << anonymous
     base.roles << role
-    base.save
+    base.roles << normal
     base = Permission.new :name=>"all row", :perm_resource=>"row", :perm_type=>"A"
     base.roles << anonymous
     base.roles << role
-    base.save
+    base.roles << normal
     base = Permission.new :name=>"all nasted", :perm_resource=>"nasted", :perm_type=>"A"
     base.roles << anonymous
     base.roles << role
+    base.roles << normal
     base.save
   end
 

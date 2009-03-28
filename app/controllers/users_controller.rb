@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
   layout "site", :except => :info
   layout "blog", :only => :info
+
   include AccessFilter
 
   active_scaffold
   ActiveScaffold.set_defaults do |config|
-    config.ignore_columns.add [:password_salt, :crypted_password, :persistence_token]
+    config.ignore_columns.add [:password_salt, :crypted_password, :persistence_token, :unread_messages, :read_messages, :deleted_messages, :request_messages, :refuse_messages]
+    #config.actions.exclude :nested
+  end
+
+  active_scaffold :users do | config |
+    config.columns = [:login, :email, :login_count, :last_login_at]
+    #config.columns[:messages].includes = [:messageboxes]
+    #config.columns[:last_transaction_date].sort_by :sql => "user_transactions.created_at"
   end
 
   controller_accessor :create, :delete, :update, :show, :index
@@ -23,12 +31,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.roles << Role.find_by_name('normal')
     #@user.login.downcase!
     if @user.save
       flash[:notice] = "Account registered!"
       #redirect_back_or_default account_url
-      redirect_back_or_default users_url
+      current_user = @user
+      redirect_back_or_default "/user/#{@user.login}"
     else
+      flash[:notice] = "Register Failed"
       render :action => :new
     end
   end
@@ -86,6 +97,7 @@ class UsersController < ApplicationController
   def panel
     #@user = User.find_by_login(params[:name])
     @user = current_user
+    render :action => 'panel', :layout => 'site'
   end
 
   # Show message list

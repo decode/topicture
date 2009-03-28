@@ -33,7 +33,7 @@ render_navigation :status, :generate_css => true do
       add_item do |i|
         i.html = {:method => :delete}
         i.named 'Logout'
-        i.links_to user_session_url
+        i.links_to :controller => 'user_sessions', :action => 'destroy'
       end
     end
     

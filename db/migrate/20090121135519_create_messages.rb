@@ -7,6 +7,9 @@ class CreateMessages < ActiveRecord::Migration
       t.text :body
       t.integer :follow_id
       t.string :message_type
+      # For comment message use
+      t.string :comment_user, :comment_email, :comment_website
+      
       t.timestamps
     end
   end
