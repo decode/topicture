@@ -1,17 +1,25 @@
-%h1 Login
+.span-24
+  .span-8
+    %p
+  .span-8.colborder
+    .span-4
+      %h2 Login
+    .span-4.last
+      .prepend-3
+        = link_to "Back", :back
+    .span-8
+      - form_for @user_session, :url => user_session_path do |f|
+        = #f.error_messages
+        #login_container
+          = f.label :login
+          = f.text_field :login
+          %br
+          = f.label :password
+          = f.password_field :password
+          %br
+          = f.check_box :remember_me
+          = f.label :remember_me
+          %br
 
-- form_for @user_session, :url => user_session_path do |f|
-  = #f.error_messages
-  #login_container
-    = f.label :login
-    = f.text_field :login
-    %br
-    = f.label :password
-    = f.password_field :password
-    %br
-    = f.check_box :remember_me
-    = f.label :remember_me
-    %br
-
-    = f.submit "Login"
-
+          = f.submit "Login"
+  .span-7.last

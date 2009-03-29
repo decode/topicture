@@ -67,12 +67,12 @@ class MessagesController < ApplicationController
   # POST /messages.xml
   def create
     @message = Message.new(params[:message])
-
+    @message.message_type = session[:message_type]
     # Add reply message
     target_id = session[:target_message_id]
     unless target_id.nil?
       @message.follow_id = target_id 
-      @message.message_type = session[:message_type] || Message.find_by_id(target_id).message_type
+      @message.message_type ||= Message.find_by_id(target_id).message_type
       session[:target_message_id] = nil
     end
 

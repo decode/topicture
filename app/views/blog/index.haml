@@ -1,0 +1,14 @@
+.span-24
+  .span-12.colborder
+    %h3 New Posts
+    %ul
+      - for blog in @new_blogs
+        %li
+          = link_to blog.title, message_path(blog)
+          = link_to blog.user.login, "/user/#{blog.user.login}"
+  .span-11.last
+    %h3 New users
+    %ul
+      - for user in @new_registers
+        %li
+          = link_to user.login, "/user/#{user.login}"

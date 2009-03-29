@@ -6,3 +6,8 @@
 
 #block_container
   = link_to "Block Box", :action => "block"
+
+#blog_container
+  = link_to "My Blog", :action => "info"
+  = "->"
+  = link_to "Post Arcitle", :controller => 'blog', :action => 'post'

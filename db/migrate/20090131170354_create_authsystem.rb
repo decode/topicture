@@ -118,6 +118,7 @@ class CreateAuthsystem < ActiveRecord::Migration
     #base = Permission.find :first, :conditions => { :perm_resource=>"users/create", :perm_type=>"CA" }
     #base.roles << normal
     base = Permission.find :first, :conditions => { :perm_resource=>"users/info", :perm_type=>"CA" }
+    base.roles << anonymous
     base.roles << normal
     base = Permission.find :first, :conditions => { :perm_resource=>"users/panel", :perm_type=>"CA" }
     base.roles << normal
