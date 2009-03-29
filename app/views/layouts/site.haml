@@ -19,9 +19,8 @@
       - if flash[:notice]
         .notice
           = flash[:notice]
-
+      = yield :panel
       = yield
-
       %hr
       #footer.span-24
         %span.quiet Topicture v0.1

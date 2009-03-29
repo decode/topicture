@@ -4,7 +4,10 @@
   .span-4.last
     = link_to 'New topic', new_topic_path
 
+
   .span-5.colborder
+    - if @topics.count == 0
+      %p Not topic created
     %ul
       - for topic in @topics
         %li

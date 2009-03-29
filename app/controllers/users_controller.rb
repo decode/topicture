@@ -105,6 +105,7 @@ class UsersController < ApplicationController
   # Show message list
   def message
     @user = current_user
+    render :action => 'message', :layout => 'site'
   end
 
   def message_modify
@@ -197,6 +198,7 @@ class UsersController < ApplicationController
   # Show block user list
   def block
     @user = current_user
+    render :action => 'block', :layout => 'site'
   end
 
   def unblock

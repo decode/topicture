@@ -11,5 +11,10 @@ class BlogController < ApplicationController
     @article = Message.new  
   end
   
+  # manage blog articles and comment, include settings page
+  def manage
+    
+  end
   
+
 end

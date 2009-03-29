@@ -1,3 +1,6 @@
+- content_for :panel do
+  = tabnav :panel
+
 = link_to "Trash", :action => "trash"
 
 -form_for @user, :url => {:action => "message_modify"}, :method => :put do |f|
