@@ -1,18 +1,8 @@
-#message_container
-  = link_to "Message Box", :action => "message"
- 
-#friend_container
-  = link_to "Friend Box", :action => "friend"
-
-#block_container
-  = link_to "Block Box", :action => "block"
-
-#blog_container
-  = link_to "My Blog", :controller => 'blog', :action => 'manage'
-  = "->"
-  = link_to "Post Arcitle", :controller => 'blog', :action => 'post'
-
 - content_for :panel do
   = tabnav :panel  
 
+.span-24
+  %p
+    Welcome to the manage box! You could post your article, 
+    receive your messages and manage users from this page.
   

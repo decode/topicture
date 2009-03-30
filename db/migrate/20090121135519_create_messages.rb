@@ -9,6 +9,9 @@ class CreateMessages < ActiveRecord::Migration
       t.string :message_type
       # For comment message use
       t.string :comment_user, :comment_email, :comment_website
+
+      # Record last edit infomation
+      t.integer :last_edit_id
       
       t.timestamps
     end

@@ -32,5 +32,5 @@
     - if @blog_news.size == 0
       = "No recently blog news..."
     - for b in @blog_news
-      = link_to b.title, messages_path(b)
-      = link_to b.user.login, users_path(b.user)
+      = link_to b.title, message_path(b)
+      = user_info(b.user)

@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20090312072518) do
     t.string   "comment_user"
     t.string   "comment_email"
     t.string   "comment_website"
+    t.datetime "last_edit"
+    t.integer  "last_edit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

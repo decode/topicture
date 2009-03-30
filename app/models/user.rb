@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
   acts_as_user
 
-  has_many :sent_messages, :class_name => "Message", :foreign_key => "user_id"
+  has_many :sent_messages, :class_name => "Message", :foreign_key => "user_id", :conditions => "message_type='sms'", :order => "created_at DESC"
   has_many :articles, :class_name => "Message", :foreign_key => "user_id", :conditions => "follow_id is null", :order => "created_at DESC"
 
   # Message relation
@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :strangers, :through => :friendships, :conditions => "friendships.workflow_state = 'request'", :source => :friend
   has_many :refused_users, :through => :friendships, :conditions => "friendships.workflow_state = 'refuse'", :source => :friend
   has_many :relations, :through => :friendships, :source => :friend
+  
+  has_many :last_edit_messages, :class_name => 'Message', :foreign_key => 'last_edit_id'
 
   def to_label
     login

@@ -35,5 +35,18 @@ module ApplicationHelper
     content += "</ul>"
     return content
   end
+
+  # Generate a link to user's blog page
+  def user_info(user)
+    link_to user.login, :controller => 'users', :action => 'info'
+  end
+
+  def make_shorter(sentence)
+    str = sentence
+    if str.length > 20
+      str = str[0,20] + "..."
+    end
+    return str
+  end
   
 end

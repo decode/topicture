@@ -60,7 +60,12 @@ class MessagesController < ApplicationController
 
   # GET /messages/1/edit
   def edit
-    @message = Message.find(params[:id])
+    if session[:view_style] != 'blog'
+      @message = Message.find(params[:id])
+    else
+      @article = Message.find(params[:id])
+      render :action => 'blog_edit', :layout => 'blog'
+    end
   end
 
   # POST /messages
@@ -84,12 +89,17 @@ class MessagesController < ApplicationController
     end
 
     # Record message receiver's id
-    receiver = User.find_by_id(session[:target_user_id]) unless session[:target_user_id].nil?
     blocked = false
-    unless receiver.nil?
-      blocked = receiver.blocked_users.include?(current_user)
-      flash[:notice] = "You are blocked" if blocked
-      @message.receivers << receiver
+    unless session[:target_user_id] == current_user.id
+      receiver = User.find_by_id(session[:target_user_id]) unless session[:target_user_id].nil?
+      unless receiver.nil?
+        blocked = receiver.blocked_users.include?(current_user)
+        if blocked
+          flash[:notice] = "You are blocked"
+        else
+          @message.receivers << receiver
+        end
+      end
     end
     #session[:target_user_id] = nil
  
@@ -120,6 +130,7 @@ class MessagesController < ApplicationController
           if blocked
             redirect_back_or_default "/user/#{receiver.login}"
           else
+            flash[:notice] = "Message not saved"
             render :action => "new" 
           end
         end
@@ -132,7 +143,7 @@ class MessagesController < ApplicationController
   # PUT /messages/1.xml
   def update
     @message = Message.find(params[:id])
-
+    params[:message][:last_edit_id] = current_user.id
     respond_to do |format|
       if @message.update_attributes(params[:message])
         flash[:notice] = 'Message was successfully updated.'
@@ -152,7 +163,9 @@ class MessagesController < ApplicationController
     @message.destroy
 
     respond_to do |format|
-      format.html { redirect_to(messages_url) }
+      format.html { 
+        redirect_back_or_default session[:return_to]
+      }
       format.xml  { head :ok }
     end
   end
