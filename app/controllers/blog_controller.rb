@@ -13,7 +13,7 @@ class BlogController < ApplicationController
   
   # manage blog articles and comment, include settings page
   def manage
-    
+    @articles = Message.paginate :all, :conditions => ['user_id=?', current_user.id], :order => 'created_at DESC', :page => params[:page]
   end
   
 

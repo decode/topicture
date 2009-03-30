@@ -1,0 +1,13 @@
+- for article in @articles
+  %p
+    = article.title
+  %p
+    = article.body
+  %p
+    = article.created_at
+  %p
+    = link_to 'view'
+    = link_to 'edit'
+    = link_to 'delete'
+
+= will_paginate @articles
