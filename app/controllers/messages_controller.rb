@@ -3,14 +3,13 @@ class MessagesController < ApplicationController
   include AccessFilter
 
   active_scaffold
-
   active_scaffold :messages do | config |
     config.actions.exclude :create, :search
     config.columns = [:title, :body, :created_at, :updated_at]
     #config.columns[:messages].includes = [:messageboxes]
     #config.columns[:last_transaction_date].sort_by :sql => "user_transactions.created_at"
   end
-
+  
   layout "site"
   # GET /messages
   # GET /messages.xml
@@ -27,21 +26,27 @@ class MessagesController < ApplicationController
   # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
+    @message.view_count += 1
+    @message.save
     session[:return_to] = message_path(@message)
     if session[:view_style] != 'blog'
-      render :action => 'show', :id => params[:id], :layout => 'site'
       # prevent display single message in topic mode
       unless @message.follow_message.nil? || session[:view_style] == 'single'
         @message = @message.follow_message
       end
       respond_to do |format|
-        format.html # show.html.erb
+        format.html {# show.html.erb {
+          render :layout => 'site'
+        }
         format.xml  { render :xml => @message }
       end
     else
       @article = @message
       @comment = Message.new
-      render :action => 'blog_view', :id => params[:id], :layout => 'blog'
+      respond_to do |format|
+        format.html {render :action => 'blog_view', :id => params[:id], :layout => 'blog' }
+        format.xml { render :xml => @message }
+      end
     end
 =begin
     # prevent display single message in topic mode

@@ -1,6 +1,8 @@
 class Topic < ActiveRecord::Base
   has_many :messages
+  has_many :posts, :class_name => 'Message', :conditions => 'follow_id is null'
 
   belongs_to :parent_topic, :class_name => 'Topic', :foreign_key => 'parent_id'
   has_many :sub_topics, :class_name => 'Topic', :foreign_key => 'parent_id'
+
 end
