@@ -16,3 +16,6 @@
   #send_message_list
     - for msg in @user.sent_messages
       = link_to msg.title, message_path(msg)
+
+  -#
+    = render :active_scaffold => 'messages', :constraints => {:user_id => @user.id, :message_type => 'sms'}, :label => ''

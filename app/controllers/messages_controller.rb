@@ -2,6 +2,15 @@ class MessagesController < ApplicationController
   
   include AccessFilter
 
+  active_scaffold
+
+  active_scaffold :messages do | config |
+    config.actions.exclude :create, :search
+    config.columns = [:title, :body, :created_at, :updated_at]
+    #config.columns[:messages].includes = [:messageboxes]
+    #config.columns[:last_transaction_date].sort_by :sql => "user_transactions.created_at"
+  end
+
   layout "site"
   # GET /messages
   # GET /messages.xml
