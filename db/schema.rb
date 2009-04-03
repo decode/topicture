@@ -30,15 +30,15 @@ ActiveRecord::Schema.define(:version => 20090312072518) do
   create_table "messages", :force => true do |t|
     t.integer  "topic_id"
     t.integer  "user_id"
-    t.string   "title",           :null => false
+    t.string   "title",                          :null => false
     t.text     "body"
     t.integer  "follow_id"
     t.string   "message_type"
     t.string   "comment_user"
     t.string   "comment_email"
     t.string   "comment_website"
-    t.datetime "last_edit"
     t.integer  "last_edit_id"
+    t.integer  "view_count",      :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

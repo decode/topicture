@@ -1,11 +1,10 @@
 #news_list.span-24
-  %h2 News
-  .box
-    - if @news.size == 0
-      = "No recently news..."
-    - for n in @news
-      = link_to n.title, messages_path(n)
-      = n.body
+  %h4 News
+  - if @news.size == 0
+    = "No recently news..."
+  - for n in @news
+    = link_to n.title, messages_path(n)
+    = n.body
 %hr
 
 #topic_list.span-11.colborder

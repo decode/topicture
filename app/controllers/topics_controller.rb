@@ -3,6 +3,12 @@ class TopicsController < ApplicationController
 
   layout 'site'
 
+  active_scaffold :topics do | config |
+    config.columns = [:name, :description, :parent_topic]
+    #config.columns[:messages].includes = [:messageboxes]
+    #config.columns[:last_transaction_date].sort_by :sql => "user_transactions.created_at"
+  end
+
   # GET /topics
   # GET /topics.xml
   def index
@@ -53,7 +59,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.save
-        flash[:notice] = 'Topic was successfully created.'
+        flash[:success] = 'Topic was successfully created.'
         format.html { redirect_to(@topic) }
         format.xml  { render :xml => @topic, :status => :created, :location => @topic }
       else
@@ -70,7 +76,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.update_attributes(params[:topic])
-        flash[:notice] = 'Topic was successfully updated.'
+        flash[:success] = 'Topic was successfully updated.'
         format.html { redirect_to(@topic) }
         format.xml  { head :ok }
       else

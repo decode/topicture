@@ -11,7 +11,7 @@
   %p 
     = f.label :parent_id
     %br
-    = select 'topic', 'parent_id', Topic.find(:all).map {|t| [t.name, t.id]}
+    = select 'topic', 'parent_id', Topic.find(:all).map {|t| [t.name, t.id]}, {:include_blank => true}
     
   %p
     = f.label :description

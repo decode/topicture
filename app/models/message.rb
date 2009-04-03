@@ -10,12 +10,12 @@ class Message < ActiveRecord::Base
   
   belongs_to :last_edit_user, :class_name => "User", :foreign_key => "last_edit_id"
 
-  def self.take_action(messages)
+  def self.handle(messages)
     messages.each do |msg_id|
       msg = Messagebox.find_by_message_id(msg_id)
       yield(msg)
       msg.save
-    end
+    end unless messages.nil?
   end
   
   def self.mark_delete(messages)

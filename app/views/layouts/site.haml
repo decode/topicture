@@ -34,10 +34,22 @@
               |
             %li
               = link_to 'Blog', '/blog'
+            - if current_user && current_user.has_role?('admin')
+              %li.sep
+                |
+              %li
+                = link_to 'Admin', :controller => 'admin'
+
       %hr
       - if flash[:notice]
         .notice
           = flash[:notice]
+      - if flash[:success]
+        .success
+          = flash[:success]
+      - if flash[:error]
+        .error
+          = flash[:error]
       = yield :panel
       = yield
       %hr

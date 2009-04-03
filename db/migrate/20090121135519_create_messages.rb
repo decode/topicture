@@ -14,7 +14,7 @@ class CreateMessages < ActiveRecord::Migration
       t.integer :last_edit_id
       
       # Record the number of user view the message
-      t.integer :view_count
+      t.integer :view_count, :default => 0
 
       t.timestamps
     end

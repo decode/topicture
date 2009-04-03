@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     #config.columns[:last_transaction_date].sort_by :sql => "user_transactions.created_at"
   end
 
+  def conditions_for_collection
+    ['login != ?', 'admin'] unless current_user.has_role? 'admin'
+  end
+
   controller_accessor :create, :delete, :update, :show, :index
 
   before_filter :require_no_user, :only => [:new, :create]
@@ -110,14 +114,15 @@ class UsersController < ApplicationController
 
   def message_modify
     if params[:mark_delete] 
-      Message.mark_delete(params[:messages])
+      Message.handle(params[:messages]) { |msg| msg.msg_delete }
+      flash[:notice] = "Message has been deleted"
     end
     if params[:mark_read]
-      Message.mark_read(params[:messages])
+      Message.handle(params[:messages]) { |msg| msg.read }
       flash[:notice] = "Message status changed"
     end
     if params[:move]
-      Message.move(params[:messages])
+      Message.handle(params[:messages]) { |msg| msg.move }
       flash[:notice] = "Message status changed"
     end
     @user = current_user
@@ -207,6 +212,11 @@ class UsersController < ApplicationController
     User.handle([*unblocked_user.id]) { |u| u.approve }
     @user.save
     redirect_to :action => "block"
+  end
+
+  def send_message
+    session[:message_type] = 'message'
+    redirect_to :controller => "messages", :action => "new"
   end
   
 end

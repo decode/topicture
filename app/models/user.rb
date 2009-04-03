@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
   acts_as_user
 
-  has_many :sent_messages, :class_name => "Message", :foreign_key => "user_id", :conditions => "message_type='sms'", :order => "created_at DESC"
+  has_many :sent_messages, :class_name => "Message", :foreign_key => "user_id", :conditions => "message_type='message'", :order => "created_at DESC"
   has_many :articles, :class_name => "Message", :foreign_key => "user_id", :conditions => "follow_id is null", :order => "created_at DESC"
 
   # Message relation

@@ -20,7 +20,7 @@
         = navigation :status
       .span-24
         .prepend-20
-          = link_to "message", new_message_url#:controller => "messages", :action => "new"
+          = link_to "message", :controller => 'users', :action => 'send_message'#new_message_url#:controller => "messages", :action => "new"
           = link_to "Add as friend", :controller => "users", :action => "invite", :id => @user
       .span-24
         %h1 

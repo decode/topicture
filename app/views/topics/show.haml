@@ -23,6 +23,7 @@
     %th Post
     %th Last post
     %th Replies
+    %th Views
   - for message in @messages
     %tr
       %td
@@ -45,6 +46,8 @@
           = link_to message.user.login, user_path(message.user)
         %td
           = message.follow_messages.count
+        %td
+          = message.view_count
       -#
         %td
           = link_to 'Delete', message, :confirm => 'Are you sure?', :method => :delete

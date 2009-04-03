@@ -10,6 +10,12 @@ class MessagesController < ApplicationController
     #config.columns[:last_transaction_date].sort_by :sql => "user_transactions.created_at"
   end
   
+  def conditions_for_collection
+    #['login != ?', 'admin'] unless current_user.has_role? 'admin'
+    return '' if session[:manage_type].nil?
+    ['message_type = ?', session[:manage_type]]
+  end
+
   layout "site"
   # GET /messages
   # GET /messages.xml
@@ -26,7 +32,7 @@ class MessagesController < ApplicationController
   # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
-    @message.view_count += 1
+    @message.view_count = @message.view_count + 1
     @message.save
     session[:return_to] = message_path(@message)
     if session[:view_style] != 'blog'
@@ -128,7 +134,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save and blocked == false
-        flash[:notice] = 'Message was successfully created.'
+        flash[:success] = 'Message was successfully created.'
         #begin
         #  redirect_to :back
         #rescue ActionController::RedirectBackError
@@ -160,7 +166,7 @@ class MessagesController < ApplicationController
     params[:message][:last_edit_id] = current_user.id
     respond_to do |format|
       if @message.update_attributes(params[:message])
-        flash[:notice] = 'Message was successfully updated.'
+        flash[:success] = 'Message was successfully updated.'
         format.html { redirect_to(@message) }
         format.xml  { head :ok }
       else
@@ -198,7 +204,7 @@ class MessagesController < ApplicationController
   def mark_read
     msg_box = Messagebox.find_by_message_id(params[:id])
     msg_box.read
-    flash[:notice] = "Message status changed" if msg_box.state == "open"
+    flash[:success] = "Message status changed" if msg_box.state == "open"
     redirect_back_or_default messages_url
   end
   

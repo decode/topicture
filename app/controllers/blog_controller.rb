@@ -15,7 +15,11 @@ class BlogController < ApplicationController
   # manage blog articles and comment, include settings page
   def manage
     session[:return_to] = "/blog/manage"
-    @articles = Message.paginate :all, :conditions => ['user_id=? and follow_id is null', current_user.id], :order => 'created_at DESC', :page => params[:page]
+    begin
+      @articles = Message.paginate :all, :conditions => ['user_id=? and follow_id is null', current_user.id], :order => 'created_at DESC', :page => params[:page]
+    rescue
+      redirect_to :controller => "site"
+    end
   end
   
 
