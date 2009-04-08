@@ -1,0 +1,14 @@
+.span-24
+= link_to image_tag(@attachment.object.url), :back
+
+.span-24
+  .box
+    = 'User: '
+    = h @attachment.gallary.user.login
+    %br
+    = 'File Name: '
+    = h @attachment.object_file_name
+    %br
+    = 'Uploaded at: '
+    = h @attachment.updated_at
+

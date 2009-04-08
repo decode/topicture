@@ -1,0 +1,12 @@
+%h2 
+  = link_to @user.login, user_path(@user)
+  = "'s gallaries"
+
+%hr
+
+- for gallary in @gallaries
+  %p
+    = image_tag gallary.attachments[0].object.url :thumb
+    = link_to h(gallary.name), gallary_path(gallary)
+    = h gallary.updated_at
+    = h gallary.attachments_count

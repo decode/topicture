@@ -9,12 +9,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090312072518) do
+ActiveRecord::Schema.define(:version => 20090404115746) do
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.integer  "gallary_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "object_file_name"
+    t.string   "object_content_type"
+    t.integer  "object_file_size"
+    t.datetime "object_updated_at"
+  end
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id",        :null => false
     t.integer  "friend_id",      :null => false
     t.string   "workflow_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "gallaries", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "attachments_count"
+    t.integer  "password"
+    t.boolean  "ispublic"
+    t.boolean  "isfriend"
+    t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

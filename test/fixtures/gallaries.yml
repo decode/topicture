@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  attachments_count: 1
+  password: 1
+  ispublic: false
+  isfriend: false
+  category: MyString
+
+two:
+  name: MyString
+  attachments_count: 1
+  password: 1
+  ispublic: false
+  isfriend: false
+  category: MyString

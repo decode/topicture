@@ -31,6 +31,11 @@ render_tabnav :panel,
     t.links_to :controller => 'blog', :action => 'manage'
   end 
   add_tab do |t|
+    t.named 'Gallary'
+    t.titled 'Gallary Page'
+    t.links_to :controller => 'users', :action => 'gallary'
+  end
+  add_tab do |t|
     t.named 'Message Box'
     t.titled 'Message Box'
     t.links_to :controller => 'users', :action => 'message'

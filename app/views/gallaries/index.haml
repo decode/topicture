@@ -1,0 +1,9 @@
+- if @gallaries.count == 0
+  No public gallaries in our liabry
+- for gallary in @gallaries
+  %p
+    = image_tag gallary.attachments[0].object.url(:thumb)
+    = link_to h(gallary.user.login), :action => 'view', :id => gallary.user
+    = link_to h(gallary.name), gallary_path(gallary)
+    = h gallary.attachments_count
+    = h gallary.category

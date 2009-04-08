@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   
   has_many :last_edit_messages, :class_name => 'Message', :foreign_key => 'last_edit_id'
 
+  has_many :attachments
+  has_many :gallaries
+
   def to_label
     login
   end

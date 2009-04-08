@@ -40,6 +40,11 @@ render_tabnav :admin,
       t.links_to :action => 'manage_blog'
     end 
     add_tab do |t|
+      t.named 'Gallary'
+      t.titled 'Gallary manage'
+      t.links_to :action => 'manage_gallary'
+    end 
+    add_tab do |t|
       t.named 'Message'
       t.titled 'Message manage'
       t.links_to :action => 'manage_message'

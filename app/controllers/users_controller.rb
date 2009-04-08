@@ -99,6 +99,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # The page of user manage their settings
   def panel
     #@user = User.find_by_login(params[:name])
     session[:return_to] = "/user/#{current_user.login}/panel"
@@ -219,4 +220,11 @@ class UsersController < ApplicationController
     redirect_to :controller => "messages", :action => "new"
   end
   
+  def gallary 
+    session[:return_to] = "/users/gallary"
+    @gallaries = Gallary.paginate(:conditions => ['user_id=?',current_user.id], :order => 'updated_at DESC',:page=>params[:page])
+    render :action => 'gallary', :layout => 'site'
+  rescue
+    redirect_to :controller => "site"
+  end
 end

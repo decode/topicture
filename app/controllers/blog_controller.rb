@@ -9,6 +9,9 @@ class BlogController < ApplicationController
 
   def post
     session[:return_to] = "/blog/manage"
+    session[:message_type] = 'blog'
+    session[:topic_id] = nil
+    session[:target_message_id] = nil
     @article = Message.new  
   end
   

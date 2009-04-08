@@ -1,0 +1,21 @@
+%h2 Image list
+.span-24
+  - i = 0 
+  - for attach in @attachments
+    - i += 1
+    - if i%3!=0
+      .span-8
+        = link_to h(attach.user.login), user_path(attach.user)
+        = "posted at "
+        = h(attach.object_updated_at)
+        = image_tag attach.object.url(:medium)
+        = h(attach.object_file_name)
+        = h attach.object_content_type
+    - else
+      .span-8.last
+        = link_to h(attach.user.login), user_path(attach.user)
+        = "posted at "
+        = h(attach.object_updated_at)
+        = image_tag attach.object.url(:medium)
+        = h(attach.object_file_name)
+        = h attach.object_content_type
