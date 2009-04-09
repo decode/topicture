@@ -2,6 +2,11 @@
   = render :partial => 'article_list'
 
 .span-6.last 
+  = "Links"
+  %ul
+    %li
+      = link_to 'Gallary', :controller => 'gallaries', :action => 'view', :id => @user
+  %hr
   = "Latest Articles"
   %hr
   %ul

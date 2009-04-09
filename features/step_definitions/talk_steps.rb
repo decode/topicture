@@ -1,7 +1,7 @@
 Given /^I am on a page about user named (.*)$/ do |name|
   @user_to = Factory :user, :login => name, :email => "#{name}@mail.org"
   visit "/user/#{@user_to.login}"
-  response.body.should =~ /User\'s first page/m
+  response.body.should =~ /#{@user_to.login}/m
 end
 
 When /^I send a message$/ do

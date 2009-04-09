@@ -1,7 +1,7 @@
 class GallariesController < ApplicationController
   layout 'site'
 
-  active_scaffold
+  #active_scaffold
 
   # GET /gallaries
   # GET /gallaries.xml

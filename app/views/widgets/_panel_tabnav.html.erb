@@ -41,6 +41,11 @@ render_tabnav :panel,
     t.links_to :controller => 'users', :action => 'message'
   end 
   add_tab do |t|
+    t.named 'Friend Box'
+    t.titled 'Friend Box'
+    t.links_to :controller => 'users', :action => 'friend'
+  end 
+  add_tab do |t|
     t.named 'Block Box'
     t.titled 'Blocked user'
     t.links_to :controller => 'users', :action => 'block'

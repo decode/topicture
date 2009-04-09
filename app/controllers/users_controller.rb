@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  layout "site", :except => :info
-  layout "blog", :only => :info
+  layout "site"
 
   include AccessFilter
 
@@ -60,13 +59,15 @@ class UsersController < ApplicationController
 
   def edit
     #@user = @current_user
-    @user = Message.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def update
     #@user = @current_user # makes our views "cleaner" and more consistent
     @user = User.find(params[:id])
     #@user.login.downcase!
+    @user.roles << Role.find(params[:roles])
+    @user.save
     respond_to do |format|
       params[:user][:login].downcase!
       if @user.update_attributes(params[:user])
@@ -97,6 +98,7 @@ class UsersController < ApplicationController
     if @user.nil?
       #redirect_to :controller => "users"        
     end
+    render :layout => 'blog'
   end
 
   # The page of user manage their settings
@@ -143,38 +145,33 @@ class UsersController < ApplicationController
     @user = current_user
     if params[:refuse]  
       User.handle(params[:request_users]) { |user| user.refuse }
-      @user = current_user
-      render :update do |page|
-        page.replace_html 'request_list', :partial => 'request_list', :object => @user
-      end
-#=begin
-#=end
 =begin
       render :partial => 'request_list'
 =end
     end
     if params[:accept]
       User.handle(params[:friend_users]) { |user| user.approve }
-      render :update do |page|
-        page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
-      end
     end
     if params[:block]
-      User.handle(params[:friend_users]) { |user| user.block}
-      render :update do |page|
-        page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
-      end
+      User.handle(params[:request_users]) { |user| user.block}
+      User.handle(params[:friend_users]) { |user| user.approve }
     end
     if params[:delete]
       User.handle(params[:friend_users]) { |user| user.delete }
-      render :update do |page|
-        page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
-      end
     end
 
     #render :update do |page|
     #  page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
     #end
+    respond_to do |format|
+      format.html { redirect_to '/users/friend' }
+      format.js do
+        render :update do |page|
+          page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
+          page.replace_html 'request_list', :partial => 'friend_list', :object => @user
+        end
+      end
+    end
   end
   
   # Display a add friend box to input messages

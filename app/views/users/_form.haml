@@ -12,10 +12,13 @@
 %br
 = form.password_field :password_confirmation
 %br
-%br
 
 = form.label :email
 %br
 = form.text_field :email
 %br
+
+= form.label :role
+%br
+= select_tag 'roles[]', options_from_collection_for_select(Role.find(:all), :id, :name)#, {:include_blank => true}
 %br
