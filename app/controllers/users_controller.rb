@@ -112,7 +112,6 @@ class UsersController < ApplicationController
   # Show message list
   def message
     @user = current_user
-    render :action => 'message', :layout => 'site'
   end
 
   def message_modify
@@ -128,15 +127,44 @@ class UsersController < ApplicationController
       Message.handle(params[:messages]) { |msg| msg.move }
       flash[:notice] = "Message status changed"
     end
-    @user = current_user
-    render :partial => "message_list", :object => current_user
+    #render :partial => "message_list", :object => current_user
+    respond_to do |format|
+      format.html { redirect_to '/users/message' }
+      format.js do
+        render :update do |page|
+          page.replace_html 'message_list', :partial => 'message_list', :object => @user
+        end
+      end
+    end
   end
 
   def trash
     @user = current_user
-    render :partial => "trash_message_list"
   end
 
+  def trash_modify
+    if params[:mark_delete] 
+      Message.handle(params[:messages]) { |msg| msg.delete_forever }
+      flash[:notice] = "Message has been deleted"
+    end
+    if params[:mark_read]
+      Message.handle(params[:messages]) { |msg| msg.read }
+      flash[:notice] = "Message status changed"
+    end
+    if params[:move]
+      Message.handle(params[:messages]) { |msg| msg.move }
+      flash[:notice] = "Message status changed"
+    end
+    #render :partial => "message_list", :object => current_user
+    respond_to do |format|
+      format.html { redirect_to '/users/trash' }
+      format.js do
+        render :update do |page|
+          page.replace_html 'trash_message_list', :partial => 'trash_message_list', :object => @user
+        end
+      end
+    end
+  end
   def friend
     @user = current_user
   end

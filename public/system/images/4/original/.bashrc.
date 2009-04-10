@@ -1,9 +1,0 @@
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
-
-# enable bash completion in interactive shells
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
-source /usr/share/cdargs/cdargs-bash.sh

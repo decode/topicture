@@ -6,4 +6,5 @@
       %td
         = link_to msg.title, message_path(msg)
       %td
-        = link_to msg.user, user_path(msg,user)
+        = link_to msg.user.login, user_path(msg.user)
+        
