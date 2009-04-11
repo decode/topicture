@@ -16,8 +16,6 @@ Feature: Manage topics
     And I fill in "Description" with "description 1"
     And I press "Create"
     Then I should see "name 1"
-    And I should see "1"
-    And I should see "description 1"
 
   Scenario: Delete topic
     Given I am the admin user
@@ -27,12 +25,9 @@ Feature: Manage topics
       |name 2|2|description 2|
       |name 3|3|description 3|
       |name 4|4|description 4|
-    When I delete the 3rd topic
-    Then I should see the following topics:
-      |name|parent_id|description|
-      |name 1|1|description 1|
-      |name 2|2|description 2|
-      |name 4|4|description 4|
+    When I am on topic manage page
+    And I follow "Delete"
+    Then I should not see "name 1"
 
   Scenario: Post message
     Given I am the normal user

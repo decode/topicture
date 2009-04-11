@@ -91,7 +91,7 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-
+    flash[:success] = "Topic has been delete"
     respond_to do |format|
       format.html { redirect_to(topics_url) }
       format.xml  { head :ok }

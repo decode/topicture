@@ -3,6 +3,7 @@ class BlogController < ApplicationController
 
   def index
     session[:return_to] = "/blog/index"
+    session[:view_type] = 'blog'
     @new_blogs = Message.find :all, :conditions => "message_type = 'blog'", :order => 'created_at DESC', :limit => 10
     @new_registers = User.find :all, :conditions => "login != 'admin' and login != 'anonymous'", :order => 'created_at DESC', :limit => 5
   end

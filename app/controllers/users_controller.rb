@@ -85,7 +85,7 @@ class UsersController < ApplicationController
   end
 
   # Display user's main page
-  def info 
+  def info
     session[:view_style] = 'blog'
     session[:message_type] = 'blog'
     @user = User.find_by_login(params[:name] || current_user.login)
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
 
     session[:target_user_id] = @user.id
     if @user.nil?
-      #redirect_to :controller => "users"        
+      #redirect_to :controller => "users"
     end
     render :layout => 'blog'
   end
@@ -115,13 +115,9 @@ class UsersController < ApplicationController
   end
 
   def message_modify
-    if params[:mark_delete] 
+    if params[:mark_delete]
       Message.handle(params[:messages]) { |msg| msg.msg_delete }
       flash[:notice] = "Message has been deleted"
-    end
-    if params[:mark_read]
-      Message.handle(params[:messages]) { |msg| msg.read }
-      flash[:notice] = "Message status changed"
     end
     if params[:move]
       Message.handle(params[:messages]) { |msg| msg.move }
@@ -143,7 +139,7 @@ class UsersController < ApplicationController
   end
 
   def trash_modify
-    if params[:mark_delete] 
+    if params[:mark_delete]
       Message.handle(params[:messages]) { |msg| msg.delete_forever }
       flash[:notice] = "Message has been deleted"
     end
@@ -165,26 +161,30 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def friend
     @user = current_user
   end
 
   def friend_modify
     @user = current_user
-    if params[:refuse]  
+    if params[:refuse]
       User.handle(params[:request_users]) { |user| user.refuse }
+      User.handle(params[:friend_list]) { |user| user.refuse }
 =begin
       render :partial => 'request_list'
 =end
     end
     if params[:accept]
+      User.handle(params[:request_users]) { |user| user.approve}
       User.handle(params[:friend_users]) { |user| user.approve }
     end
     if params[:block]
       User.handle(params[:request_users]) { |user| user.block}
-      User.handle(params[:friend_users]) { |user| user.approve }
+      User.handle(params[:friend_users]) { |user| user.block}
     end
     if params[:delete]
+      User.handle(params[:request_users]) { |user| user.delete }
       User.handle(params[:friend_users]) { |user| user.delete }
     end
 
@@ -201,7 +201,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   # Display a add friend box to input messages
   def invite
     session[:target_user_id] = params[:id]
@@ -212,20 +212,22 @@ class UsersController < ApplicationController
     @dest_user = User.find_by_id(session[:target_user_id])
     if @source_user.blocked_by?(@dest_user)
       flash[:notice] = "You are blocked"
-      redirect_back_or_default "/user/#{@dest_user.login}"
+      #redirect_back_or_default "/user/#{@dest_user.login}"
     else
       @dest_user.strangers << @source_user
       @dest_user.save
-      
+
       message = Message.new(params[:message])
       message.receivers << @dest_user
       message.user = @source_user
       message.save
+      Message.handle([*message.id]) { |m| m.change_to_request }
       flash[:notice] = "Your request has been sent"
-    redirect_to :controller => "users", :action => "info", :name => @dest_user.login
+      #redirect_to :controller => "users", :action => "info", :name => @dest_user.login
     end
+    redirect_back_or_default "/user/#{@dest_user.login}"
   end
-  
+
   # Show block user list
   def block
     @user = current_user
@@ -244,8 +246,8 @@ class UsersController < ApplicationController
     session[:message_type] = 'message'
     redirect_to :controller => "messages", :action => "new"
   end
-  
-  def gallary 
+
+  def gallary
     session[:return_to] = "/users/gallary"
     @gallaries = Gallary.paginate(:conditions => ['user_id=?',current_user.id], :order => 'updated_at DESC',:page=>params[:page])
     render :action => 'gallary', :layout => 'site'

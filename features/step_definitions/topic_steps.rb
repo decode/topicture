@@ -20,6 +20,14 @@ Given /^I am the (\w+) user$/ do |name|
   click_button "Login"
 end
 
+Then /^I am on the topics page$/ do
+  visit topics_path
+end
+
+Then /^I am on topic manage page$/ do
+  visit '/admin/manage_topic'
+end
+
 Given /^I am on the new topic page$/ do
   visit new_topic_url
   response.body.should =~ /New topic/m
@@ -30,7 +38,7 @@ Given /^the following topics:$/ do |topics|
 end
 
 When /^I delete the (\d+)(?:st|nd|rd|th) topic$/ do |pos|
-  visit topics_url
+  visit '/admin/manage_topic' #topics_url
   within("table > tr:nth-child(#{pos.to_i+1})") do
     click_link "Destroy"
   end
@@ -49,9 +57,10 @@ end
 Given /I am on a topic page/ do
   topic = Topic.create :name => "name 1"
   topic.save
-  visit topics_url
-  response.body.should =~ /Show/m
-  click_link "Show"
+  visit topic_path(topic)
+  puts topic_path(topic)
+  response.body.should =~ /name 1/m
+  click_link "Post"
 end
 
 When /^I click the "Post" link$/ do

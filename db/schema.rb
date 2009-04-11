@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090404115746) do
+ActiveRecord::Schema.define(:version => 20090430170354) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "user_id"

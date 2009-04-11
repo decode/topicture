@@ -38,7 +38,7 @@ module ApplicationHelper
 
   # Generate a link to user's blog page
   def user_info(user)
-    link_to user.login, :controller => 'users', :action => 'info'
+    link_to user.login, "/user/#{user.login}"
   end
 
   def make_shorter(sentence)

@@ -31,6 +31,7 @@ end
 Given /^I logged in as a normal user (.*)$/ do |name|
   Given "Role normal can access controller messages"
   Given "Role normal can access controller users"
+  Given "Role normal can access controller topics"
   Given "I am logged in as normal named #{name}"
 end
 
