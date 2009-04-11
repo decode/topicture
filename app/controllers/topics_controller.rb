@@ -102,6 +102,7 @@ class TopicsController < ApplicationController
     session[:topic_id] = params[:id]
     session[:return_to] = "/topics/#{params[:id]}"
     session[:messages_type] = "topic"
+    session[:target_message_id] = nil
     redirect_to :controller => "messages", :action => "new"
   end
 end

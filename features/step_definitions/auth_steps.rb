@@ -26,6 +26,10 @@ Given /^I am logged in as (.*) named (.*)$/ do |role, name|
 end
 
 Given /^I logged in as a admin user (.*)$/ do |name|
+  Given "Role admin can access controller messages"
+  Given "Role admin can access controller users"
+  Given "Role admin can access controller topics"
+  Given "I am logged in as admin named #{name}"
 end
 
 Given /^I logged in as a normal user (.*)$/ do |name|

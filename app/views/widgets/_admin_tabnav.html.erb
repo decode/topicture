@@ -22,32 +22,32 @@ render_tabnav :admin,
     add_tab do |t|
       t.named 'Role'
       t.titled 'Role manage'
-      t.links_to :action => 'manage_role'
+      t.links_to :controller => 'admin', :action => 'manage_role'
     end
     add_tab do |t|
       t.named 'Topic'
       t.titled 'Topic manage'
-      t.links_to :action => 'manage_topic'
+      t.links_to :controller => 'manage_topic'
     end 
     add_tab do |t|
       t.named 'Post'
       t.titled 'Post manage'
-      t.links_to :action => 'manage_post'
+      t.links_to :controller => 'admin', :action => 'manage_post'
     end 
     add_tab do |t|
       t.named 'Blog'
       t.titled 'Blog manage'
-      t.links_to :action => 'manage_blog'
+      t.links_to :controller => 'admin', :action => 'manage_blog'
     end 
     add_tab do |t|
       t.named 'Gallary'
       t.titled 'Gallary manage'
-      t.links_to :action => 'manage_gallary'
+      t.links_to :controller => 'manage_gallary'
     end 
     add_tab do |t|
       t.named 'Message'
       t.titled 'Message manage'
-      t.links_to :action => 'manage_message'
+      t.links_to :controller => 'admin', :action => 'manage_message'
     end 
   end
   #

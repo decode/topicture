@@ -21,6 +21,6 @@ require 'webrat/rspec-rails'
 require 'spec/expectations'
 
 #Include the FireWatir file. 
-require 'firewatir'
+#require 'firewatir'
 ##include the FireWatir Module.
-include FireWatir
+#include FireWatir

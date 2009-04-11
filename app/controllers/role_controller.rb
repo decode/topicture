@@ -1,6 +1,8 @@
 class RoleController < ApplicationController
-  layout "base"
+  layout "admin"
+
   active_scaffold
+
   ActiveScaffold.set_defaults do |config|
     config.ignore_columns.add [:permissions]
     #config.actions.exclude :nested

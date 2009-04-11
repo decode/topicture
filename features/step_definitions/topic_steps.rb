@@ -1,7 +1,4 @@
-Given /I am a unregistered user$/ do
-end
-
-When /^I goto the new topic page$/ do
+Given /^I goto the new topic page$/ do
   visit new_topic_url
 end
 
@@ -26,6 +23,7 @@ end
 
 Then /^I am on topic manage page$/ do
   visit '/admin/manage_topic'
+  response.body.should =~ /Delete/m
 end
 
 Given /^I am on the new topic page$/ do
@@ -54,13 +52,12 @@ Then /^I should see the following topics:$/ do |topics|
   end
 end
 
-Given /I am on a topic page/ do
+Given /^I am on a topic page$/ do
   topic = Topic.create :name => "name 1"
   topic.save
   visit topic_path(topic)
-  puts topic_path(topic)
   response.body.should =~ /name 1/m
-  click_link "Post"
+  response.body.should =~ /Post/m
 end
 
 When /^I click the "Post" link$/ do
@@ -71,27 +68,33 @@ Given /I am on the topic page included 2 messages$/ do
   topic = Topic.create! :name => "topic 1"
   message = Message.new :title => "message 1"
   message.topic_id = topic.id
+  message.user = User.find :first
+  message.message_type = 'topic'
   message.save
   message = Message.new :title => "message 2"
   message.topic_id = topic.id
+  message.user = User.find :first
+  message.message_type = 'topic'
   message.save
-  visit topics_url
-  click_link "Show"
+  visit topic_path(topic)
+  response.body.should =~ /Delete/m
 end
 
 When /^I click the (\d+)(?:st|nd|rd|th) "Delete" link$/ do |pos|
-  within("table > tr:nth-child(#{pos.to_i+1})") do
+  #within("table > tr:nth-child(#{pos.to_i+1})") do
+  response.body.should =~ /#{title}/m
     click_link "Delete"
-  end
+  #end
 end
 
 Given /I am on topic page with message title "(\w+)"$/ do |title|
   topic = Topic.create! :name => "topic 1"
   message = Message.new :title => title, :body => "message body"
   message.topic_id = topic.id
+  message.user = User.find :first
   message.save
-  visit topics_url
-  click_link "Show"
+  visit topic_path(topic)
+  response.body.should =~ /#{title}/m
 end
 
 When /^I click the message title "(\w+)"$/ do |title|

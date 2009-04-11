@@ -1,8 +1,6 @@
 class GallariesController < ApplicationController
   layout 'site'
 
-  #active_scaffold
-
   # GET /gallaries
   # GET /gallaries.xml
   def index

@@ -1,8 +1,4 @@
 class AdminController < ApplicationController
-  active_scaffold :users
-  active_scaffold :messages
-  active_scaffold :topics
-
   def index
    
   end
@@ -12,14 +8,17 @@ class AdminController < ApplicationController
   
   def manage_post
     session[:manage_type] = 'topic'
+    redirect_to :controller => "manage_message"
   end
 
   def manage_blog
     session[:manage_type] = 'blog'
+    redirect_to :controller => "manage_message"
   end
 
   def manage_message
     session[:manage_type] = 'message'
+    redirect_to :controller => "manage_message"
   end
   
 end

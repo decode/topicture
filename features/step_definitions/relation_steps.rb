@@ -23,8 +23,8 @@ Given /^the following list request:$/ do |requests|
     message = Factory.create :message, :title => m["title"], :body => m["body"]
     message.user = user
     message.receivers << @user
-    message.change_to_request
     message.save
+    Message.handle([*message.id]) { |m| m.change_to_request }
 
     @user.strangers << user
     @user.save

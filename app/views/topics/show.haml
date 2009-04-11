@@ -27,6 +27,8 @@
   - for message in @messages
     %tr
       %td
+        - if !current_user.nil? && current_user.has_role?('admin')
+          = link_to 'Delete', message_path(message), :method => :delete
         = link_to message.title, message
       %td
         = h message.created_at
