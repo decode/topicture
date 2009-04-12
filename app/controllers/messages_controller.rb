@@ -34,6 +34,7 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
     @message.view_count = @message.view_count + 1
     @message.save
+    session[:target_user_id] = @message.user.id
     session[:return_to] = message_path(@message)
     if session[:view_style] != 'blog'
       # prevent display single message in topic mode
@@ -84,6 +85,7 @@ class MessagesController < ApplicationController
       @message = Message.find(params[:id])
     else
       @article = Message.find(params[:id])
+      session[:target_user_id] = @article.user.id
       render :action => 'blog_edit', :layout => 'blog'
     end
   end

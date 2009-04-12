@@ -21,3 +21,7 @@ Factory.define :message do |m|
   m.body "message content"
 end
 
+Factory.define :topic do |t|
+  t.name "Topic"
+  t.description "Topic Desc"
+end

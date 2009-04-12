@@ -2,6 +2,12 @@ When /^I am on the articles list page$/ do
   visit '/blog'
 end
 
+When /^I am on the article manage page$/ do
+  visit '/blog/manage'
+  response.body.should =~ /New article/m
+  response.body.should =~ /Edit/m
+end
+
 Given /^I am on the new article page$/ do
   visit 'blog/post'
   response.body.should =~ /New Article/m
@@ -13,7 +19,8 @@ Given /^the existing articles:$/ do |articles|
       user = Factory.create :user, :login => m["author"], :email => "#{m["author"]}@test.net" 
     end
     message = Factory.create :message, :title => m["title"], :body => m["body"]
-    message.user = user
+    message.user = User.find_by_login(m["author"])
+    session[:target_user_id] = message.user.id
     message.receivers << @user
     message.message_type = 'blog'
     message.save
@@ -30,22 +37,11 @@ When /^I change the articles:$/ do |articles|
   end
 end
 
-Given /^the following articles:$/ do |articles|
-  pending
-end
-
-When /^I delete the 3rd articles$/ do
-  pending
-end
-
-Then /^I should see the following articles:$/ do
-  pending
-end
-
-Given /^the posted article:$/ do |articles|
-  pending
-end
-
-When /^I comment the article$/ do
-  pending
+When /^I view the article$/ do
+  @target_user = User.find_by_id(session[:target_user_id])
+  puts @target_user.login
+  visit "/user/#{@target_user.login}/"
+  response.body.should =~ /more.../m
+  click_link "more..." 
+  response.body.should =~ /Comments/m
 end

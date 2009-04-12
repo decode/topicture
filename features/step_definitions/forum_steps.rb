@@ -1,4 +1,4 @@
 When /^I goto the forum first page$/ do
-  pending
+  visit topics_path
 end
 

@@ -25,37 +25,35 @@ Feature: View style of blog
     And the existing articles:
       |title|body|author|
       |title 1|body 1|Jerry|
-    When I change the articles:
-      |origin|title|body|
-      |title 1|new title 1|new body 1|
+    When I am on the article manage page
+    And I follow "Edit"
+    And I fill in "Title" with "new title 1"
+    And I fill in "Body" with "new body 1"
     And I press "Update"
     Then I should see "new title 1"
     And I should see "new body 1"
 
   Scenario: Delete article
     Given I logged in as a normal user Jerry
-    And the following articles:
-      |title|body|
-      |title 1|body 1|
-      |title 2|body 2|
-      |title 3|body 3|
-      |title 4|body 4|
-    When I delete the 3rd articles 
-    Then I should see the following articles:
-      |title|body|
-      |title 1|body 1|
-      |title 2|body 2|
-      |title 4|body 4|
+    And the existing articles:
+      |title|body|author|
+      |title 1|body 1|Jerry|
+      |title 2|body 2|Jerry|
+      |title 3|body 3|Jerry|
+      |title 4|body 4|Jerry|
+    When I am on the article manage page 
+    And I follow "Delete"
+    Then I should not see "title 4"
   
   Scenario: Comment a article
     Given I logged in as a normal user Jerry
-    And the posted article:
-      |title|body|
-      |target title 1|body 1|
-    When I comment the article
-    And I fill in "Title" with "title 2"
-    And I fill in "Body" with "body 2"
-    And I press "Create"
+    And the existing articles:
+      |title|body|author|
+      |target title 1|body 1|Aux|
+    When I view the article
+    And I fill in "message_title" with "title 2"
+    And I fill in "message_body" with "body 2"
+    And I press "Post"
     Then I should see "target title 1"
     And I should see "title 2"
     And I should see "body 2"
