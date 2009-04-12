@@ -41,8 +41,8 @@ Feature: Manage topics
     Given I logged in as a admin user Ted
     And I am on the topic page included 2 messages
     When I follow "Delete"
-    Then I should see "message 1"
-    And I should not see "message 2"
+    Then I should not see "message 1"
+    And I should see "message 2"
 
   Scenario: View message
     Given I logged in as a normal user Tex

@@ -33,7 +33,7 @@ Feature: Users messages
     When I am on my message list page
     And I check the 1st message
     And I press "Mark as read"
-    Then I should not see "Mark as read"
+    Then I should see "Message status changed"
 
   Scenario: Mark messages as delete
     Given I logged in as a normal user Jerry

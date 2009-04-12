@@ -18,36 +18,4 @@ class Message < ActiveRecord::Base
     end unless messages.nil?
   end
   
-=begin
-  def self.mark_delete(messages)
-    messages.each do |msg_id|
-      msg = Messagebox.find_by_message_id(msg_id)   
-      msg.msg_delete
-      msg.save
-    end
-  end
-
-  def self.mark_read(messages)
-    messages.each do |msg_id|
-      msg = Messagebox.find_by_message_id(msg_id)
-      msg.read
-      msg.save
-    end
-  end
-
-  def self.move(messages)
-    messages.each do |msg_id|
-      msg = Messagebox.find_by_message_id(msg_id)
-      msg.move
-      msg.save
-    end
-  end
-
-  # Change message type to add friend request
-  def change_to_request
-    msg = Messagebox.find_by_message_id(self.id)
-    msg.change_to_request
-    msg.save
-  end
-=end
 end

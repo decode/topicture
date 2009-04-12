@@ -4,8 +4,7 @@ Feature: Manage messages
   wants to operator the message
   
   Scenario: Register new message
-    Given Role normal can access controller messages
-    And I am logged in as normal named user
+    Given I logged in as a normal user Jerry
     And I am on the new message page
     When I fill in "Title" with "title 1"
     And I fill in "Body" with "body 1"

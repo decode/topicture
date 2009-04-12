@@ -12,8 +12,8 @@ class MessagesController < ApplicationController
   
   def conditions_for_collection
     #['login != ?', 'admin'] unless current_user.has_role? 'admin'
-    return '' if session[:manage_type].nil?
-    ['message_type = ?', session[:manage_type]]
+    return '' if session[:message_type].nil?
+    ['message_type = ?', session[:message_type]]
   end
 
   layout "site"
@@ -202,9 +202,10 @@ class MessagesController < ApplicationController
   end
 
   def mark_read
-    msg_box = Messagebox.find_by_message_id(params[:id])
-    msg_box.read
-    flash[:success] = "Message status changed" if msg_box.state == "open"
+    #msg_box = Messagebox.find_by_message_id(params[:id])
+    #msg_box.read
+    Mesage.handle([*params[:id]]) { |m| m.read }
+    flash[:success] = "Message status changed"# if msg_box.state == "open"
     redirect_back_or_default messages_url
   end
   

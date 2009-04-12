@@ -32,6 +32,8 @@ Given /^the following list messages:$/ do |messages|
     message = Factory.create :message, :title => m["title"], :body => m["body"]
     message.user = user
     message.receivers << @user
+    message.message_type = 'message'
+    message.save
 
     unless m[:status].nil?
       # Add code for initial message status
@@ -40,7 +42,7 @@ Given /^the following list messages:$/ do |messages|
 end
 
 When /^I delete the (\d+)(?:st|nd|rd|th) message from the list$/ do |pos|
-  visit "/user/#{@user.login}/panel"
+  visit "/user/#{current_user.login}/panel"
   within("table > tr:nth-child(#{pos.to_i})") do
     click_link "delete"
   end
@@ -57,7 +59,7 @@ end
 Then /^I should see the message list:$/ do |messages|
   messages.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.should have_selector("table > tr:nth-child(#{i+1}) > td:nth-child(#{j+2})") { |td|
+      response.should have_selector("table > tr:nth-child(#{i+1}) > td:nth-child(#{j+3})") { |td|
         td.inner_text.chomp.strip.should == cell
       }
     end

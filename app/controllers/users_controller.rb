@@ -117,11 +117,15 @@ class UsersController < ApplicationController
   def message_modify
     if params[:mark_delete]
       Message.handle(params[:messages]) { |msg| msg.msg_delete }
-      flash[:notice] = "Message has been deleted"
+      flash[:success] = "Message has been deleted"
     end
     if params[:move]
       Message.handle(params[:messages]) { |msg| msg.move }
-      flash[:notice] = "Message status changed"
+      flash[:success] = "Message status changed"
+    end
+    if params[:mark_read]
+      Message.handle(params[:messages]) { |msg| msg.read }
+      flash[:success] = "Message status changed"
     end
     #render :partial => "message_list", :object => current_user
     respond_to do |format|
