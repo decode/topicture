@@ -45,6 +45,7 @@ Given /^I logged in as a guest user (.*)$/ do |name|
   Given "Role anonymous can access controller messages"
   Given "Role anonymous can access controller users"
   Given "Role anonymous can access controller blog"
+  Given "Role normal can access controller topics"
   Given "I am logged in as anonymous named #{name}" 
 end
 
