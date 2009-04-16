@@ -37,10 +37,12 @@ class MessagesController < ApplicationController
     session[:target_user_id] = @message.user.id
     session[:return_to] = message_path(@message)
     if session[:view_style] != 'blog'
+      @reply = Message.new
       # prevent display single message in topic mode
-      unless @message.follow_message.nil? || session[:view_style] == 'single'
+      unless @message.follow_message.nil?# || session[:view_style] == 'single'
         @message = @message.follow_message
       end
+      @replies = Message.paginate :conditions => ['follow_id=?', @message.id], :order => 'created_at DESC', :page => params[:page], :per_page => 15
       respond_to do |format|
         format.html {# show.html.erb {
           render :layout => 'site'
@@ -98,7 +100,7 @@ class MessagesController < ApplicationController
     # Add reply message
     target_id = session[:target_message_id]
     unless target_id.nil?
-      @message.follow_id = target_id 
+      #@message.follow_id = target_id 
       @message.message_type ||= Message.find_by_id(target_id).message_type
       session[:target_message_id] = nil
     end
@@ -230,4 +232,13 @@ class MessagesController < ApplicationController
     end
 =end
   end
+
+  # Quote user's post content
+  def quote
+    source = Message.find params[:id]   
+    @message = Message.new
+    @message.body = "Quote content: " + source.body
+    render :action => 'new'
+  end
+  
 end

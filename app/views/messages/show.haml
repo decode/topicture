@@ -21,7 +21,7 @@
   = link_to 'Reply', :action => "reply", :id => @message
   %table
     %tr
-      %td
+      %td{:colspan=>2}
         = h @message.created_at
     %tr
       %td{:rowspan => 2}
@@ -30,10 +30,15 @@
         %div{:id => "message-#{@message.id}", :class=>'message'}
           = @message.title
     %tr
-      %td
+      %td{:colspan=>2}
         = @message.body
-
-    - for m in @message.follow_messages
+    %tr
+      %td{:colspan=>2}
+        = link_to 'Quote', :action => 'quote', :id => @message
+        = link_to 'Edit', edit_message_path(@message)
+        = link_to_function 'Reply', "fastreply('reply #{@message.user.login} post')"
+    - pos = 1
+    - for m in @replies
       %tr
         %td
           = h m.created_at
@@ -46,5 +51,30 @@
       %tr
         %td
           = m.body
+      %tr
+        %td
+          = "##{pos}"
+          - pos += 1
+          = link_to 'Quote', :action => 'quote', :id => m
+          = link_to 'Edit', edit_message_path(m)
+          = link_to_function 'Reply', "fastreply('Reply floor #{pos} #{@message.user.login} post')"
 
   = link_to 'Reply', :action => "reply", :id => @message
+
+  = will_paginate @replies
+
+
+.span-24
+  #post_box
+    - form_for :message, @reply, :url => {:action => 'create'} do |f|
+      = f.hidden_field :follow_id, :value => @message.id
+      %p
+        = f.label "Title:"
+        %br
+        = f.text_field :title
+      %p
+        = f.label "Content:"
+        %br
+        = f.text_area :body
+      %p
+        = submit_tag 'Post'

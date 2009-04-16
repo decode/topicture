@@ -25,8 +25,10 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.xml
   def show
+    session[:target_message_id] = params[:id]
     @topic = Topic.find_by_id params[:id]
     @messages = @topic.posts.paginate :page => params[:page]||1, :order => 'updated_at DESC'
+    @message = Message.new
     session[:view_style] = 'topic'
     session[:message_type] = 'topic'
     session[:return_to] = topic_url(@topic)
