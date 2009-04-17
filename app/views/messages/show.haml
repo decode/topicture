@@ -18,7 +18,7 @@
   .box
     = full_topic_path(@message.topic)
 
-  = link_to 'Reply', :action => "reply", :id => @message
+  = link_to 'Post', :action => "reply", :id => @message
   %table
     %tr
       %td{:colspan=>2}
@@ -59,7 +59,7 @@
           = link_to 'Edit', edit_message_path(m)
           = link_to_function 'Reply', "fastreply('Reply floor #{pos} #{@message.user.login} post')"
 
-  = link_to 'Reply', :action => "reply", :id => @message
+  = link_to 'Post', :action => "reply", :id => @message
 
   = will_paginate @replies
 

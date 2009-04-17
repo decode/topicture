@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
     @message.view_count = @message.view_count + 1
     @message.save
-    session[:target_user_id] = @message.user.id
+    session[:target_user_id] = @message.user.id unless @message.user.nil?
     session[:return_to] = message_path(@message)
     if session[:view_style] != 'blog'
       @reply = Message.new

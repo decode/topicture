@@ -63,3 +63,10 @@ Feature: View style of forum
     Then I should see "Quote content:"
 
   Scenario: User reply a user in current post thread
+    Given I logged in as a normal user Jerry
+    And the existing post list:
+      |topic|title|body|poster|
+      |Computer|Post|body|Jerry|
+    And I am on a post thread named Post
+    When I follow "Reply"
+    Then I should see "reply Jerry post"

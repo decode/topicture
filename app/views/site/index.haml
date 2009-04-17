@@ -3,7 +3,7 @@
   - if @news.size == 0
     = "No recently news..."
   - for n in @news
-    = link_to n.title, messages_path(n)
+    = link_to n.title, message_path(n)
     = n.body
 %hr
 

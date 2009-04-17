@@ -49,6 +49,11 @@ render_tabnav :admin,
       t.titled 'Message manage'
       t.links_to :controller => 'admin', :action => 'manage_message'
     end 
+    add_tab do |t|
+      t.named 'News'
+      t.titled 'Site news manage'
+      t.links_to :controller => 'admin', :action => 'manage_news'
+    end 
   end
   #
   # you can use restful routes with:
