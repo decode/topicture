@@ -1,12 +1,9 @@
 class TopicsController < ApplicationController
-  include AccessFilter
-
   layout 'site'
+  include AccessFilter
 
   active_scaffold :topics do | config |
     config.columns = [:name, :description, :parent_topic]
-    #config.columns[:messages].includes = [:messageboxes]
-    #config.columns[:last_transaction_date].sort_by :sql => "user_transactions.created_at"
   end
 
   # GET /topics

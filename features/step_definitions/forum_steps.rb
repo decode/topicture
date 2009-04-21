@@ -31,7 +31,6 @@ Given /^the existing post list:$/ do |posts|
     post.message_type = 'topic'
     post.save
   end
-  puts Message.find(:first).title
 end
 
 Given /^I am on a post thread named (.*)$/ do |name|

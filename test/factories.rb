@@ -25,3 +25,7 @@ Factory.define :topic do |t|
   t.name "Topic"
   t.description "Topic Desc"
 end
+
+Factory.define :gallary do |g|
+  g.name "gallary"
+end
