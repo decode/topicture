@@ -4,7 +4,7 @@ class CreateGallaries < ActiveRecord::Migration
       t.references :user
       t.string :name
       t.integer :attachments_count
-      t.integer :password
+      t.string :password
       t.boolean :ispublic
       t.boolean :isfriend
       t.string :category

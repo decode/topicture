@@ -9,8 +9,13 @@ Given /^the existing gallaries:$/ do |gallaries|
       user = Factory.create :user, :login => m["owner"], :email => "#{m["owner"]}@test.net" unless m["owner"].nil?
     end
     gallary = Factory.create :gallary, :name => m["name"]
+    gallary.password = m["password"] unless m["password"].nil?
     gallary.user = user
     gallary.save
   end
+end
+
+Given /^I am on manage gallary page$/ do
+  visit '/users/gallary'
 end
 
