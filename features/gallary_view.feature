@@ -69,3 +69,6 @@ Feature:
     And the existing gallaries:
       |name|owner|password|
       |mygallary|Jerry|pass|
+    And I am on gallary index page
+    When I follow "mygallary"
+    Then I should see "Password Required"
