@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20090430170354) do
     t.integer  "user_id"
     t.string   "name"
     t.integer  "attachments_count"
-    t.integer  "password"
+    t.string   "password"
     t.boolean  "ispublic"
     t.boolean  "isfriend"
     t.string   "category"

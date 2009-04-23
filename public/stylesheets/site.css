@@ -25,3 +25,11 @@
         border-right: 1px solid #000; }
       #site_menu li a.last {
         border-right: 0 /* remove left frame */; }
+
+#gallary_password {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 110;
+  text-align: center;
+  line-height: 0; }

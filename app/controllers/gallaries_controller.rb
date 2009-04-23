@@ -52,7 +52,7 @@ class GallariesController < ApplicationController
     @gallary.user = current_user
     respond_to do |format|
       if @gallary.save
-        flash[:notice] = 'Gallary was successfully created.'
+        flash[:success] = 'Gallary was successfully created.'
         format.html { redirect_to(@gallary) }
         format.xml  { render :xml => @gallary, :status => :created, :location => @gallary }
       else
@@ -69,7 +69,7 @@ class GallariesController < ApplicationController
 
     respond_to do |format|
       if @gallary.update_attributes(params[:gallary])
-        flash[:notice] = 'Gallary was successfully updated.'
+        flash[:success] = 'Gallary was successfully updated.'
         format.html { redirect_to(@gallary) }
         format.xml  { head :ok }
       else
