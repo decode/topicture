@@ -1,6 +1,11 @@
 /**
  * Script used by gallary view
  */
+
+
+var overlayOpacity = 0.8;	// controls transparency of shadow overlay
+var overlayDuration = 0;
+
 Object.extend(Element, {
 	getWidth: function(element) {
 	   	element = $(element);
@@ -36,25 +41,69 @@ Object.extend(Element, {
 var GallaryPassbox = Class.create();
 
 GallaryPassbox.prototype = {
+
+  initialize: function() {
+		var objBody = document.getElementsByTagName("body").item(0);
+		
+		var objOverlay = document.createElement("div");
+		objOverlay.setAttribute('id','passbox_overlay');
+		objOverlay.style.display = 'none';
+    //objOverlay.onclick = function() { myLightbox.end(); }
+		objBody.appendChild(objOverlay);
+
+    var objInfo = document.createElement("span");
+    objInfo.setAttribute('id', 'message');
+    objInfo.style.display = 'none';
+    objBody.appendChild(objInfo);
+
+
+		if (!document.getElementsByTagName){ return; }
+		var anchors = document.getElementsByTagName('a');
+		var areas = document.getElementsByTagName('area');
+
+		// loop through all anchor tags
+		for (var i=0; i<anchors.length; i++){
+			var anchor = anchors[i];
+			
+			var relAttribute = String(anchor.getAttribute('rel'));
+			
+			// use the string.match() method to catch 'lightbox' references in the rel attribute
+			if (anchor.getAttribute('href') && (relAttribute.toLowerCase().match('pass_box'))){
+				anchor.onclick = function () {passBox.show_box(this); return false;}
+			}
+		}
+
+		for (var i=0; i< areas.length; i++){
+			var area = areas[i];
+			
+			var relAttribute = String(area.getAttribute('rel'));
+			
+			// use the string.match() method to catch 'lightbox' references in the rel attribute
+			if (area.getAttribute('href') && (relAttribute.toLowerCase().match('pass_box'))){
+				area.onclick = function () {passBox.show_box(this); return false;}
+			}
+		}
+
+  },
   
-  showpic: function(subject) {
+  show_box: function(subject) {
     var arrayPageSize = getPageSize();
-    Element.setHeight('overlay', arrayPageSize[1]);
-    Effect.Appear('overlay', { duration: overlayDuration, from: 0.0, to: overlayOpacity });
+    Element.setHeight('passbox_overlay', arrayPageSize[1]);
+    Effect.Appear('passbox_overlay', { duration: overlayDuration, from: 0.0, to: overlayOpacity });
 
     var arrayPageScroll = getPageScroll();
     var passformTop = arrayPageScroll[1] + (arrayPageSize[3] / 10);
     Element.setTop('gallary_password', passformTop);
     Element.show('gallary_password');
+  },
+
+  hide_box: function() {
+    $('gallary_password').hide();
+		new Effect.Fade('passbox_overlay', { duration: overlayDuration});
   }
 
-  hide_passbox: function() {
-    $('gallary_password').style.display = 'none';
-    $('overlay').style.display = 'none';
-  }
-
-  /*
-  function getPageScroll(){
+  /* 
+  getPageScroll: function(){
 
     var yScroll;
 
@@ -68,10 +117,9 @@ GallaryPassbox.prototype = {
 
     arrayPageScroll = new Array('',yScroll) 
     return arrayPageScroll;
-  }
-  */
-  /*
-  function getPageSize(){
+  },
+  
+  getPageSize: function(){
     
     var xScroll, yScroll;
     
@@ -99,7 +147,7 @@ GallaryPassbox.prototype = {
     }	
   }
   */
-};
+}
 
-function initGallaryPassbox() { gpBox = new GallaryPassbox(); }
+function initGallaryPassbox() { passBox = new GallaryPassbox(); }
 Event.observe(window, 'load', initGallaryPassbox, false);

@@ -8,9 +8,8 @@
     = "Password needed" unless gallary.password.nil?
     = h gallary.attachments_count
     = h gallary.category
-    = link_to_function "View", "showpic(#{gallary.id})"
+    = link_to_function "View", "show_box(#{gallary.id})", :rel=>'pass_box'
 
-#overlay{:style => "display:none"}
 #gallary_password{:style => "display:none"}
   - form_remote_tag :html => {:action => url_for(:controller=>'gallary', :action=>'check_pass') } do 
     = hidden_field "gallary", "id"
@@ -18,7 +17,7 @@
     = text_field "gallary", "password"
     %br
     = submit_tag "Post"
-    = button_to_function "Close", "hide_passform()"
+    = button_to_function "Close", "passBox.hide_box()"
     
 
 
