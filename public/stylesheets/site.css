@@ -26,11 +26,11 @@
       #site_menu li a.last {
         border-right: 0 /* remove left frame */; }
 
-#gallary_password {
+#passbox {
   position: absolute;
   left: 0;
   width: 100%;
-  z-index: 120;
+  z-index: 100;
   text-align: center;
   line-height: 0; }
 
@@ -38,7 +38,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 110;
+  z-index: 90;
   width: 100%;
   height: 500px;
   background-color: #000; }

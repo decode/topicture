@@ -10,6 +10,8 @@ Given /^the existing gallaries:$/ do |gallaries|
     end
     gallary = Factory.create :gallary, :name => m["name"]
     gallary.password = m["password"] unless m["password"].nil?
+    gallary.ispublic = (m["ispublic"] == "true" ? true : false)
+    gallary.isfriend = (m["isfriend"] == "true" ? true : false)
     gallary.user = user
     gallary.save
   end

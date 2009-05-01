@@ -1,6 +1,10 @@
 class GallariesController < ApplicationController
   layout 'site'
 
+  before_filter :only => 'show' do |controller|
+    controller.has_right?(controller.params[:id])
+  end
+
   # GET /gallaries
   # GET /gallaries.xml
   def index
@@ -70,7 +74,8 @@ class GallariesController < ApplicationController
     respond_to do |format|
       if @gallary.update_attributes(params[:gallary])
         flash[:success] = 'Gallary was successfully updated.'
-        format.html { redirect_to(@gallary) }
+        #format.html { redirect_to(@gallary) }
+        format.html { redirect_to :back }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -97,5 +102,42 @@ class GallariesController < ApplicationController
   rescue
     redirect_to gallaries_url
   end
+
+  def check_pass
+    #gallary = Gallary.find params[:gallary][:id]  
+    gallary = Gallary.find params[:passbox][:id]  
+
+    respond_to do |format|
+      if gallary.password == params[:gallary][:password].chomp
+        session[:gallary] = gallary.id
+        session[:gallary_password] = gallary.password
+        format.html { redirect_to :action => "show", :id => gallary }
+      else
+        format.html {
+          flash[:error] = 'Wrong password'
+          redirect_to :action => 'index' 
+        }
+        format.js do
+          render do |page|
+            page.show 'passbox'
+          end
+        end
+      end
+    end
+  end
   
+  def has_right?(gallary_id)
+    @gallary = Gallary.find gallary_id
+    unless @gallary.password.nil?
+      unless (session[:gallary_password] == @gallary.password) && (session[:gallary] == @gallary.id)
+        redirect_to :action => "index"
+      end
+    end
+    if @gallary.isfriend == true
+      unless @gallary.user.friends.include? current_user
+        redirect_to :action => "index"
+      end
+    end
+  end
+
 end

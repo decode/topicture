@@ -7,7 +7,7 @@
 .span-6.last
   - if @permit
     = link_to 'Edit', edit_gallary_path
-    = link_to 'Back', "/user/gallary" #user_gallary_path(current_user, @gallary)
+    = link_to 'Back', :back #"/user/gallary" #user_gallary_path(current_user, @gallary)
     = link_to 'Add Image', new_user_gallary_attachment_path(current_user, @gallary)
 
 .span-24
