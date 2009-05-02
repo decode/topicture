@@ -24,6 +24,6 @@ end
 Given /^I am the friend of user (.*)$/ do |user_name|
   user = User.find_by_login user_name
   user.friends << @user
-  User.handle([*@user.id]) { |u| u.approve }
+  user.handle([*@user.id]) { |u| u.approve }
   user.save
 end

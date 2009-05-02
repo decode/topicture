@@ -24,7 +24,8 @@ Given /^the following list request:$/ do |requests|
     message.user = user
     message.receivers << @user
     message.save
-    Message.handle([*message.id]) { |m| m.change_to_request }
+    #Message.handle([*message.id]) { |m| m.change_to_request }
+    message.handle(user, [*message.id]) { |m| m.change_to_request }
 
     @user.strangers << user
     @user.save
@@ -57,7 +58,7 @@ Given /^the following list friends:$/ do |friends|
   friends.hashes.each do |m|
     user = Factory.create :user, :login => m["friend"], :email => "#{m["friend"]}@test.net" unless m["friend"].nil?
     @user.friends << user
-    User.handle([*user.id]) { |u| u.approve }
+    @user.handle([*user.id]) { |u| u.approve }
     @user.save
 
     unless m[:status].nil?
@@ -76,7 +77,7 @@ Given /^I was blocked by user (.*)$/ do |friend|
   u = User.find_by_login friend
   user = u || Factory.create( :user, :login => friend, :email => "#{friend}@test.net" )
   user.blocked_users << @user
-  User.handle([*@user.id]) { |u| u.block }
+  user.handle([*@user.id]) { |u| u.block }
   user.save
 end
 
@@ -84,7 +85,7 @@ Given /^I have blocked (.*)$/ do |friend|
   u = User.find_by_login friend
   user = u || Factory.create( :user, :login => friend, :email => "#{friend}@test.net" )
   @user.blocked_users << user
-  User.handle([*user.id]) { |u| u.block }
+  @user.handle([*user.id]) { |u| u.block }
   @user.save
 end
 
