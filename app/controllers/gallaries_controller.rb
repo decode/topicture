@@ -14,6 +14,8 @@ class GallariesController < ApplicationController
     else
       @gallaries = Gallary.find :all, :conditions => 'ispublic = true', :order => 'updated_at DESC'
     end
+    session[:gallary_password] = nil
+    session[:gallary] = nil
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @gallaries }
@@ -128,13 +130,16 @@ class GallariesController < ApplicationController
   
   def has_right?(gallary_id)
     @gallary = Gallary.find gallary_id
-    unless @gallary.password.nil?
+    unless @gallary.password.nil? || @gallary.password.length <= 0
       unless (session[:gallary_password] == @gallary.password) && (session[:gallary] == @gallary.id)
+        flash[:error] = "Wrong password!"
         redirect_to :action => "index"
+        return
       end
     end
     if @gallary.isfriend == true
-      unless @gallary.user.friends.include? current_user
+      unless @gallary.user == current_user || @gallary.user.friends.include?(current_user)
+        flash[:error] = "You have no permission to view this gallary"
         redirect_to :action => "index"
       end
     end

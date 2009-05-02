@@ -73,7 +73,7 @@ Feature:
     When I am on gallary index page
     Then I should see "Password needed"
 
-  Scenario: Only user's friend can view the friend only gallary
+  Scenario: Not user's friend can't view the friend only gallary
     Given I logged in as a normal user Aubery
     And the existing gallaries:
       |name|owner|ispublic|isfriend|
@@ -82,3 +82,12 @@ Feature:
     And I follow "mygallary"
     Then I should see "You have no permission to view this gallary"
 
+  Scenario: Only user's friend can view the friend only gallary
+    Given I logged in as a normal user Aubery
+    And the existing gallaries:
+      |name|owner|ispublic|isfriend|
+      |mygallary|Jerry|true|true|
+    And I am the friend of user Jerry
+    When I am on gallary index page
+    And I follow "mygallary"
+    Then I should see "Attachments"

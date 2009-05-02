@@ -1,6 +1,6 @@
 body {
   line-height: 1.5;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
   color: #000;
   background: none;
   font-size: 10pt; }
@@ -21,13 +21,14 @@ hr {
     color: #fff; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }
+  font-family: Helvetica Neue, Arial, Helvetica, sans-serif; }
 
 code {
   font-size: .9em;
   font-family: 'andale mono', 'lucida console', monospace; }
 
 img {
+  display: inline;
   float: left;
   margin: 1.5em 1.5em 1.5em 0; }
 

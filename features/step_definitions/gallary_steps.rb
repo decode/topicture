@@ -21,3 +21,9 @@ Given /^I am on manage gallary page$/ do
   visit '/users/gallary'
 end
 
+Given /^I am the friend of user (.*)$/ do |user_name|
+  user = User.find_by_login user_name
+  user.friends << @user
+  User.handle([*@user.id]) { |u| u.approve }
+  user.save
+end
