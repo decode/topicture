@@ -10,17 +10,7 @@ class Message < ActiveRecord::Base
   
   belongs_to :last_edit_user, :class_name => "User", :foreign_key => "last_edit_id"
 
-=begin
-  def self.handle(messages)
-    messages.each do |msg_id|
-      msg = Messagebox.find_by_message_id(msg_id)
-      yield(msg)
-      msg.save
-    end unless messages.nil?
-  end
-=end
-  
-  def handle(user, messages)
+  def self.handle(user, messages)
     messages.each do |msg_id|
       msg = Messagebox.find :first, :conditions => ["message_id=? and user_id =?", msg_id, user.id]
       yield(msg)

@@ -116,15 +116,15 @@ class UsersController < ApplicationController
 
   def message_modify
     if params[:mark_delete]
-      Message.handle(params[:messages]) { |msg| msg.msg_delete }
+      Message.handle(current_user, params[:messages]) { |msg| msg.msg_delete }
       flash[:success] = "Message has been deleted"
     end
     if params[:move]
-      Message.handle(params[:messages]) { |msg| msg.move }
+      Message.handle(current_user, params[:messages]) { |msg| msg.move }
       flash[:success] = "Message status changed"
     end
     if params[:mark_read]
-      Message.handle(params[:messages]) { |msg| msg.read }
+      Message.handle(current_user, params[:messages]) { |msg| msg.read }
       flash[:success] = "Message status changed"
     end
     #render :partial => "message_list", :object => current_user
@@ -144,15 +144,15 @@ class UsersController < ApplicationController
 
   def trash_modify
     if params[:mark_delete]
-      Message.handle(params[:messages]) { |msg| msg.delete_forever }
+      Message.handle(current_user, params[:messages]) { |msg| msg.delete_forever }
       flash[:notice] = "Message has been deleted"
     end
     if params[:mark_read]
-      Message.handle(params[:messages]) { |msg| msg.read }
+      Message.handle(current_user, params[:messages]) { |msg| msg.read }
       flash[:notice] = "Message status changed"
     end
     if params[:move]
-      Message.handle(params[:messages]) { |msg| msg.move }
+      Message.handle(current_user, params[:messages]) { |msg| msg.move }
       flash[:notice] = "Message status changed"
     end
     #render :partial => "message_list", :object => current_user
@@ -173,23 +173,23 @@ class UsersController < ApplicationController
   def friend_modify
     @user = current_user
     if params[:refuse]
-      User.handle(params[:request_users]) { |user| user.refuse }
-      User.handle(params[:friend_list]) { |user| user.refuse }
+      @user.handle(params[:request_users]) { |user| user.refuse }
+      @user.handle(params[:friend_list]) { |user| user.refuse }
 =begin
       render :partial => 'request_list'
 =end
     end
     if params[:accept]
-      User.handle(params[:request_users]) { |user| user.approve}
-      User.handle(params[:friend_users]) { |user| user.approve }
+      @user.handle(params[:request_users]) { |user| user.approve}
+      @user.handle(params[:friend_users]) { |user| user.approve }
     end
     if params[:block]
-      User.handle(params[:request_users]) { |user| user.block}
-      User.handle(params[:friend_users]) { |user| user.block}
+      @user.handle(params[:request_users]) { |user| user.block}
+      @user.handle(params[:friend_users]) { |user| user.block}
     end
     if params[:delete]
-      User.handle(params[:request_users]) { |user| user.delete }
-      User.handle(params[:friend_users]) { |user| user.delete }
+      @user.handle(params[:request_users]) { |user| user.delete }
+      @user.handle(params[:friend_users]) { |user| user.delete }
     end
 
     #render :update do |page|
@@ -225,7 +225,7 @@ class UsersController < ApplicationController
       message.receivers << @dest_user
       message.user = @source_user
       message.save
-      Message.handle([*message.id]) { |m| m.change_to_request }
+      Message.handle(@dest_user, [*message.id]) { |m| m.change_to_request }
       flash[:notice] = "Your request has been sent"
       #redirect_to :controller => "users", :action => "info", :name => @dest_user.login
     end
@@ -241,7 +241,7 @@ class UsersController < ApplicationController
   def unblock
     @user = current_user
     unblocked_user = User.find_by_id params[:id]
-    User.handle([*unblocked_user.id]) { |u| u.approve }
+    @user.handle([*unblocked_user.id]) { |u| u.approve }
     @user.save
     redirect_to :action => "block"
   end

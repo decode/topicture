@@ -1,5 +1,4 @@
 When /^I send a friend invite request$/ do
-  #response.body.should =~ /abc/m
   fill_in "message[title]", :with => "hello"
   fill_in "message[body]", :with => "I want add you to my friend"
   click_button "Send"
@@ -24,8 +23,7 @@ Given /^the following list request:$/ do |requests|
     message.user = user
     message.receivers << @user
     message.save
-    #Message.handle([*message.id]) { |m| m.change_to_request }
-    message.handle(user, [*message.id]) { |m| m.change_to_request }
+    Message.handle(@user, [*message.id]) { |m| m.change_to_request }
 
     @user.strangers << user
     @user.save

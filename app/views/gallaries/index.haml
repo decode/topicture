@@ -9,7 +9,11 @@
     - else
       = link_to h(gallary.name), gallary_path(gallary)
     - unless gallary.password.nil?
+      %br
       = "Password needed"
+    - if gallary.isfriend == true
+      %br
+      = "Only Friend View"
     = h gallary.attachments_count
     = h gallary.category
 

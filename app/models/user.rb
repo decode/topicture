@@ -30,18 +30,10 @@ class User < ActiveRecord::Base
   def to_label
     login
   end
-=begin
-  def self.handle(users)
-    users.each do |user_id|
-      user = Friendship.find_by_friend_id(user_id)
-      yield(user)
-      user.save
-    end unless users.nil?
-  end
-=end
+
   def handle(users)
     users.each do |user_id|
-      user = Friendship.find :first, :conditions => ["friend_id=? and user_id =?", user_id, self.id]
+      user = Friendship.find :first, :conditions => ["friend_id=? and user_id=?", user_id, self.id]
       yield(user)
       user.save
     end unless users.nil?
