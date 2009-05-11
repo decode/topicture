@@ -16,3 +16,6 @@
 [submodule "vendor/plugins/lightbox"]
 	path = vendor/plugins/lightbox
 	url = git://github.com/Lipsiasoft/lightbox.git
+[submodule "vendor/plugins/tiny_mce"]
+	path = vendor/plugins/tiny_mce
+	url = git://github.com/kete/tiny_mce.git

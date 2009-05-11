@@ -4,7 +4,7 @@
   #blog_time
     = @article.created_at
   #blog_body
-    = @article.body
+    = RedCloth.new(@article.body).to_html
   %hr
   #comments_list
     %h3
@@ -56,5 +56,5 @@
       .span-18
         %p
           = submit_tag 'Post'
-    
+        
 .span-6.last

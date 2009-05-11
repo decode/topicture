@@ -15,7 +15,9 @@ class ManageMessageController < ApplicationController
 
   def update_table_config         
     if session[:manage_type] != 'news'
-      active_scaffold_config.exclude :create, :search
+      active_scaffold_config.create.link.label = ' '
+      active_scaffold_config.search.link.label = ' '
+      active_scaffold_config.actions.exclude :create, :search
     else
       active_scaffold_config.label = "Site news manage"
     end
