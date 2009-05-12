@@ -3,6 +3,8 @@ class MessagesController < ApplicationController
   layout "site"
   include AccessFilter
 
+  uses_tiny_mce
+
   active_scaffold
   active_scaffold :messages do | config |
     config.actions.exclude :create, :search

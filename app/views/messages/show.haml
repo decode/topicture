@@ -75,7 +75,8 @@
       %p
         = f.label "Content:"
         %br
-        = f.text_area :body
+        = text_area_tag :body
       %p
         = submit_tag 'Post'
 
+= "TinyMCE supported" if using_tiny_mce?

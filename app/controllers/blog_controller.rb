@@ -26,6 +26,5 @@ class BlogController < ApplicationController
       redirect_to :controller => "site"
     end
   end
-  
 
 end
