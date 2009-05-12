@@ -29,7 +29,7 @@
       %td
         - if !current_user.nil? && current_user.has_role?('admin')
           = link_to 'Delete', message_path(message), :method => :delete
-        = link_to message.title, message
+        = link_to excerpt(message.title, message.title[0,18], :radius => 2), message
       %td
         = h message.created_at
         %br

@@ -3,8 +3,6 @@ class MessagesController < ApplicationController
   layout "site"
   include AccessFilter
 
-  uses_tiny_mce
-=begin
   active_scaffold
   active_scaffold :messages do | config |
     config.actions.exclude :create, :search
@@ -16,7 +14,7 @@ class MessagesController < ApplicationController
     return '' if session[:message_type].nil?
     ['message_type = ?', session[:message_type]]
   end
-=end
+
   # GET /messages
   # GET /messages.xml
   def index

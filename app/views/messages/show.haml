@@ -31,7 +31,7 @@
           = @message.title
     %tr
       %td{:colspan=>2}
-        = @message.body
+        = textilize(@message.body)
     %tr
       %td{:colspan=>2}
         = link_to 'Quote', :action => 'quote', :id => @message
@@ -50,7 +50,7 @@
             = h m.title
       %tr
         %td
-          = m.body
+          = textilize(m.body) unless m.body.nil?
       %tr
         %td
           = "##{pos}"
@@ -75,8 +75,11 @@
       %p
         = f.label "Content:"
         %br
-        = text_area_tag :body
+        = #f.text_area :body
+        = textile_editor 'message', 'body'
+        = textile_editor_initialize
       %p
         = submit_tag 'Post'
 
-= "TinyMCE supported" if using_tiny_mce?
+.span-24
+  = "TinyMCE supported" if using_tiny_mce?
