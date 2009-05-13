@@ -19,3 +19,9 @@
 [submodule "vendor/plugins/tiny_mce"]
 	path = vendor/plugins/tiny_mce
 	url = git://github.com/kete/tiny_mce.git
+[submodule "vendor/plugins/acts_as_textiled"]
+	path = vendor/plugins/acts_as_textiled
+	url = git://github.com/defunkt/acts_as_textiled.git
+[submodule "vendor/plugins/textile-editor-helper"]
+	path = vendor/plugins/textile-editor-helper
+	url = git://github.com/decode/textile-editor-helper.git
