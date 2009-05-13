@@ -19,11 +19,11 @@
 
 %table
   %tr
-    %th Title
-    %th Post
-    %th Last post
-    %th Replies
-    %th Views
+    %th{:width => '50%'} Title
+    %th{:width => '15%'} Post
+    %th{:width => '15%'} Last post
+    %th{:width => '5%'} Replies
+    %th{:width => '5%'} Views
   - for message in @messages
     %tr
       %td
@@ -31,21 +31,21 @@
           = link_to 'Delete', message_path(message), :method => :delete
         = link_to excerpt(message.title, message.title[0,18], :radius => 2), message, :title => message.title
       %td
-        = h message.created_at
-        %br
         = link_to message.user.login, message.user
+        %br
+        = h distance_of_time_in_words(message.created_at, Time.now)
       - reply_messages = message.follow_messages.find( :all, :order => 'created_at DESC' )
       %td
         - unless reply_messages.count == 0
-          = reply_messages[0].created_at
-          %br
           = 'by '
           = link_to reply_messages[0].user.login, reply_messages[0].user
-        - else
-          = message.updated_at
           %br
+          = h distance_of_time_in_words(reply_messages[0].created_at)
+        - else
           = 'by '
           = link_to message.user.login, user_path(message.user)
+          %br
+          = h distance_of_time_in_words(Time.now, message.updated_at)
         %td
           = message.follow_messages.count
         %td

@@ -63,6 +63,7 @@
 
   = will_paginate @replies
 
+%hr
 
 .span-24
   #post_box
@@ -70,14 +71,11 @@
       = f.hidden_field :follow_id, :value => @message.id
       %p
         = f.label "Title:"
-        %br
         = f.text_field :title
       %p
         = f.label "Content:"
         %br
-        = #f.text_area :body
-        = textile_editor 'message', 'body'
-        = textile_editor_initialize
+        = f.text_area :body
       %p
         = submit_tag 'Post'
 
