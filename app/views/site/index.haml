@@ -17,7 +17,7 @@
     - for t in @topic_news
       = link_to t.user.login, user_path(t.user)
       = "says: "
-      = link_to excerpt(t.title, t.title[0,18], :radius => 2), message_path(t)
+      = link_to excerpt(t.title, t.title[0,18], :radius => 2), message_path(t), :title => t.title
       = " in "
       - topic = Topic.find_by_id(t.topic_id)
       = link_to topic.name, topic_path(topic)
