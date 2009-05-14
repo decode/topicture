@@ -1,11 +1,24 @@
 zh:
   site:
     welcome: "欢迎, {{name}}"
+    login: "登陆"
+    register: "注册"
+    logout: "注销"
+    login_name: "用户名"
+    password: "密码"
+    remenber_me: "记住我"
+    news: "新间"
 
   page:
     submit: "提交"
     reply: "回复"
-
+    post: "提交"
+    back: "返回"
+    name: "名字"
+    email: "电子邮件"
+    website: "网址"
+    message: "发消息"
+    add_friend: "添加好友"
 
   topic:
     label: "讨论"
@@ -13,6 +26,19 @@ zh:
     new: "新主题"
     new_update: "最新发表"
     say: "说"
+
+  blog:
+    label: "日志"
+    new_post: "新文章"
+    new_user: "新加入用户"
+    comments: "评论"
+    title: "标题"
+    comment: "评论"
+
+  gallary:
+    label: "相册"
+    need_password: "密码访问"
+    only_friend: "好友可见"
 
   activerecord:
     models:

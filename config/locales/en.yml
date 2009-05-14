@@ -4,10 +4,32 @@
 en:
   site:
     welcome: "Welcome, {{name}}"
+    login: "Login"
+    register: "Register"
+    logout: "Logout"
+    login_name: "Login"
+    password: "Password"
+    remenber_me: "Remenber me"
+    news: "News"
 
   page:
     submit: "Submit"
     reply: "Reply"
+    post: "Post"
+    back: "Back"
+    name: "Name"
+    email: "Email"
+    website: "Website"
+    message: "Message"
+    add_friend: "Add as friend"
+
+  blog:
+    label: "Blog"
+    new_post: "New Posts"
+    new_user: "New Users"
+    comments: "Comments"
+    title: "Title"
+    comment: "Comment"
 
   topic:
     label: "Discuss"
@@ -16,3 +38,7 @@ en:
     new_update: "New Updates"
     say: "says"
 
+  gallary:
+    label: "Gallary"
+    need_password: "Password Needed"
+    only_friend: "Only Friend"
