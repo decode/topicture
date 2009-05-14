@@ -1,0 +1,23 @@
+zh:
+  site:
+    welcome: "欢迎, {{name}}"
+
+  page:
+    submit: "提交"
+    reply: "回复"
+
+
+  topic:
+    label: "讨论"
+    list_topic: "主题列表"
+    new: "新主题"
+    new_update: "最新发表"
+    say: "说"
+
+  activerecord:
+    models:
+      user: "用户"
+    attributes:
+      user:
+        login: "用户名"
+        email: "邮件"
