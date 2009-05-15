@@ -1,28 +1,24 @@
-%h1 New message
-
 - form_for(@message) do |f|
   = f.error_messages
+  - unless session[:target_message_id].nil?
+    %p
+      = f.label t('global.follow')
+      %br
+      = Message.find_by_id(session[:target_message_id]).title
 
   %p
-    = f.label :title
+    = f.label t('global.title')
     %br
     = f.text_field :title
 
   %p
-    = f.label :body
+    = f.label t('global.content')
     %br
     = #f.text_area :body
     = textile_editor 'message', 'body'
     = textile_editor_initialize
 
-
-  - unless session[:target_message_id].nil?
-    %p
-      = f.label :follow
-      %br
-      = Message.find_by_id(session[:target_message_id]).title
-
   %p
-    = f.submit "Create"
+    = f.submit t('global.create')
 
-= link_to 'Back', :back
+= link_to t('global.back'), :back

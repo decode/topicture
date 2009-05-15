@@ -1,62 +1,55 @@
-.span-12
-  = "Name: "
-  = h @topic.name
-.span-12.last
-  -# unless @topic.parent_id.nil?
-    = "Parent: "
-    = h @topic.parent_topic.name
-.span-24
-  = t 'global.description'
-  = h @topic.description
-%hr
-
 .span-18
   = full_topic_path(@topic)
 .span-6.last
   = link_to t('global.edit'), edit_topic_path(@topic) |
   = link_to t('global.back'), topics_path
-  = link_to t('global.post'), :action => 'post', :id => @topic
+  = link_to t('topic.post'), :action => 'post', :id => @topic
 
-%table
-  %tr
-    %th{:width => '50%'}
-      = t 'global.title'
-    %th{:width => '15%'}
-      = t 'topic.poster'
-    %th{:width => '15%'}
-      = t 'topic.last_poster'
-    %th{:width => '5%'}
-      = t 'topic.reply'
-    %th{:width => '5%'}
-      = t 'topic.viewer'
-  - for message in @messages
+.span-24
+  = t 'global.description'
+  = h @topic.description
+%hr
+.span-24
+  %table
     %tr
-      %td
-        - if !current_user.nil? && current_user.has_role?('admin')
-          = link_to t('global.delete'), message_path(message), :method => :delete
-        = link_to excerpt(message.title, message.title[0,18], :radius => 2), message, :title => message.title
-      %td
-        = link_to message.user.login, message.user
-        %br
-        = h distance_before_now(message.created_at)
-      - reply_messages = message.follow_messages.find( :all, :order => 'created_at DESC' )
-      %td
-        - unless reply_messages.count == 0
-          = 'by '
-          = link_to reply_messages[0].user.login, reply_messages[0].user
+      %th{:width => '50%'}
+        = t 'global.title'
+      %th{:width => '15%'}
+        = t 'topic.poster'
+      %th{:width => '15%'}
+        = t 'topic.last_poster'
+      %th{:width => '5%'}
+        = t 'topic.reply'
+      %th{:width => '5%'}
+        = t 'topic.viewer'
+    - for message in @messages
+      %tr
+        %td
+          - if !current_user.nil? && current_user.has_role?('admin')
+            = link_to t('global.delete'), message_path(message), :method => :delete
+          = link_to excerpt(message.title, message.title[0,18], :radius => 2), message, :title => message.title
+        %td
+          = link_to message.user.login, message.user
           %br
-          = h distance_before_now(reply_messages[0].created_at)
-        - else
-          = 'by '
-          = link_to message.user.login, user_path(message.user)
-          %br
-          = h distance_before_now(message.updated_at)
+          = h distance_before_now(message.created_at)
+        - reply_messages = message.follow_messages.find( :all, :order => 'created_at DESC' )
         %td
-          = message.follow_messages.count
-        %td
-          = message.view_count
-      -#
-        %td
-          = link_to 'Delete', message, :confirm => 'Are you sure?', :method => :delete
+          - unless reply_messages.count == 0
+            = 'by '
+            = link_to reply_messages[0].user.login, reply_messages[0].user
+            %br
+            = h distance_before_now(reply_messages[0].created_at)
+          - else
+            = 'by '
+            = link_to message.user.login, user_path(message.user)
+            %br
+            = h distance_before_now(message.updated_at)
+          %td
+            = message.follow_messages.count
+          %td
+            = message.view_count
+        -#
+          %td
+            = link_to 'Delete', message, :confirm => 'Are you sure?', :method => :delete
 
 = will_paginate @messages

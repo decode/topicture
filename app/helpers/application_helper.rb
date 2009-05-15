@@ -1,8 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  # Get the distance word form now
   def distance_before_now(from, include_seconds = false)
-    return distance_of_time_in_words(from, Time.now, include_seconds) + I18n.translate('global.before')   
+    return distance_of_time_in_words_to_now(from, include_seconds) + I18n.translate('global.before')   
   end
   
   # Get topic path from current to the base topic

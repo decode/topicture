@@ -5,11 +5,13 @@ zh:
     edit: "编辑"
     back: "返回"
     post: "提交"
+    create: "创建"
     delete: "删除"
     description: "描述"
     before: "前"
     after: "后"
     links: "链接"
+    follow: "回复"
 
   system:
     password_error: "密码错误"
@@ -66,6 +68,7 @@ zh:
     reply: "回复"
     viewer: "查看"
     quote: "引用"
+    post: "发表"
 
   blog:
     label: "日志"

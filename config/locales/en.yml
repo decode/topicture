@@ -8,11 +8,13 @@ en:
     edit: "Edit"
     back: "Back"
     post: "Post"
+    create: "Create"
     delete: "Delete"
     description: "Description"
     before: " before"
     after: " after"
     links: "Links"
+    follow: "Follow"
 
   system:
     password_error: "Wrong Password!"
@@ -83,6 +85,7 @@ en:
     reply: "Reply"
     viewer: "Views"
     quote: "Quote"
+    post: "Post"
 
   gallary:
     label: "Gallary"

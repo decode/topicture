@@ -24,7 +24,7 @@
   %table
     %tr
       %td{:rowspan => 2}
-        = link_to @message.user.login, @message.user
+        = user_info @message.user
       %td
         %div{:id => "message-#{@message.id}", :class=>'message'}
           = @message.title
@@ -33,7 +33,7 @@
         = textilize(@message.body)
     %tr
       %td
-        = h distance_of_time_in_words(@message.created_at, Time.now)
+        = h distance_before_now(@message.created_at)
       %td
         = link_to t('topic.quote'), :action => 'quote', :id => @message
         = link_to t('global.edit'), edit_message_path(@message)
@@ -42,7 +42,7 @@
     - for m in @replies
       %tr
         %td
-          = h distance_of_time_in_words(m.created_at, Time.now)
+          = h distance_before_now(m.created_at)
       %tr
         %td{:rowspan => 2}
           = link_to m.user.login, m.user
