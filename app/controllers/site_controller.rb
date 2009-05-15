@@ -5,4 +5,9 @@ class SiteController < ApplicationController
     @topic_news = Message.find :all, :conditions => "message_type = 'topic'", :order => 'created_at DESC', :limit => 10
     @blog_news = Message.find :all, :conditions => "message_type = 'blog'", :order => 'created_at DESC', :limit => 10
   end
+
+  def set_language
+    session[:language] = params[:id]
+    redirect_to :back
+  end
 end

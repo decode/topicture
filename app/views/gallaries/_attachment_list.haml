@@ -1,5 +1,6 @@
 .span-24
-  %h3 Attachments
+  %h3
+    = t 'gallary.attachments'
   - i = 0 
   - for attach in @attachments
     - i += 1
@@ -7,8 +8,8 @@
       .span-24
     - if i%3!=0
       .span-8
-        = "posted at "
-        = h attach.object_updated_at
+        = t 'gallary.posted_at'
+        = h distance_of_time_in_words(attach.object_updated_at, Time.now)
         =# link_to image_tag(attach.object.url(:medium)), attachment_path(attach)
         = lightbox_image_tag attach.object.url(:medium), attach.object.url, {:class => 'images'}, :title => attach.object_file_name
         = h attach.object_file_name
@@ -20,12 +21,12 @@
       - i = 0
       .span-8.last
         = "posted at "
-        = h attach.object_updated_at
+        = h distance_of_time_in_words(attach.object_updated_at, Time.now)
         = lightbox_image_tag attach.object.url(:medium), attach.object.url, {:class => 'images'}, :title => attach.object_file_name
         = h attach.object_file_name
         = h attach.object_content_type
         %br
         - if @permit
-          = link_to 'Delete', :controller=>'attachment', :action=>'delete', :id => attach, :method => :delete
+          = link_to t('global.delete'), :controller=>'attachment', :action=>'delete', :id => attach, :method => :delete
 
   = will_paginate @attachments

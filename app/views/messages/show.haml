@@ -1,10 +1,12 @@
 - if session[:view_style] == 'single' #or @message.follow_messages.count == 0
   %p
-    %b Title:
+    %b
+      = t 'global.title'
     = h @message.title
 
   %p
-    %b Body:
+    %b
+      = t 'global.content'
     = h @message.body
 
   %p
@@ -18,11 +20,8 @@
   .box
     = full_topic_path(@message.topic)
 
-  = link_to 'Post', :action => "reply", :id => @message
+  = link_to t('global.post'), :action => "reply", :id => @message
   %table
-    %tr
-      %td{:colspan=>2}
-        = h @message.created_at
     %tr
       %td{:rowspan => 2}
         = link_to @message.user.login, @message.user
@@ -33,15 +32,17 @@
       %td{:colspan=>2}
         = textilize(@message.body)
     %tr
-      %td{:colspan=>2}
-        = link_to 'Quote', :action => 'quote', :id => @message
-        = link_to 'Edit', edit_message_path(@message)
-        = link_to_function 'Reply', "fastreply('reply #{@message.user.login} post')"
+      %td
+        = h distance_of_time_in_words(@message.created_at, Time.now)
+      %td
+        = link_to t('topic.quote'), :action => 'quote', :id => @message
+        = link_to t('global.edit'), edit_message_path(@message)
+        = link_to_function t('topic.reply'), "fastreply('reply #{@message.user.login} post')"
     - pos = 1
     - for m in @replies
       %tr
         %td
-          = h m.created_at
+          = h distance_of_time_in_words(m.created_at, Time.now)
       %tr
         %td{:rowspan => 2}
           = link_to m.user.login, m.user
@@ -55,11 +56,11 @@
         %td
           = "##{pos}"
           - pos += 1
-          = link_to 'Quote', :action => 'quote', :id => m
-          = link_to 'Edit', edit_message_path(m)
-          = link_to_function 'Reply', "fastreply('Reply floor #{pos} #{@message.user.login} post')"
+          = link_to t('topic.quote'), :action => 'quote', :id => m
+          = link_to t('global.edit'), edit_message_path(m)
+          = link_to_function t('topic.reply'), "fastreply('Reply floor #{pos} #{@message.user.login} post')"
 
-  = link_to 'Post', :action => "reply", :id => @message
+  = link_to t('global.post'), :action => "reply", :id => @message
 
   = will_paginate @replies
 
@@ -70,14 +71,12 @@
     - form_for :message, @reply, :url => {:action => 'create'} do |f|
       = f.hidden_field :follow_id, :value => @message.id
       %p
-        = f.label "Title:"
+        = f.label t('global.title')
         = f.text_field :title
       %p
-        = f.label "Content:"
+        = f.label t('global.content')
         %br
         = f.text_area :body
       %p
-        = submit_tag 'Post'
+        = submit_tag t('global.post')
 
-.span-24
-  = "TinyMCE supported" if using_tiny_mce?

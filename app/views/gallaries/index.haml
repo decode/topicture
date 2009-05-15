@@ -1,5 +1,5 @@
 - if @gallaries.count == 0
-  No public gallaries in our library
+  = t 'gallary.no_public_gallaries'
 - for gallary in @gallaries
   %p
     = image_tag gallary.attachments[0].object.url(:thumb) if gallary.attachments.count > 0
@@ -8,19 +8,17 @@
       = link_to_function h(gallary.name), "passBox.show_box(#{gallary.id})", :rel=>'pass_box'
     - else
       = link_to h(gallary.name), gallary_path(gallary)
-    - unless gallary.password.nil?
-      %br
-      = "Password needed"
+    %br
+    - unless gallary.password.nil? or gallary.password.length == 0
+      = t 'gallary.need_password'
     - if gallary.isfriend == true
       %br
-      = "Only Friend View"
+      = t 'gallary.only_friend'
     = h gallary.attachments_count
     = h gallary.category
 
 #passbox{:style => "display:none"}
   - form_tag :action=>"check_pass" do 
-    = "Password: "
+    = t 'site.password'
     = text_field "gallary", "password"
-    
-
 

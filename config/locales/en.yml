@@ -2,15 +2,50 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  global:
+    title: "Title"
+    content: "Content"
+    edit: "Edit"
+    back: "Back"
+    post: "Post"
+    delete: "Delete"
+    description: "Description"
+    before: " before"
+    after: " after"
+    links: "Links"
+
+  system:
+    password_error: "Wrong Password!"
+    login_success: "Login Successful!"
+    login_failed: "Login Failed"
+
   site:
+    label: "Site"
     welcome: "Welcome, {{name}}"
     login: "Login"
     register: "Register"
     logout: "Logout"
+    profile: "Profile"
     login_name: "Login"
     password: "Password"
-    remenber_me: "Remenber me"
+    change_password: "Change Password"
+    password_confirmation: "Password Confirmation"
+    remember_me: "Remenber me"
     news: "News"
+    no_news: "No recently news"
+    no_topics: "No recently topic news"
+    no_articles: "No recently blog news"
+    update: "News"
+
+  manage:
+    message_box: "Inbox"
+    friend_list: "Friends"
+    block_list: "Blocks"
+    friend_list_description: "All The Friend List"
+    block_list_description: "Block User List"
+
+  admin:
+    label: "Administrator Page"
 
   page:
     submit: "Submit"
@@ -21,7 +56,7 @@ en:
     email: "Email"
     website: "Website"
     message: "Message"
-    add_friend: "Add as friend"
+    add_friend: "Add Friend"
 
   blog:
     label: "Blog"
@@ -30,6 +65,12 @@ en:
     comments: "Comments"
     title: "Title"
     comment: "Comment"
+    comment_count: "Comments"
+    comment_at: "comment at"
+    posted_at: "Post at"
+    more: "More..."
+    last_articles: "Last Articles"
+    latest_comments: "Latest Comments"
 
   topic:
     label: "Discuss"
@@ -37,8 +78,24 @@ en:
     new: "New Topic"
     new_update: "New Updates"
     say: "says"
+    poster: "Post"
+    last_poster: "Last Post"
+    reply: "Reply"
+    viewer: "Views"
+    quote: "Quote"
 
   gallary:
     label: "Gallary"
+    name: "Name"
+    owner: "Owner"
     need_password: "Password Needed"
     only_friend: "Only Friend"
+    no_public_gallaries: "No public gallaries in our library"
+    new: "New"
+    add_image: "Add Image"
+    attachments: "Attachments"
+    attachment_count: "Attachment Count"
+    public: "Public to All Users"
+    friend_view: "Only Friend Can View"
+    category: "Catetory"
+    posted_at: "Posted at:"

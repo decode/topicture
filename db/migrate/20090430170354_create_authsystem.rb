@@ -13,6 +13,7 @@ class CreateAuthsystem < ActiveRecord::Migration
       t.string :last_login_ip
       t.string :current_login_ip
       t.string :email
+      t.string :locale
       t.timestamps
     end
 

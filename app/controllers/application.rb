@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 
   #include AccessFilter
+  before_filter :init_locale
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -74,4 +75,10 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
+
+  def init_locale
+    I18n.locale = current_user.locale if current_user and !current_user.locale.nil?
+    I18n.locale = session[:language] unless session[:language].nil?
+  end
+  
 end

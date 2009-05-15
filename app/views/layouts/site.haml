@@ -30,24 +30,24 @@
         #menu
           %ul.level1{:id=>'root'}
             %li
-              = link_to 'Site', '/site'
+              = link_to t('site.label'), '/site'
             %li.sep
               |
             %li
-              = link_to 'Forum', topics_path
+              = link_to t('topic.label'), topics_path
             %li.sep 
               |
             %li
-              = link_to 'Blog', '/blog'
+              = link_to t('blog.label'), '/blog'
             %li.sep
               |
             %li
-              = link_to 'Gallary', gallaries_url 
+              = link_to t('gallary.label'), gallaries_url 
             - if current_user && current_user.has_role?('admin')
               %li.sep
                 |
               %li
-                = link_to 'Admin', :controller => 'admin'
+                = link_to t('admin.label'), :controller => 'admin'
 
       %hr
       - if flash[:notice]
@@ -63,4 +63,7 @@
       = yield
       %hr
       #footer.span-24
-        %span.quiet Topicture v0.1
+        %span.quiet 
+          = 'Topicture v0.1'
+          = link_to 'ENG', '/en'
+          = link_to '中文', '/cn'

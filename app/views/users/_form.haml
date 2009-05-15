@@ -1,24 +1,25 @@
-= form.label :login
+= form.label t('site.login_name')
 %br
 = form.text_field :login
 %br
 
-= form.label :password, form.object.new_record? ? nil : "Change Password"
+= form.label t('site.password'), form.object.new_record? ? nil : t('site.change_password')
 %br
 = form.password_field :password
 %br
 
-= form.label :password_confirmation
+= form.label t('site.password_confirmation')
 %br
 = form.password_field :password_confirmation
 %br
 
-= form.label :email
+= form.label t('page.email')
 %br
 = form.text_field :email
 %br
 
-= form.label :role
-%br
-= select_tag 'roles[]', options_from_collection_for_select(Role.find(:all), :id, :name)#, {:include_blank => true}
-%br
+- # Bugs Bugs!
+= #form.label :role
+- #%br
+= #select_tag 'roles[]', options_from_collection_for_select(Role.find(:all), :id, :name)#, {:include_blank => true}
+- #%br

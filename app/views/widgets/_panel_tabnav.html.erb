@@ -26,28 +26,28 @@ render_tabnav :panel,
   #end 
          
   add_tab do |t|
-    t.named 'Blog'
+    t.named t('blog.label')
     t.titled 'Blog Page'
     t.links_to :controller => 'blog', :action => 'manage'
   end 
   add_tab do |t|
-    t.named 'Gallary'
+    t.named t('gallary.label')
     t.titled 'Gallary Page'
     t.links_to :controller => 'users', :action => 'gallary'
   end
   add_tab do |t|
-    t.named 'Message Box'
-    t.titled 'Message Box'
+    t.named t('manage.message_box')
+    t.titled t('manage.message_box')
     t.links_to :controller => 'users', :action => 'message'
   end 
   add_tab do |t|
-    t.named 'Friend Box'
-    t.titled 'Friend Box'
+    t.named t('manage.friend_list')
+    t.titled t('manage.friend_list_description')
     t.links_to :controller => 'users', :action => 'friend'
   end 
   add_tab do |t|
-    t.named 'Block Box'
-    t.titled 'Blocked user'
+    t.named t('manage.block_list')
+    t.titled t('manage.block_list_description')
     t.links_to :controller => 'users', :action => 'block'
   end 
   #  

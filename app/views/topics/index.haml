@@ -1,24 +1,27 @@
 #topic_page
   .span-20 
-    %h2 List topics
+    %h2 
+      = t 'topic.list_topic'
   .span-4.last
-    = link_to 'New topic', new_topic_path
+    = link_to t('topic.new'), new_topic_path
 
 
   .span-5.colborder
     - if @topics.count == 0
-      %p Not topic created
+      %p
+        = t 'site.no_topics'
     %ul
       - for topic in @topics
         %li
           = link_to topic.name, topic
           = subtopic_path(topic)
   .span-18.last
-    %h3 New updates
+    %h3 
+      = t('topic.new_update')
     - for message in @topic_news
       .box
         = link_to message.user.login, message.user
-        = " says: " 
+        = t 'topic.say'
         - if message.follow_id.nil?
           = link_to message.title, message
         - else
@@ -26,5 +29,5 @@
           = link_to message.title, message.follow_message, {:href => link}
         %br
         = link_to message.topic.name
-        = h message.created_at
+        = h distance_before_now(message.created_at)
 

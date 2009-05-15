@@ -17,7 +17,7 @@ render_tabnav :admin,
     add_tab do |t|
       t.named 'User'
       t.titled 'User manage'
-      t.links_to :action => 'manage_user'
+      t.links_to :controller => 'admin', :action => 'manage_user'
     end
     add_tab do |t|
       t.named 'Role'
@@ -25,7 +25,7 @@ render_tabnav :admin,
       t.links_to :controller => 'admin', :action => 'manage_role'
     end
     add_tab do |t|
-      t.named 'Topic'
+      t.named t('topic.label')
       t.titled 'Topic manage'
       t.links_to :controller => 'manage_topic'
     end 
@@ -35,12 +35,12 @@ render_tabnav :admin,
       t.links_to :controller => 'admin', :action => 'manage_post'
     end 
     add_tab do |t|
-      t.named 'Blog'
+      t.named t('blog.label')
       t.titled 'Blog manage'
       t.links_to :controller => 'admin', :action => 'manage_blog'
     end 
     add_tab do |t|
-      t.named 'Gallary'
+      t.named t('gallary.label')
       t.titled 'Gallary manage'
       t.links_to :controller => 'manage_gallary'
     end 
@@ -50,7 +50,7 @@ render_tabnav :admin,
       t.links_to :controller => 'admin', :action => 'manage_message'
     end 
     add_tab do |t|
-      t.named 'News'
+      t.named t('site.news')
       t.titled 'Site news manage'
       t.links_to :controller => 'admin', :action => 'manage_news'
     end 

@@ -10,29 +10,30 @@ render_navigation :status, :generate_css => true do
     unless current_user
       add_item do |i|
         # i.html = {:id => 'logout_link'}
-        i.named 'Login' 
+        i.named t('site.login')
         i.links_to '/user_session/new'
       end
 
       add_item do |i|
-        i.named 'Register' 
+        i.named t('site.register')
         i.titled 'Get a new account'
         i.links_to new_user_url
       end
     else
       add_item do |i|
-        i.named 'Welcome: ' + current_user.login
+        # i.named 'Welcome: ' + current_user.login
+        i.named t('site.welcome', :name => current_user.login)
         i.disable!
       end
 
       add_item do |i|
-        i.named 'Profile'
+        i.named t('site.profile')
         #i.links_to account_url
         i.links_to '/user/' + current_user.login + '/panel'
       end
       add_item do |i|
         i.html = {:method => :delete}
-        i.named 'Logout'
+        i.named t('site.logout')
         i.links_to :controller => 'user_sessions', :action => 'destroy'
       end
     end

@@ -1,7 +1,8 @@
 #news_list.span-24
-  %h4 News
+  %h4 
+    = t 'site.news'
   - if @news.size == 0
-    = "No recently news..."
+    = t 'site.no_news'
   - for n in @news
     = link_to n.title, message_path(n)
     = n.body
@@ -10,13 +11,13 @@
 #topic_list.span-11.colborder
   %h2 
     = link_to 'Topic', :controller => 'topics'
-    = "News"
+    = t 'site.update'
   .box
     - if @topic_news.size == 0
-      = "No recently topic news..."
+      = t 'site.no_topics'
     - for t in @topic_news
       = link_to t.user.login, user_path(t.user)
-      = "says: "
+      = t 'topic.say'
       = link_to excerpt(t.title, t.title[0,18], :radius => 2), message_path(t), :title => t.title
       = " in "
       - topic = Topic.find_by_id(t.topic_id)
@@ -26,11 +27,12 @@
 #blog_list.span-12.last
   %h2 
     = link_to 'Blog', :controller => 'blog'
-    = "News"
+    = t 'site.update'
   .box
     - if @blog_news.size == 0
-      = "No recently blog news..."
+      = t 'site.no_articles'
     - for b in @blog_news
-      = link_to b.title, message_path(b)
       = user_info(b.user)
+      = ":"
+      = link_to b.title, message_path(b)
       %br

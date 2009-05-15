@@ -63,5 +63,7 @@ ActionController::Routing::Routes.draw do |map|
   map.user 'user/:name', :controller => 'users', :action => 'info', :requirements => { :name => /[a-zA-Z0-9\-\.]+/ }
   map.user 'user/:name/panel', :controller => 'users', :action => 'panel'
 
+  map.lang 'en', :controller => 'site', :action => 'set_language', :id => 'en'
+  map.lang 'cn', :controller => 'site', :action => 'set_language', :id => 'zh'
   
 end

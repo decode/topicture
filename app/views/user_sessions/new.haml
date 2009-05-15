@@ -1,25 +1,26 @@
 .span-24
-  .span-8
+  .span-7
     %p
-  .span-8.colborder
-    .span-4
-      %h2 Login
+  .span-9.colborder
+    .span-5
+      %h2 
+        = t 'site.login'
     .span-4.last
       .prepend-3
-        = link_to "Back", :back
-    .span-8
+        = link_to t('global.back'), :back
+    .span-10
       - form_for @user_session, :url => user_session_path do |f|
         = #f.error_messages
         #login_container
-          = f.label :login
+          = f.label t('site.login_name')
           = f.text_field :login
           %br
-          = f.label :password
+          = f.label t('site.password')
           = f.password_field :password
           %br
           = f.check_box :remember_me
-          = f.label :remember_me
+          = f.label t('site.remember_me')
           %br
 
-          = f.submit "Login"
-  .span-7.last
+          = f.submit t('site.login')
+  .span-6.last

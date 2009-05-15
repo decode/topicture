@@ -2,13 +2,13 @@
   #blog_title
     = @article.title
   #blog_time
-    = @article.created_at
+    = distance_before_now(@article.created_at)
   #blog_body
-    = RedCloth.new(@article.body).to_html
+    = textilize @article.body
   %hr
   #comments_list
     %h3
-      = "Comments "
+      = t 'blog.comments'
     - pos = 1
     - for comment in @article.follow_messages
       .box
@@ -17,7 +17,7 @@
         #commenter
           = link_to comment.user.login, user_path(comment.user) unless comment.user.nil?
           = " comment at: "
-          = comment.created_at
+          = distance_before_now(comment.created_at)
         #comment_title
           = comment.title
 
@@ -32,29 +32,29 @@
       = f.hidden_field :follow_id, :value => @article.id
       .span-10.colborder
         %p
-          = f.label "Title:"
+          = f.label t('global.title')
           %br
           = f.text_field :title
         %p
-          = f.label "Comment:"
+          = f.label t('blog.comment')
           %br
           = f.text_area :body
       .span-7.last
         - unless current_user
           %p
-            = f.label "Name:"
+            = f.label t('page.name')
             %br
             = f.text_field :comment_user
           %p
-            = f.label "Email:"
+            = f.label t('page.email')
             %br
             = f.text_field :comment_email
           %p
-            = f.label "Website:"
+            = f.label t('page.website')
             %br
             = f.text_field :comment_website
       .span-18
         %p
-          = submit_tag 'Post'
+          = submit_tag t('global.post')
         
 .span-6.last

@@ -14,14 +14,14 @@
     - @user = User.find_by_id session[:target_user_id]
     .container
       .span-12
-        = link_to 'Site', "/"
-        = link_to 'Blog', "/blog"
+        = link_to t('site.label'), "/"
+        = link_to t('blog.label'), "/blog"
       .span-12.last
         = navigation :status
       .span-24
         .prepend-20
-          = link_to "message", :controller => 'users', :action => 'send_message'#new_message_url#:controller => "messages", :action => "new"
-          = link_to "Add as friend", :controller => "users", :action => "invite", :id => @user
+          = link_to t('page.message'), :controller => 'users', :action => 'send_message'#new_message_url#:controller => "messages", :action => "new"
+          = link_to t('page.add_friend'), :controller => "users", :action => "invite", :id => @user
       .span-24
         %h1 
           = link_to @user.login, "/user/#{@user.login}"
