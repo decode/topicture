@@ -1,11 +1,12 @@
 - content_for :panel do
   = tabnav :panel
 
-= link_to "Message", :action => "message"
+= link_to t('manage.message_box'), :action => "message"
 
 -form_for @user, :url => {:action => "trash_modify"}, :method => :put do |f|
-  = submit_tag "Delete", :name => "mark_delete"
-  = submit_tag "Move to inbox", :name => "move"
-  %h4 Trash list
+  = submit_tag t('global.delete'), :name => "mark_delete"
+  = submit_tag t('manage.move_to_inbox'), :name => "move"
+  %h4
+    = t 'manage.trash'
   #trash_list
     = render :partial => 'trash_message_list'#, :object => @user

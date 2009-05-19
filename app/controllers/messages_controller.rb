@@ -185,9 +185,9 @@ class MessagesController < ApplicationController
   end
 
   def mark_read
-    Mesage.handle([*params[:id]]) { |m| m.read }
+    Message.handle(current_user, [*params[:id]]) { |m| m.read }
     flash[:success] = "Message status changed"# if msg_box.state == "open"
-    redirect_back_or_default messages_url
+    redirect_back_or_default :back #messages_url
   end
   
   def view

@@ -20,6 +20,7 @@ en:
     password_error: "Wrong Password!"
     login_success: "Login Successful!"
     login_failed: "Login Failed"
+    logout_success: "Logout Successful!"
 
   site:
     label: "Site"
@@ -41,10 +42,20 @@ en:
 
   manage:
     message_box: "Inbox"
+    message_list: "Messages"
     friend_list: "Friends"
     block_list: "Blocks"
     friend_list_description: "All The Friend List"
     block_list_description: "Block User List"
+    mark_read: "Mark as read"
+    move_to_inbox: "Move to inbox"
+    delete_forever: "Delete forever"
+    trash: "Trash"
+    accept: "Accept"
+    refuse: "Refuse"
+    block: "Block"
+    request: "Request"
+    unblock: "Unblock"
 
   admin:
     label: "Administrator Page"
@@ -59,6 +70,7 @@ en:
     website: "Website"
     message: "Message"
     add_friend: "Add Friend"
+    send: "Send"
 
   blog:
     label: "Blog"
@@ -73,6 +85,8 @@ en:
     more: "More..."
     last_articles: "Last Articles"
     latest_comments: "Latest Comments"
+    welcome_title: "Welcome to my blog"
+    welcome_body: "Wish you have a happy tour in my site"
 
   topic:
     label: "Discuss"
@@ -102,3 +116,4 @@ en:
     friend_view: "Only Friend Can View"
     category: "Catetory"
     posted_at: "Posted at:"
+    total_gallaries: "Total Gallaries"

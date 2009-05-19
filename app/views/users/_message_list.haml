@@ -1,33 +1,33 @@
 %table
   - for msg in @user.unread_messages
     %tr
-      %td
+      %td{:width=>'5%'}
         = check_box_tag "messages[]", msg.id
-      %td
+      %td{:width=>'10%'}
         %b
           = link_to h(msg.user.login), user_path(msg.user)
-      %td
+      %td{:width=>'10%'}
         %b
           = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
-      %td
+      %td{:width=>'10%'}
         %b
           = h msg.created_at
-      %td
+      %td{:width=>'5%'}
         %b
-          = link_to "Mark as read", :controller => "messages", :action => "mark_read", :id => msg
-      %td
+          = link_to t('manage.mark_read'), :controller => "messages", :action => "mark_read", :id => msg
+      %td{:width=>'5%'}
         %b
-          = link_to "Reply", :controller => "messages", :action => "reply", :id => msg
+          = link_to t('global.reply'), :controller => "messages", :action => "reply", :id => msg
   - for msg in @user.read_messages
     %tr
-      %td
+      %td{:width=>'5%'}
         = check_box_tag "messages[]", msg.id
-      %td
+      %td{:width=>'5%'}
         = link_to h(msg.user.login), user_path(msg.user)
-      %td
+      %td{:width=>'5%'}
         = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
-      %td
+      %td{:width=>'5%'}
         = h msg.created_at
-      %td
-        = link_to "Reply", :controller => "messages", :action => "reply", :id => msg
+      %td{:width=>'5%'}
+        = link_to t('global.reply'), :controller => "messages", :action => "reply", :id => msg
 

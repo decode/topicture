@@ -1,16 +1,20 @@
 #article_content
   - if @articles.count == 0
-    #article_title Welcome to my blog
-    #article_body Wish you have a happy tour in my site
+    #article_title
+      = t 'blog.welcome_title'
+    #article_body
+      = t 'blog.welcome_body'
   - for article in @articles
     #article_title
-      = article.title
+      %h3
+        = article.title
     #article_time
       = t 'blog.posted_at'
       = distance_before_now(article.created_at)
     #article_body
-      = article.body
+      = h strip_tags(textilize(article.body))
       = link_to t('blog.more'), user_article_url(@user,article)
     #status
       = t 'blog.comment_count'
       = article.follow_messages.count
+    %hr

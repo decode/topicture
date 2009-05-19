@@ -3,8 +3,7 @@
     %h2 
       = t 'topic.list_topic'
   .span-4.last
-    = link_to t('topic.new'), new_topic_path
-
+    = #link_to t('topic.new'), new_topic_path
 
   .span-5.colborder
     - if @topics.count == 0

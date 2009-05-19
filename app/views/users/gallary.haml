@@ -3,10 +3,10 @@
 
 .span-24
   .prepend-20
-    = link_to "New Gallary", new_user_gallary_path(current_user)
+    = link_to t('gallary.new'), new_user_gallary_path(current_user)
 .span-24
   %h3 
-    = "Total Gallaries: "
+    = t 'gallary.total_gallaries'
     = @gallaries.count
   - for gallary in @gallaries
     .span-18

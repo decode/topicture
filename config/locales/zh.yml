@@ -5,6 +5,7 @@ zh:
     edit: "编辑"
     back: "返回"
     post: "提交"
+    reply: "回复"
     create: "创建"
     delete: "删除"
     description: "描述"
@@ -17,6 +18,7 @@ zh:
     password_error: "密码错误"
     login_success: "登录成功"
     login_failed: "登录失败"
+    logout_success: "注销成功"
 
   site:
     label: "首页"
@@ -38,10 +40,20 @@ zh:
 
   manage:
     message_box: "收件箱"
+    message_list: "消息列表"
     friend_list: "好友列表"
     block_list: "黑名单"
     friend_list_description: "所有好友"
     block_list_description: "黑名单列表"
+    mark_read: "标记为己读"
+    move_to_inbox: "移动到收件箱"
+    delete_forever: "永久删除"
+    trash: "垃圾箱"
+    accept: "接受"
+    refuse: "拒绝"
+    block: "黑名单"
+    request: "请求"
+    unblock: "取消黑名单"
 
   admin:
     label: "网站管理"
@@ -56,6 +68,7 @@ zh:
     website: "网址"
     message: "发消息"
     add_friend: "添加好友"
+    send: "发送"
 
   topic:
     label: "讨论"
@@ -83,6 +96,9 @@ zh:
     more: "更多..."
     last_articles: "最近更新"
     latest_comments: "最新评论"
+    welcome_title: "欢迎访问我的日志"
+    welcome_body: "希望您在这里有愉快的体验"
+
 
   gallary:
     label: "相册"
@@ -99,6 +115,7 @@ zh:
     friend_view: "好友可见"
     category: "类别"
     posted_at: "创建于"
+    total_gallaries: "相册数"
 
   activerecord:
     models:

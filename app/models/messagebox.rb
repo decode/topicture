@@ -13,6 +13,8 @@ class Messagebox < ActiveRecord::Base
     end
     state :open do
       event :msg_delete, :transitions_to => :suspend
+      event :read, :transitions_to => :open
+      event :move, :transitions_to => :open
     end
     state :suspend do
       event :undelete, :transitions_to => :open

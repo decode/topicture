@@ -23,12 +23,13 @@
   = link_to t('global.post'), :action => "reply", :id => @message
   %table
     %tr
-      %td{:rowspan => 2}
+      %td{:width => '20%'}
         = user_info @message.user
       %td
         %div{:id => "message-#{@message.id}", :class=>'message'}
           = @message.title
     %tr
+      %td
       %td{:colspan=>2}
         = textilize(@message.body)
     %tr

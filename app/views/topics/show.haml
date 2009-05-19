@@ -1,12 +1,12 @@
 .span-18
   = full_topic_path(@topic)
 .span-6.last
-  = link_to t('global.edit'), edit_topic_path(@topic) |
-  = link_to t('global.back'), topics_path
+  = #link_to t('global.edit'), edit_topic_path(@topic) |
+  = link_to t('global.back'), @topic.parent_topic.nil? ? topics_path : topic_path(@topic.parent_topic)
   = link_to t('topic.post'), :action => 'post', :id => @topic
 
 .span-24
-  = t 'global.description'
+  = #t 'global.description'
   = h @topic.description
 %hr
 .span-24

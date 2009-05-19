@@ -6,8 +6,8 @@
       %td
         = link_to user.login, user_path(user)
       %td
-        = link_to "Delete"
+        = link_to t('global.delete')
       %td
-        = link_to "Unblock", :action => "unblock", :id => user
+        = link_to t('manage.unblock'), :action => "unblock", :id => user
   
       

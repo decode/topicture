@@ -22,6 +22,6 @@
         - link = url_for :controller => 'messages', :action => 'show', :id => comment.follow_message, :anchor=>"message-#{comment.id}"
         = link_to comment.user.login, user_article_path(@user, comment), {:href => link} 
         = ": "
-        = comment.body
+        = h strip_tags(comment.body)
 
 

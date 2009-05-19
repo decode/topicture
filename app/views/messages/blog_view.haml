@@ -1,22 +1,25 @@
 .span-18
   #blog_title
-    = @article.title
+    %h2
+      = @article.title
   #blog_time
     = distance_before_now(@article.created_at)
+  %br
   #blog_body
     = textilize @article.body
   %hr
   #comments_list
     %h3
+      = @article.follow_messages.count
       = t 'blog.comments'
     - pos = 1
     - for comment in @article.follow_messages
       .box
         %div{:id=>"message-#{comment.id}"}
-          = pos
+          = "##{pos}"
         #commenter
           = link_to comment.user.login, user_path(comment.user) unless comment.user.nil?
-          = " comment at: "
+          = t 'blog.comment_at' 
           = distance_before_now(comment.created_at)
         #comment_title
           = comment.title
