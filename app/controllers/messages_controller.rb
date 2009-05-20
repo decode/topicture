@@ -48,6 +48,13 @@ class MessagesController < ApplicationController
       end
     else
       @article = @message
+      @user = @message.user
+
+      # Display for sidebar
+      @articles = @user.articles
+      source_ids = @articles.collect { |m| m.id }
+      @latest_comments = Message.find :all, :conditions => ["follow_id='?' and user_id!=?", source_ids, @user.id], :order => 'created_at DESC', :limit => 15
+
       @comment = Message.new
       respond_to do |format|
         format.html {render :action => 'blog_view', :id => params[:id], :layout => 'blog' }
@@ -93,7 +100,7 @@ class MessagesController < ApplicationController
 
     # Record message sender's id
     if current_user.nil?
-      @msesage.user_id = User.find_by_login 'anonymous'
+      @msesage.user = User.find_by_login('anonymous')
     else
       @message.user_id = current_user.id
     end
