@@ -5,16 +5,16 @@
     #article_body
       = t 'blog.welcome_body'
   - for article in @articles
-    #article_title
-      %h3
+    #article
+      #article_title
         = article.title
-    #article_time
-      = t 'blog.posted_at'
-      = distance_before_now(article.created_at)
-    #article_body
-      = h strip_tags(textilize(article.body))
-      = link_to t('blog.more'), user_article_url(@user,article)
-    #status
-      = t 'blog.comment_count'
-      = article.follow_messages.count
+      #article_time
+        = t 'blog.posted_at'
+        = distance_before_now(article.created_at)
+      #article_body
+        = h strip_tags(textilize(article.body))
+        = link_to t('blog.more'), user_article_url(@user,article)
+      #status
+        = t 'blog.comment_count'
+        = article.follow_messages.count
     %hr

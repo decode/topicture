@@ -98,16 +98,19 @@ class MessagesController < ApplicationController
       session[:target_message_id] = nil
     end
 
+    @message.user = User.find_by_login('anonymous')
+
     # Record message sender's id
     if current_user.nil?
-      @msesage.user = User.find_by_login('anonymous')
+      # Bugs when user not logged in. Should fix the authority function's bugs.
+      #@msesage.user = User.find_by_login('anonymous')
     else
       @message.user_id = current_user.id
     end
 
     # Record message receiver's id
     blocked = false
-    unless session[:target_user_id] == current_user.id
+    unless current_user.nil? || session[:target_user_id] == current_user.id
       receiver = User.find_by_id(session[:target_user_id]) unless session[:target_user_id].nil?
       unless receiver.nil?
         blocked = receiver.blocked_users.include?(current_user)

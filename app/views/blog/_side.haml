@@ -1,0 +1,21 @@
+= t 'global.links'
+%ul
+  %li
+    = link_to 'Gallary', :controller => 'gallaries', :action => 'view', :id => @user
+%hr
+= t 'blog.last_articles'
+%hr
+%ul
+  - for article in @articles
+    %li
+      = link_to article.title, user_article_url(@user,article)
+= t 'blog.latest_comments' 
+= @latest_comments.count
+%hr
+%ul
+  - for comment in @latest_comments
+    %li
+      - link = url_for :controller => 'messages', :action => 'show', :id => comment.follow_message, :anchor=>"message-#{comment.id}"
+      = link_to comment.user.login, user_article_path(@user, comment), {:href => link} 
+      = ": "
+      = h strip_tags(comment.body)

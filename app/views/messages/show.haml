@@ -43,20 +43,20 @@
     - for m in @replies
       %tr
         %td
-          = h distance_before_now(m.created_at)
-      %tr
-        %td{:rowspan => 2}
           = link_to m.user.login, m.user
         %td
           %div{:id => "message-#{m.id}", :class=>'message'}
             = h m.title
       %tr
         %td
+        %td
           = textilize(m.body) unless m.body.nil?
       %tr
         %td
           = "##{pos}"
           - pos += 1
+          = h distance_before_now(m.created_at)
+        %td
           = link_to t('topic.quote'), :action => 'quote', :id => m
           = link_to t('global.edit'), edit_message_path(m)
           = link_to_function t('topic.reply'), "fastreply('Reply floor #{pos} #{@message.user.login} post')"
