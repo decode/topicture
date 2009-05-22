@@ -39,24 +39,21 @@
         = link_to t('topic.quote'), :action => 'quote', :id => @message
         = link_to t('global.edit'), edit_message_path(@message)
         = link_to_function t('topic.reply'), "fastreply('reply #{@message.user.login} post')"
-    - pos = 1
-    - for m in @replies
-      %tr
-        %td
-          = link_to m.user.login, m.user
-        %td
-          %div{:id => "message-#{m.id}", :class=>'message'}
-            = h m.title
-      %tr
-        %td
-        %td
+  - pos = 1
+  - for m in @replies
+    #topic_reply
+      .user
+        = link_to m.user.login, m.user
+      .dialog
+        %div{:id => "message-#{m.id}", :class=>'message'}
+          = h m.title
+        .body
           = textilize(m.body) unless m.body.nil?
-      %tr
-        %td
+        .position
           = "##{pos}"
           - pos += 1
           = h distance_before_now(m.created_at)
-        %td
+        .toolbox
           = link_to t('topic.quote'), :action => 'quote', :id => m
           = link_to t('global.edit'), edit_message_path(m)
           = link_to_function t('topic.reply'), "fastreply('Reply floor #{pos} #{@message.user.login} post')"

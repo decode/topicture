@@ -45,3 +45,26 @@
 
 #blog_time {
   background-color: #e0f0e0; }
+
+#topic_reply .user {
+  position: relative;
+  width: 20%; }
+#topic_reply .dialog {
+  border-width: 2px;
+  border-style: dotted;
+  position: relative;
+  top: -20px;
+  left: 20%;
+  width: 79%; }
+  #topic_reply .dialog .message {
+    background-color: #E6FFDC;
+    position: relative; }
+  #topic_reply .dialog .body {
+    position: relative; }
+  #topic_reply .dialog .position {
+    position: relative;
+    top: 20px; }
+  #topic_reply .dialog .toolbox {
+    width: 20%;
+    position: relative;
+    left: 85%; }

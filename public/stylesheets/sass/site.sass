@@ -46,3 +46,34 @@
 	
 #blog_time
   :background-color #e0f0e0 
+
+!blog_info = 20
+!percent = "%"
+#topic_reply
+  .user
+    :position relative
+    :width = !blog_info + !percent
+
+  .dialog
+    :border-width 2px
+    :border-style dotted
+    :position relative
+    :top -20px
+    :left = !blog_info + !percent
+    :width = (100 - !blog_info - 1) + !percent
+
+    .message
+      :background-color #E6FFDC
+      :position relative
+      
+    .body
+      :position relative
+
+    .position
+      :position relative
+      :top 20px
+
+    .toolbox
+      :width = (!blog_info) + !percent
+      :position relative
+      :left = (100 - !blog_info + 5) + !percent
