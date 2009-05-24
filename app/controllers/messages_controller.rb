@@ -98,12 +98,12 @@ class MessagesController < ApplicationController
       session[:target_message_id] = nil
     end
 
-    @message.user = User.find_by_login('anonymous')
+    #@message.user = User.find_by_login('anonymous')
 
     # Record message sender's id
     if current_user.nil?
       # Bugs when user not logged in. Should fix the authority function's bugs.
-      #@msesage.user = User.find_by_login('anonymous')
+      @msesage.user = User.find_by_login('anonymous')
     else
       @message.user_id = current_user.id
     end

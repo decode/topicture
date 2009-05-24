@@ -1,3 +1,10 @@
+/ 
+  body
+    :background-color #e6e6e6
+
+  hr
+    :background-color #000
+  
 #site_menu
   /*:font 12px verdana, arial, sans-serif
   :list-style none
@@ -47,27 +54,45 @@
 #blog_time
   :background-color #e0f0e0 
 
-!blog_info = 20
+!blog_info = 15
+!talk = 5
 !percent = "%"
 #topic_reply
   .user
     :position relative
-    :width = !blog_info + !percent
+    :width = (!blog_info - !talk)+ !percent
 
   .dialog
-    :border-width 2px
-    :border-style dotted
+    :background-color #fff
+    :border-width 1px
+    :border-style solid
+    :border-color #c9c2c1
     :position relative
-    :top -20px
-    :left = !blog_info + !percent
+    :top -15px
+    :left = (!blog_info) + !percent
     :width = (100 - !blog_info - 1) + !percent
+    :-moz-border-radius 1ex
+    :-webkit-border-radius 1ex
+
+    .talk
+      :position relative
+      :top 0px
+      :margin 0px
+      :padding 0px 0px 0px 2px
+      :left = -12px
+      :background transparent url(../images/talk.gif) no-repeat left bottom
 
     .message
       :background-color #E6FFDC
       :position relative
-      
+      :-moz-border-radius-topleft 1ex
+      :-webkit-border-top-left-radius 1ex
+      :-moz-border-radius-topright 1ex
+      :-webkit-border-top-right-radius 1ex
     .body
       :position relative
+      :top -15px
+      :left 5%
 
     .position
       :position relative
@@ -77,3 +102,76 @@
       :width = (!blog_info) + !percent
       :position relative
       :left = (100 - !blog_info + 5) + !percent
+
+#topic
+  .user
+    :position relative
+    :width = (!blog_info - !talk)+ !percent
+
+
+  .dialog
+    :background-color #fff
+    :border-width 1px
+    :border-style solid
+    :border-color #c9c2c1
+    :position relative
+    :top -15px
+    :left = (!blog_info) + !percent
+    :width = (100 - !blog_info - 1) + !percent
+    :-moz-border-radius 1ex
+    :-webkit-border-radius 1ex
+
+    .talk
+      :position relative
+      :top 0px
+      :margin 0px
+      :padding 0px 0px 0px 2px
+      :left = -12px
+      :background transparent url(../images/talk.gif) no-repeat left bottom
+
+    .message
+      :background-color #b7e0ff
+      :position relative
+      :-moz-border-radius-topleft 1ex
+      :-webkit-border-top-left-radius 1ex
+      :-moz-border-radius-topright 1ex
+      :-webkit-border-top-right-radius 1ex
+    .body
+      :position relative
+      :top -15px
+      :left 5%
+
+    .position
+      :position relative
+      :top 20px
+
+    .toolbox
+      :width = (!blog_info) + !percent
+      :position relative
+      :left = (100 - !blog_info + 5) + !percent
+
+.rounded 
+  :background-color #b7e0ff
+  :-moz-border-radius 1ex
+  :-webkit-border-radius 1ex
+
+#comment_list
+  .comment_box
+    :border 1px solid #c9c2c1
+    :background-color #fff
+    :margin 0px
+    :padding 0px
+    :-moz-border-radius 1ex
+    :-webkit-border-radius 1ex
+  #comment_title
+    //:margin 10px
+  #comment_body
+    :margin 10px
+  #commenter
+    :background-color #b7e0ff
+    :position relative
+    :margin 0px
+    :padding 7px 0px 0px 15px
+    :top -1px
+    :background transparent url(../images/tip_down.gif) no-repeat 10px 0px
+    

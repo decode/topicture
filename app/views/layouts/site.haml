@@ -14,9 +14,23 @@
     = javascript_include_tag 'menu'
     = javascript_include_tag 'forum'
     = javascript_include_tag 'gallary'
-    =# javascript_include_tag 'scriptaculous'
+    = javascript_include_tag 'curvycorners'
     = active_scaffold_includes
-     
+    / 
+      :javascript
+        //<![CDATA[
+        window.onload = function() {
+            settings = {
+                tl: { radius: 10 },
+                tr: { radius: 10 },
+                bl: { radius: 10 },
+                br: { radius: 10 },
+                antiAlias: true
+            }
+            curvyCorners(settings, "rounded");
+        }
+        //]]>
+
     %title ToPicTure
   %body
     .container

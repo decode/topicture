@@ -21,42 +21,64 @@
     = full_topic_path(@message.topic)
 
   = link_to t('global.post'), :action => "reply", :id => @message
-  %table
-    %tr
-      %td{:width => '20%'}
-        = user_info @message.user
-      %td
-        %div{:id => "message-#{@message.id}", :class=>'message'}
-          = @message.title
-    %tr
-      %td
-      %td{:colspan=>2}
+  #topic
+    .user
+      = user_info @message.user
+    .dialog
+      %div{:id => "message-#{@message.id}", :class=>'message'}
+        = @message.title
+      .talk
+        %br
+      .body
         = textilize(@message.body)
-    %tr
-      %td
+      .position
         = h distance_before_now(@message.created_at)
-      %td
+      .toolbox
         = link_to t('topic.quote'), :action => 'quote', :id => @message
         = link_to t('global.edit'), edit_message_path(@message)
         = link_to_function t('topic.reply'), "fastreply('reply #{@message.user.login} post')"
   - pos = 1
   - for m in @replies
-    #topic_reply
-      .user
-        = link_to m.user.login, m.user
-      .dialog
-        %div{:id => "message-#{m.id}", :class=>'message'}
-          = h m.title
-        .body
-          = textilize(m.body) unless m.body.nil?
-        .position
-          = "##{pos}"
-          - pos += 1
-          = h distance_before_now(m.created_at)
-        .toolbox
-          = link_to t('topic.quote'), :action => 'quote', :id => m
-          = link_to t('global.edit'), edit_message_path(m)
-          = link_to_function t('topic.reply'), "fastreply('Reply floor #{pos} #{@message.user.login} post')"
+    - if m.user == @message.user
+      #topic
+        .user
+          = link_to m.user.login, m.user
+        .dialog
+          %div{:id => "message-#{m.id}", :class=>'message'}
+            = link_to m.user.login, m.user
+            = h m.title
+          .talk
+            %br
+          .body
+            = textilize(m.body) unless m.body.nil?
+          .position
+            = "##{pos}"
+            - pos += 1
+            = h distance_before_now(m.created_at)
+          .toolbox
+            = link_to t('topic.quote'), :action => 'quote', :id => m
+            = link_to_function t('topic.reply'), "fastreply('Reply floor #{pos} #{@message.user.login} post')"
+            = link_to t('global.edit'), edit_message_path(m) if current_user == m.user
+    - else
+      #topic_reply
+        .user
+          = link_to m.user.login, m.user
+        .dialog
+          %div{:id => "message-#{m.id}", :class=>'message'}
+            = link_to m.user.login, m.user
+            = h m.title
+          .talk
+            %br
+          .body
+            = textilize(m.body) unless m.body.nil?
+          .position
+            = "##{pos}"
+            - pos += 1
+            = h distance_before_now(m.created_at)
+          .toolbox
+            = link_to t('topic.quote'), :action => 'quote', :id => m
+            = link_to_function t('topic.reply'), "fastreply('Reply floor #{pos} #{@message.user.login} post')"
+            = link_to t('global.edit'), edit_message_path(m) if current_user == m.user
 
   = link_to t('global.post'), :action => "reply", :id => @message
 

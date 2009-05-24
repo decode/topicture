@@ -8,27 +8,29 @@
   #blog_body
     = textilize @article.body
   %hr
-  #comments_list
+  #comment_list
     %h3
       = @article.follow_messages.count
       = t 'blog.comments'
     - pos = 1
     - for comment in @article.follow_messages
-      .box
+      .comment_box
         %div{:id=>"message-#{comment.id}"}
           = "##{pos}"
-        #commenter
-          - unless comment.comment_user.nil?
-            = link_to "@#{comment.comment_user}", "#{comment.comment_website}"
-          - else
-            = link_to comment.user.login, user_path(comment.user) unless comment.user.nil?
-          = t 'blog.comment_at' 
-          = distance_before_now(comment.created_at)
         #comment_title
           = comment.title
 
         #comment_body
           = comment.body
+
+      #commenter
+        - unless comment.comment_user.nil?
+          = link_to "@#{comment.comment_user}", "#{comment.comment_website}"
+        - else
+          = link_to comment.user.login, user_path(comment.user) unless comment.user.nil?
+        = t 'blog.comment_at' 
+        = distance_before_now(comment.created_at)
+      %br
       - pos += 1
 
   %hr
