@@ -4,3 +4,4 @@ coverage/*
 config/database.yml
 tags
 .gitignore.swp
+public/system/*
