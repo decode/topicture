@@ -56,6 +56,10 @@ en:
     block: "Block"
     request: "Request"
     unblock: "Unblock"
+    message_status_changed: "Message Status Changed"
+    message_has_been_delete: "Message has been deleted"
+    request_has_been_sent: "The request has been sent"
+    has_been_blocked: "You are in the user's blocklist"
 
   admin:
     label: "Administrator Page"
@@ -71,6 +75,7 @@ en:
     message: "Message"
     add_friend: "Add Friend"
     send: "Send"
+    avatar: "Avatar"
 
   blog:
     label: "Blog"
@@ -117,3 +122,18 @@ en:
     category: "Catetory"
     posted_at: "Posted at:"
     total_gallaries: "Total Gallaries"
+
+  account:
+    edit_account: "Account Edit"
+    update_success: "Account Updated"
+    register_success: "Account Registered"
+    register_failed: "Register Failed"
+    login: "Login"
+    login_count: "Login Count"
+    last_request_at: "Last Request At:"
+    last_login_at: "Last Login At:"
+    current_login_at: "Current Login At:"
+    last_login_ip: "Last Login Ip"
+    current_login_ip: "Current Login Ip"
+
+

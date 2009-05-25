@@ -158,3 +158,14 @@
 #topic_path {
   background-color: #b7e0ff;
   margin: 5px; }
+
+#article_content #article_title {
+  font-size: 20px; }
+#article_content #article_body {
+  margin: 20px; }
+
+#user_info {
+  border-width: 2px;
+  border-style: solid;
+  -moz-border-radius: 1ex;
+  -webkit-border-radius: 1ex; }

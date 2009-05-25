@@ -10,6 +10,8 @@ class Message < ActiveRecord::Base
   
   belongs_to :last_edit_user, :class_name => "User", :foreign_key => "last_edit_id"
 
+  acts_as_textiled :body_text, :body
+
   def self.handle(user, messages)
     messages.each do |msg_id|
       msg = Messagebox.find :first, :conditions => ["message_id=? and user_id =?", msg_id, user.id]

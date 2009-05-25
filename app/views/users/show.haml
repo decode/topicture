@@ -1,0 +1,31 @@
+.span-5
+  %h3
+    = h @user.login
+  = image_tag @user.avatar.url(:thumb) if @user.avatar
+  %br
+  = link_to 'Edit', edit_account_path if @user == current_user
+
+.span-12
+  #user_info
+    = t 'page.email'
+    = h @user.email
+    %br
+    = t 'account.login_count'
+    = h @user.login_count
+    %br
+    = t 'account.last_request_at'
+    = h @user.last_request_at
+    %br
+    = t 'account.last_login_at'
+    = h @user.last_login_at
+    %br
+    = t 'account.current_login_at'
+    = h @user.current_login_at
+    %br
+    = t 'account.last_login_ip'
+    = h @user.last_login_ip
+    %br
+    = t 'account.current_login_ip'
+    = h @user.current_login_ip
+
+.span-7.last

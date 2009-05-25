@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   has_many :attachments
   has_many :gallaries
 
+  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "100x100>" }
+
   def to_label
     login
   end

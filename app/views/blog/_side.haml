@@ -1,3 +1,5 @@
+= image_tag @user.avatar.url(:thumb) unless @user.avatar.nil?
+%br
 = t 'global.links'
 %ul
   %li

@@ -37,12 +37,12 @@ class UsersController < ApplicationController
     @user.roles << Role.find_by_name('normal')
     #@user.login.downcase!
     if @user.save
-      flash[:notice] = "Account registered!"
+      flash[:success] = t('account.registered_success')
       #redirect_back_or_default account_url
       current_user = @user
       redirect_back_or_default "/user/#{@user.login}"
     else
-      flash[:notice] = "Register Failed"
+      flash[:error] = t('account.register_failed')
       render :action => :new
     end
   end
@@ -59,19 +59,19 @@ class UsersController < ApplicationController
 
   def edit
     #@user = @current_user
-    @user = User.find(params[:id])
+    @user = (User.find(params[:id]) if params[:id]) || current_user
   end
 
   def update
     #@user = @current_user # makes our views "cleaner" and more consistent
     @user = User.find(params[:id])
     #@user.login.downcase!
-    @user.roles << Role.find(params[:roles])
+    #@user.roles << Role.find(params[:roles])
     @user.save
     respond_to do |format|
       params[:user][:login].downcase!
       if @user.update_attributes(params[:user])
-        flash[:notice] = "Account updated!"
+        flash[:success] = t('account.update_success')
         #redirect_to account_url
         #redirect_to users_url
         format.html { redirect_to(@user) }
@@ -117,15 +117,15 @@ class UsersController < ApplicationController
   def message_modify
     if params[:mark_delete]
       Message.handle(current_user, params[:messages]) { |msg| msg.msg_delete }
-      flash[:success] = "Message has been deleted"
+      flash[:success] = t('manage.message_has_been_delete')
     end
     if params[:move]
       Message.handle(current_user, params[:messages]) { |msg| msg.move }
-      flash[:success] = "Message status changed"
+      flash[:success] = t('manage.message_status_changed')
     end
     if params[:mark_read]
       Message.handle(current_user, params[:messages]) { |msg| msg.read }
-      flash[:success] = "Message status changed"
+      flash[:success] = t('manage.message_status_changed')
     end
     #render :partial => "message_list", :object => current_user
     respond_to do |format|
@@ -145,15 +145,15 @@ class UsersController < ApplicationController
   def trash_modify
     if params[:mark_delete]
       Message.handle(current_user, params[:messages]) { |msg| msg.delete_forever }
-      flash[:notice] = "Message has been deleted"
+      flash[:success] = t('manage.message_has_been_delete')
     end
     if params[:mark_read]
       Message.handle(current_user, params[:messages]) { |msg| msg.read }
-      flash[:notice] = "Message status changed"
+      flash[:success] = t('manage.message_status_changed')
     end
     if params[:move]
       Message.handle(current_user, params[:messages]) { |msg| msg.move }
-      flash[:notice] = "Message status changed"
+      flash[:success] = t('manage.message_status_changed')
     end
     #render :partial => "message_list", :object => current_user
     respond_to do |format|
@@ -215,7 +215,7 @@ class UsersController < ApplicationController
     @source_user = current_user
     @dest_user = User.find_by_id(session[:target_user_id])
     if @source_user.blocked_by?(@dest_user)
-      flash[:notice] = "You are blocked"
+      flash[:error] = t('manage.has_been_blocked')
       #redirect_back_or_default "/user/#{@dest_user.login}"
     else
       @dest_user.strangers << @source_user
@@ -226,7 +226,7 @@ class UsersController < ApplicationController
       message.user = @source_user
       message.save
       Message.handle(@dest_user, [*message.id]) { |m| m.change_to_request }
-      flash[:notice] = "Your request has been sent"
+      flash[:success] = t('manage.request_has_been_sent')
       #redirect_to :controller => "users", :action => "info", :name => @dest_user.login
     end
     redirect_back_or_default "/user/#{@dest_user.login}"

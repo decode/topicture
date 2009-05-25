@@ -12,7 +12,7 @@
         = t 'blog.posted_at'
         = distance_before_now(article.created_at)
       #article_body
-        = h strip_tags(textilize(article.body))
+        = h article.body(:plain)
         = link_to t('blog.more'), user_article_url(@user,article)
       #status
         = t 'blog.comment_count'

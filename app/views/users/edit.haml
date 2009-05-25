@@ -1,10 +1,11 @@
-%h1 Edit My Account
+%h1
+  = t 'account.edit_account'
 
-- form_for @user, :url do |f|
+- form_for @user, :url => {:action => 'update', :id => @user.id}, :html => { :multipart => true } do |f|
   = f.error_messages
   = render :partial => "form", :object => f
-  = f.submit "Update"
+  = f.submit t('site.update')
 %br
 
-= link_to "My Profile", users_path
-
+= link_to t('site.profile'), users_path
+= link_to t('global.back'), :back

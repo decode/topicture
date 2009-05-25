@@ -1,7 +1,7 @@
 %h1
   = t 'site.register'
 
-- form_for @user, :url => {:action=>'create'} do |f|
+- form_for @user, :url => {:action=>'create'}, :html => { :multipart => true } do |f|
   = f.error_messages
   = render :partial => "form", :object => f
   = f.submit t('site.register')

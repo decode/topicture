@@ -54,6 +54,10 @@ zh:
     block: "黑名单"
     request: "请求"
     unblock: "取消黑名单"
+    message_status_changed: "消息状态改变"
+    message_has_been_delete: "消息己删除"
+    request_has_been_sent: "请求己发送"
+    has_been_blocked: "己进入黑名单"
 
   admin:
     label: "网站管理"
@@ -69,6 +73,7 @@ zh:
     message: "发消息"
     add_friend: "添加好友"
     send: "发送"
+    avatar: "头像"
 
   topic:
     label: "讨论"
@@ -116,6 +121,19 @@ zh:
     category: "类别"
     posted_at: "创建于"
     total_gallaries: "相册数"
+
+  account:
+    edit_account: "编辑帐户"
+    update_success: "帐号更新成功"
+    register_success: "注册成功"
+    register_failed: "注册失败"
+    login: "登录"
+    login_count: "登录次数"
+    last_request_at: "最近请求:"
+    last_login_at: "最近登录:"
+    current_login_at: "当前登录:"
+    last_login_ip: "最后登录IP"
+    current_login_ip: "当前登录IP"
 
   activerecord:
     models:
