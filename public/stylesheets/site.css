@@ -154,3 +154,7 @@
   padding: 7px 0px 0px 15px;
   top: -1px;
   background: transparent url(../images/tip_down.gif) no-repeat 10px 0px; }
+
+#topic_path {
+  background-color: #b7e0ff;
+  margin: 5px; }
