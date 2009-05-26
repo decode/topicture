@@ -1,4 +1,10 @@
-= image_tag @user.avatar.url(:thumb) unless @user.avatar.nil?
+#user_avatar
+  - if @user.avatar_file_size
+    = image_tag @user.avatar.url(:thumb)
+  - else
+    = image_tag 'male.png' if @user.gender == "M"
+    = image_tag 'female.png' if @user.gender == "F"
+
 %br
 = t 'global.links'
 %ul

@@ -123,6 +123,8 @@ zh:
     total_gallaries: "相册数"
 
   account:
+    account_manage: "帐户管理"
+    manage_description: "管理个人帐户信息"
     edit_account: "编辑帐户"
     update_success: "帐号更新成功"
     register_success: "注册成功"
@@ -134,6 +136,10 @@ zh:
     current_login_at: "当前登录:"
     last_login_ip: "最后登录IP"
     current_login_ip: "当前登录IP"
+    gender: "性别"
+    birthday: "生日"
+    male: "男"
+    female: "女"
 
   activerecord:
     models:

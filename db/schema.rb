@@ -118,6 +118,8 @@ ActiveRecord::Schema.define(:version => 20090525092952) do
     t.string   "last_login_ip"
     t.string   "current_login_ip"
     t.string   "email"
+    t.string   "gender",              :default => "M"
+    t.datetime "birthday"
     t.string   "locale"
     t.datetime "created_at"
     t.datetime "updated_at"

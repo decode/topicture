@@ -124,6 +124,8 @@ en:
     total_gallaries: "Total Gallaries"
 
   account:
+    account_manage: "Account"
+    manage_description: "Manage your account"
     edit_account: "Account Edit"
     update_success: "Account Updated"
     register_success: "Account Registered"
@@ -135,5 +137,9 @@ en:
     current_login_at: "Current Login At:"
     last_login_ip: "Last Login Ip"
     current_login_ip: "Current Login Ip"
+    gender: "Gender"
+    birthday: "Birthday"
+    male: "Male"
+    female: "Female"
 
 

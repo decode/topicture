@@ -50,6 +50,11 @@ render_tabnav :panel,
     t.titled t('manage.block_list_description')
     t.links_to :controller => 'users', :action => 'block'
   end 
+  add_tab do |t|
+    t.named t('account.account_manage')
+    t.titled t('account.manage_description')
+    t.links_to  edit_account_path
+  end 
   #  
   # you can use restful routes with:
   #

@@ -143,8 +143,6 @@
   padding: 0px;
   -moz-border-radius: 1ex;
   -webkit-border-radius: 1ex; }
-#comment_list #comment_title {
- }
 #comment_list #comment_body {
   margin: 10px; }
 #comment_list #commenter {
@@ -163,6 +161,16 @@
   font-size: 20px; }
 #article_content #article_body {
   margin: 20px; }
+
+#user_avatar {
+  margin: auto;
+  vertical-align: middle;
+  display: table-cell;
+  text-align: center;
+  width: 240px; }
+  #user_avatar img {
+    vertical-align: middle;
+    display: inline; }
 
 #user_info {
   border-width: 2px;

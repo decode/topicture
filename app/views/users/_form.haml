@@ -3,10 +3,21 @@
 = form.text_field :login
 %br
 
+= form.label t('account.gender')
+%br
+= form.select :gender, { t('account.male') => "M", t('account.female') => "F" }
+%br
+
+= form.label t('account.birthday')
+%br
+= form.date_select :birthday, :start_year => Time.now.year - 50
+%br
+
 = form.label t('site.password'), form.object.new_record? ? nil : t('site.change_password')
 %br
 = form.password_field :password
 %br
+
 
 = form.label t('site.password_confirmation')
 %br
