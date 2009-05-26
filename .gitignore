@@ -5,3 +5,4 @@ config/database.yml
 tags
 .gitignore.swp
 public/system/*
+public/stylesheets/sass/.sass-cache/*
