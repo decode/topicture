@@ -47,6 +47,8 @@ en:
   manage:
     message_box: "Inbox"
     message_list: "Messages"
+    sent_message_list: "Sent Messages"
+    read_message_list: "Read Messages"
     friend_list: "Friends"
     block_list: "Blocks"
     friend_list_description: "All The Friend List"

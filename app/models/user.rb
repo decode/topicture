@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   # Message relation
   has_many :messagebox, :foreign_key => "user_id"
-  has_many :received_messages, :through => :messagebox, :source => :message
+  has_many :received_messages, :through => :messagebox, :source => :message, :conditions => "messageboxes.workflow_state = 'unread' or messageboxes.workflow_state = 'open'"
   has_many :unread_messages, :through => :messagebox, :source => :message, :conditions => "messageboxes.workflow_state = 'unread'"
   has_many :read_messages, :through => :messagebox, :source => :message, :conditions => "messageboxes.workflow_state = 'open'"
   has_many :deleted_messages, :through => :messagebox, :source => :message, :conditions => "messageboxes.workflow_state = 'suspend'"

@@ -44,6 +44,8 @@ zh:
   manage:
     message_box: "收件箱"
     message_list: "消息列表"
+    sent_message_list: "己发消息"
+    read_message_list: "己读消息"
     friend_list: "好友列表"
     block_list: "黑名单"
     friend_list_description: "所有好友"

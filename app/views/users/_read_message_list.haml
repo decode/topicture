@@ -1,0 +1,14 @@
+%table
+  - for msg in @read_messages
+    %tr
+      %td{:width=>'5%'}
+        = check_box_tag "messages[]", msg.id
+      %td{:width=>'5%'}
+        = link_to h(msg.user.login), user_path(msg.user)
+      %td{:width=>'5%'}
+        = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
+      %td{:width=>'5%'}
+        = h msg.created_at
+      %td{:width=>'5%'}
+        = link_to t('global.reply'), :controller => "messages", :action => "reply", :id => msg
+= will_paginate @read_messages

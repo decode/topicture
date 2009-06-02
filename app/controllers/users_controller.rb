@@ -112,6 +112,10 @@ class UsersController < ApplicationController
   # Show message list
   def message
     @user = current_user
+    @received_messages = @user.received_messages.paginate :page => params[:page], :per_page => 10#Message.paginate :page => params[:page]||1, :conditions => "messageboxes.workflow_state = 'unread' or messageboxes.workflow_state = 'open'", :order => 'created_at DESC'
+    @unread_messages = @user.unread_messages.paginate :page => params[:page], :per_page => 10
+    @read_messages = @user.read_messages.paginate :page => params[:page], :per_page => 10#Message.paginate :page => params[:page]||1, :conditions => "messageboxes.workflow_state = 'unread' or messageboxes.workflow_state = 'open'", :order => 'created_at DESC'
+    @sent_messages = @user.sent_messages.paginate :page => params[:page], :per_page => 10#, :conditions => "messageboxes.workflow_state = 'unread' or messageboxes.workflow_state = 'unread'", :order => 'created_at DESC'
   end
 
   def message_modify

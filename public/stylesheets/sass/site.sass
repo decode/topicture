@@ -54,114 +54,80 @@
 #blog_time
   :background-color #e0f0e0 
 
-!blog_info = 15
-!talk = 5
-!percent = "%"
-#topic_reply
-  .user
-    :position relative
-    :width = (!blog_info - !talk)+ !percent
-
-  .dialog
-    :background-color #fff
-    :border-width 1px
-    :border-style solid
-    :border-color #c9c2c1
-    :position relative
-    :top -15px
-    :left = (!blog_info) + !percent
-    :width = (100 - !blog_info - 1) + !percent
-    :-moz-border-radius 1ex
-    :-webkit-border-radius 1ex
-
-    .talk
-      :position relative
-      :top 0px
-      :margin 0px
-      :padding 0px 0px 0px 2px
-      :left = -12px
-      :background transparent url(../images/talk.gif) no-repeat left bottom
-
-    .message
-      :background-color #E6FFDC
-      :position relative
-      :-moz-border-radius-topleft 1ex
-      :-webkit-border-top-left-radius 1ex
-      :-moz-border-radius-topright 1ex
-      :-webkit-border-top-right-radius 1ex
-    .body
-      :position relative
-      :top -15px
-      :left 5%
-
-    .position
-      :position relative
-      :top 20px
-
-    .toolbox
-      :width = (!blog_info) + !percent
-      :position relative
-      :left = (100 - !blog_info + 5) + !percent
-
-#topic
-  .user
-    :position relative
-    :width = (!blog_info - !talk)+ !percent
-
-  .dialog
-    :background-color #fff
-    :border-width 1px
-    :border-style solid
-    :border-color #c9c2c1
-    :position relative
-    :top -15px
-    :left = (!blog_info) + !percent
-    :width = (100 - !blog_info - 1) + !percent
-    :-moz-border-radius 1ex
-    :-webkit-border-radius 1ex
-
-    .talk
-      :position relative
-      :top 0px
-      :margin 0px
-      :padding 0px 0px 0px 2px
-      :left = -12px
-      :background transparent url(../images/talk.gif) no-repeat left bottom
-
-    .message
-      :background-color #b7e0ff
-      :position relative
-      :-moz-border-radius-topleft 1ex
-      :-webkit-border-top-left-radius 1ex
-      :-moz-border-radius-topright 1ex
-      :-webkit-border-top-right-radius 1ex
-    .body
-      :position relative
-      :top -15px
-      :left 5%
-
-    .position
-      :position relative
-      :top 20px
-
-    .toolbox
-      :width = (!blog_info) + !percent
-      :position relative
-      :left = (100 - !blog_info + 5) + !percent
-
-.rounded 
-  :background-color #b7e0ff
+=round_style
   :-moz-border-radius 1ex
   :-webkit-border-radius 1ex
 
+!blog_info = 15
+!talk = 5
+!percent = "%"
+=topic_talk
+  .user
+    :position relative
+    :width = (!blog_info - !talk)+ !percent
+
+  .dialog
+    :background-color #fff
+    :border-width 1px
+    :border-style solid
+    :border-color #c9c2c1
+    :position relative
+    :top -15px
+    :left = (!blog_info) + !percent
+    :width = (100 - !blog_info - 1) + !percent
+    :-moz-border-radius 1ex
+    :-webkit-border-radius 1ex
+
+    .talk
+      :position relative
+      :top 0px
+      :margin 0px
+      :padding 0px 0px 0px 2px
+      :left = -12px
+      :background transparent url(../images/talk.gif) no-repeat left bottom
+
+    .message
+      //:background-color #E6FFDC
+      :position relative
+      :-moz-border-radius-topleft 1ex
+      :-webkit-border-top-left-radius 1ex
+      :-moz-border-radius-topright 1ex
+      :-webkit-border-top-right-radius 1ex
+    .body
+      :position relative
+      :top -15px
+      :left 5%
+
+    .position
+      :position relative
+      :top 20px
+
+    .toolbox
+      :width = (!blog_info) + !percent
+      :position relative
+      :left = (100 - !blog_info + 5) + !percent
+
+#topic_reply
+  +topic_talk
+  .message
+    :background-color #E6FFDC
+
+#topic
+  +topic_talk
+  .message
+    :background-color #b7e0ff
+
+.rounded 
+  +round_style
+  :background-color #b7e0ff
+
 #comment_list
   .comment_box
+    +round_style
     :border 1px solid #c9c2c1
     :background-color #fff
     :margin 0px
     :padding 0px
-    :-moz-border-radius 1ex
-    :-webkit-border-radius 1ex
   #comment_title
     //:margin 10px
   #comment_body
@@ -177,16 +143,12 @@
 #topic_path
   :background-color #b7e0ff
   :margin 5px
-  //:-moz-border-radius 1ex
-  //:-webkit-border-radius 1ex
 
 // Using in _article_list.haml
 #article_content
   #article_title
     :font-size 20px
-
   #article_tile
-
   #article_body
     :margin 20px
 
@@ -203,49 +165,55 @@
 
 // Using in users/show.haml
 #user_info
+  +round_style
   :border-width 2px
   :border-style solid
-  :-moz-border-radius 1ex
-  :-webkit-border-radius 1ex
+
+=account_setting_table
+  table
+    th
+      :color #039
+      :background #b9c9fe
+      :border-left 1px solid #fff
+    td
+      :background #e8edff
+      :border-top 1px solid #fff
+      :border-left 1px solid #fff
+      :color #669
+    tbody
+      tr:hover td
+        :background #d0dafd
 
 // Using in users/_friend_list.haml
 #friend_list
-  table
-    th
-      :color #039
-      :background #b9c9fe
-      :border-left 1px solid #fff
-    td
-      :background #e8edff
-      :border-top 1px solid #fff
-      :border-left 1px solid #fff
-      :color #669
-    tbody
-      tr:hover td
-        :background #d0dafd
-
+  +account_setting_table
 #friend_list_header
   :background-color #00D0C9
 #friend_detail_list
+  +round_style
   :border-width 2px
   :border-style solid
-  :-moz-border-radius 1ex
-  :-webkit-border-radius 1ex
 
 // Using in users/_request_list.haml
 #request_list
-  table
-    th
-      :color #039
-      :background #b9c9fe
-      :border-left 1px solid #fff
-    td
-      :background #e8edff
-      :border-top 1px solid #fff
-      :border-left 1px solid #fff
-      :color #669
-    tbody
-      tr:hover td
-        :background #d0dafd
+  +account_setting_table
 #request_list_header
+  :background-color #00D0C9
+
+// Using in users/_message_list.haml
+#message_list
+  +account_setting_table
+#message_list_head
+  :background-color #00D0C9
+
+// Using in users/_send_message_list.haml
+#sent_message_list
+  +account_setting_table
+#sent_message_list_head
+  :background-color #00D0C9
+
+// Using in users/_read_message_list.haml
+#read_message_list
+  +account_setting_table
+#read_message_list_head
   :background-color #00D0C9

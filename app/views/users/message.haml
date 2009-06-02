@@ -8,13 +8,22 @@
   = submit_tag t('manage.mark_read'), :name => "mark_read"
   = submit_tag t('manage.delete_forever'), :name => "forever_delete"
   = submit_tag t('manage.move_to_inbox'), :name => "move"
-  %h4
-    = t 'manage.message_list'
-  #message_list
-    = render :partial => 'message_list'
+  .span-24
+    #message_list_head
+      = t 'manage.message_list'
+    #message_list
+      = render :partial => 'message_list'
 
-  %h4 Sended Messages
-  #send_message_list
-    = render :partial => 'send_message_list'
+  .span-12
+    #read_message_list_head
+      = t 'manage.read_message_list'
+    #read_message_list
+      = render :partial => 'read_message_list'
+
+  .span-12.last
+    #sent_message_list_head
+      = t 'manage.sent_message_list'
+    #sent_message_list
+      = render :partial => 'sent_message_list'
 
     /= render :active_scaffold => 'messages', :constraints => {:user_id => @user.id, :message_type => 'message'}, :label => ''

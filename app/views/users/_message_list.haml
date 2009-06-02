@@ -1,33 +1,23 @@
 %table
-  - for msg in @user.unread_messages
-    %tr
-      %td{:width=>'3%'}
-        = check_box_tag "messages[]", msg.id
-      %td{:width=>'12%'}
-        %b
+  %thead
+  %tfoot
+  %tbody
+    - for msg in @unread_messages
+      %tr
+        - box = Messagebox.find :first, :conditions=>['user_id=? and message_id=?', @user.id, msg.id]
+        %td{:width=>'3%'}
+          = check_box_tag "messages[]", msg.id
+        %td{:width=>'12%'}
           = link_to h(msg.user.login), user_path(msg.user)
-      %td{:width=>'45%'}
-        %b
-          = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
-      %td{:width=>'20%'}
-        %b
+        %td{:width=>'45%'}
+          - if box.state == :unread
+            %b
+              = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
+        %td{:width=>'20%'}
           = h msg.created_at
-      %td{:width=>'10%'}
-        %b
+        %td{:width=>'10%'}
           = link_to t('manage.mark_read'), :controller => "messages", :action => "mark_read", :id => msg
-      %td{:width=>'10%'}
-        %b
+        %td{:width=>'10%'}
           = link_to t('global.reply'), :controller => "messages", :action => "reply", :id => msg
-  - for msg in @user.read_messages
-    %tr
-      %td{:width=>'5%'}
-        = check_box_tag "messages[]", msg.id
-      %td{:width=>'5%'}
-        = link_to h(msg.user.login), user_path(msg.user)
-      %td{:width=>'5%'}
-        = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
-      %td{:width=>'5%'}
-        = h msg.created_at
-      %td{:width=>'5%'}
-        = link_to t('global.reply'), :controller => "messages", :action => "reply", :id => msg
 
+= will_paginate @unread_messages

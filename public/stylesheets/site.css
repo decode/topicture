@@ -73,7 +73,6 @@
     left: -12px;
     background: transparent url(../images/talk.gif) no-repeat left bottom; }
   #topic_reply .dialog .message {
-    background-color: #E6FFDC;
     position: relative;
     -moz-border-radius-topleft: 1ex;
     -webkit-border-top-left-radius: 1ex;
@@ -90,6 +89,8 @@
     width: 15%;
     position: relative;
     left: 90%; }
+#topic_reply .message {
+  background-color: #E6FFDC; }
 
 #topic .user {
   position: relative;
@@ -113,7 +114,6 @@
     left: -12px;
     background: transparent url(../images/talk.gif) no-repeat left bottom; }
   #topic .dialog .message {
-    background-color: #b7e0ff;
     position: relative;
     -moz-border-radius-topleft: 1ex;
     -webkit-border-top-left-radius: 1ex;
@@ -130,19 +130,21 @@
     width: 15%;
     position: relative;
     left: 90%; }
+#topic .message {
+  background-color: #b7e0ff; }
 
 .rounded {
-  background-color: #b7e0ff;
   -moz-border-radius: 1ex;
-  -webkit-border-radius: 1ex; }
+  -webkit-border-radius: 1ex;
+  background-color: #b7e0ff; }
 
 #comment_list .comment_box {
+  -moz-border-radius: 1ex;
+  -webkit-border-radius: 1ex;
   border: 1px solid #c9c2c1;
   background-color: #fff;
   margin: 0px;
-  padding: 0px;
-  -moz-border-radius: 1ex;
-  -webkit-border-radius: 1ex; }
+  padding: 0px; }
 #comment_list #comment_title {
  }
 #comment_list #comment_body {
@@ -175,10 +177,10 @@
     display: inline; }
 
 #user_info {
-  border-width: 2px;
-  border-style: solid;
   -moz-border-radius: 1ex;
-  -webkit-border-radius: 1ex; }
+  -webkit-border-radius: 1ex;
+  border-width: 2px;
+  border-style: solid; }
 
 #friend_list table th {
   color: #039;
@@ -196,10 +198,10 @@
   background-color: #00D0C9; }
 
 #friend_detail_list {
-  border-width: 2px;
-  border-style: solid;
   -moz-border-radius: 1ex;
-  -webkit-border-radius: 1ex; }
+  -webkit-border-radius: 1ex;
+  border-width: 2px;
+  border-style: solid; }
 
 #request_list table th {
   color: #039;
@@ -214,4 +216,49 @@
   background: #d0dafd; }
 
 #request_list_header {
+  background-color: #00D0C9; }
+
+#message_list table th {
+  color: #039;
+  background: #b9c9fe;
+  border-left: 1px solid #fff; }
+#message_list table td {
+  background: #e8edff;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  color: #669; }
+#message_list table tbody tr:hover td {
+  background: #d0dafd; }
+
+#message_list_head {
+  background-color: #00D0C9; }
+
+#sent_message_list table th {
+  color: #039;
+  background: #b9c9fe;
+  border-left: 1px solid #fff; }
+#sent_message_list table td {
+  background: #e8edff;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  color: #669; }
+#sent_message_list table tbody tr:hover td {
+  background: #d0dafd; }
+
+#sent_message_list_head {
+  background-color: #00D0C9; }
+
+#read_message_list table th {
+  color: #039;
+  background: #b9c9fe;
+  border-left: 1px solid #fff; }
+#read_message_list table td {
+  background: #e8edff;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  color: #669; }
+#read_message_list table tbody tr:hover td {
+  background: #d0dafd; }
+
+#read_message_list_head {
   background-color: #00D0C9; }
