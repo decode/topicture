@@ -1,15 +1,20 @@
 %table
-  - for friend in @user.friends
+  %thead
     %tr
-      %td
-        = check_box_tag "friend_users[]", friend.id
-      %td
-        = link_to friend.login, user_path(friend)
-      %td
-        = link_to "Send Message"
-      %td
-        = link_to "Delete"
-      %td
-        = link_to "Block"
-  
-      
+      %th{:width=>'5%'}
+      %th{:width=>'70%'}
+        = t 'site.login_name'
+      %th{:width=>'25%'}
+        = t 'global.operation'
+  %tfoot
+  %tbody
+    - for friend in @user.friends
+      %tr
+        %td
+          = check_box_tag "friend_users[]", friend.id
+        %td
+          = user_info(friend)
+        %td
+          = link_to t('page.message'), :controller => 'users', :action => 'send_message', :id => friend
+          = #link_to t('global.delete')
+          = #link_to t('manage.block') 

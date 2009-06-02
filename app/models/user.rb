@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
   acts_as_user
 
+  has_many :system_messages, :class_name => "Message", :conditions => "user_id is null", :order => 'create_at DESC'
   has_many :sent_messages, :class_name => "Message", :foreign_key => "user_id", :conditions => "message_type='message'", :order => "created_at DESC"
   has_many :articles, :class_name => "Message", :foreign_key => "user_id", :conditions => "follow_id is null", :order => "created_at DESC"
 
@@ -29,7 +30,6 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :medium => "100x100>", :tiny => "32x32>", :thumb => "60x60>" }, :default_url => "/images/default_:style_avatar.png"
 
-
   def to_label
     login
   end
@@ -37,6 +37,9 @@ class User < ActiveRecord::Base
   def handle(users)
     users.each do |user_id|
       user = Friendship.find :first, :conditions => ["friend_id=? and user_id=?", user_id, self.id]
+      yield(user)
+      user.save
+      user = Friendship.find :first, :conditions => ["friend_id=? and user_id=?", self.id, user_id]
       yield(user)
       user.save
     end unless users.nil?

@@ -1,20 +1,21 @@
 - content_for :panel do
   = tabnav :panel
 .span-24
-  -form_remote_for :user, @user, :url => {:action => "friend_modify"}, :update => 'request_list', :method => :post do |f|
+  -form_for :user, @user, :url => {:action => "friend_modify"}, :update => 'request_list', :method => :put do |f|
     = submit_tag t('global.delete'), :name => "delete"
     = submit_tag t('manage.accept'), :name => "accept"
     = submit_tag t('manage.refuse'), :name => "refuse"
     = submit_tag t('manage.block'), :name => "block"
 
-    #request_list
-      %h3
-        = t 'manage.request'
-      = render :partial => 'request_list'
-    %hr
+    .span-11.border
+      #friend_list
+        #friend_list_header
+          = t 'manage.friend_list'
+        = render :partial => 'friend_list'
+    .span-12.last
+      #request_list
+        #request_list_header
+          = t 'manage.request'
+        = render :partial => 'request_list'
 
-    #friend_list
-      %h3
-        = t 'manage.friend_list'
-      = render :partial => 'friend_list'
 

@@ -1,15 +1,16 @@
-%h2 New Article 
+%h2 
+  = t 'blog.new_post'
 
 - form_for :message, @article, :url => {:controller=>'messages', :action=>'create'} do |f|
   = f.error_messages
 
   %p
-    = f.label :title
+    = f.label t('blog.title')
     %br
     = f.text_field :title
 
   %p
-    = f.label :body
+    = f.label t('blog.content')
     %br
     = #f.text_area :body
     = textile_editor 'message', 'body'
@@ -22,6 +23,6 @@
       = Message.find_by_id(session[:target_message_id]).title
 
   %p
-    = f.submit "Create"
+    = f.submit t('global.create')
 
-= link_to 'Back', :back
+= link_to t('global.back'), :back

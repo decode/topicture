@@ -81,4 +81,31 @@ class ApplicationController < ActionController::Base
     I18n.locale = session[:language] unless session[:language].nil?
   end
   
+  # Automatically handle unexpected Ajax errors
+  private
+  def rescue_action_in_public(exception)
+    respond_to do |want|
+      want.html {
+        super(exception)
+      }
+      want.js {
+        render :update do |page|
+          page.alert "We're sorry, but something went wrong.\nWe've been notified about this issue and we'll take a look at it shortly.\n\nPlease check that any update you tried has not been successful before trying it again."
+        end
+      }
+    end
+  end
+
+  def rescue_action_locally(exception)
+    respond_to do |want|
+      want.html {
+        super(exception)
+      }
+      want.js {
+        render :update do |page|
+          page.alert "Oops! I made a mistake\n#{exception.class}: #{exception.message}\nCheck the logs for more detail."
+        end
+      }
+    end
+  end
 end

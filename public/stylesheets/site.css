@@ -143,6 +143,8 @@
   padding: 0px;
   -moz-border-radius: 1ex;
   -webkit-border-radius: 1ex; }
+#comment_list #comment_title {
+ }
 #comment_list #comment_body {
   margin: 10px; }
 #comment_list #commenter {
@@ -177,3 +179,39 @@
   border-style: solid;
   -moz-border-radius: 1ex;
   -webkit-border-radius: 1ex; }
+
+#friend_list table th {
+  color: #039;
+  background: #b9c9fe;
+  border-left: 1px solid #fff; }
+#friend_list table td {
+  background: #e8edff;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  color: #669; }
+#friend_list table tbody tr:hover td {
+  background: #d0dafd; }
+
+#friend_list_header {
+  background-color: #00D0C9; }
+
+#friend_detail_list {
+  border-width: 2px;
+  border-style: solid;
+  -moz-border-radius: 1ex;
+  -webkit-border-radius: 1ex; }
+
+#request_list table th {
+  color: #039;
+  background: #b9c9fe;
+  border-left: 1px solid #fff; }
+#request_list table td {
+  background: #e8edff;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  color: #669; }
+#request_list table tbody tr:hover td {
+  background: #d0dafd; }
+
+#request_list_header {
+  background-color: #00D0C9; }

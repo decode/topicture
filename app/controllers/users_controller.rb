@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout "site"
 
-  include AccessFilter
+  #include AccessFilter
 
   active_scaffold
   ActiveScaffold.set_defaults do |config|
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     ['login != ?', 'admin'] unless current_user.has_role? 'admin'
   end
 
-  controller_accessor :create, :delete, :update, :show, :index
+  #controller_accessor :create, :delete, :update, :show, :index
 
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
@@ -175,12 +175,9 @@ class UsersController < ApplicationController
     if params[:refuse]
       @user.handle(params[:request_users]) { |user| user.refuse }
       @user.handle(params[:friend_list]) { |user| user.refuse }
-=begin
-      render :partial => 'request_list'
-=end
     end
     if params[:accept]
-      @user.handle(params[:request_users]) { |user| user.approve}
+      @user.handle(params[:request_users]) { |user| user.approve }
       @user.handle(params[:friend_users]) { |user| user.approve }
     end
     if params[:block]
@@ -191,7 +188,6 @@ class UsersController < ApplicationController
       @user.handle(params[:request_users]) { |user| user.delete }
       @user.handle(params[:friend_users]) { |user| user.delete }
     end
-
     #render :update do |page|
     #  page.replace_html 'friend_list', :partial => 'friend_list', :object => @user
     #end
@@ -214,20 +210,30 @@ class UsersController < ApplicationController
   def invite_request
     @source_user = current_user
     @dest_user = User.find_by_id(session[:target_user_id])
-    if @source_user.blocked_by?(@dest_user)
-      flash[:error] = t('manage.has_been_blocked')
-      #redirect_back_or_default "/user/#{@dest_user.login}"
+    if @source_user.friends.include? @dest_user
+      flash[:notice] = t('manage.already_friend')
     else
-      @dest_user.strangers << @source_user
-      @dest_user.save
+      if @source_user.blocked_by?(@dest_user)
+        flash[:error] = t('manage.has_been_blocked')
+      else
+        @dest_user.strangers << @source_user
+        @dest_user.save
+        @source_user.strangers << @dest_user
+        @dest_user.save
 
-      message = Message.new(params[:message])
-      message.receivers << @dest_user
-      message.user = @source_user
-      message.save
-      Message.handle(@dest_user, [*message.id]) { |m| m.change_to_request }
-      flash[:success] = t('manage.request_has_been_sent')
-      #redirect_to :controller => "users", :action => "info", :name => @dest_user.login
+        # Create User Message to the user being requested
+        message = Message.new(params[:message])
+        message.receivers << @dest_user
+        message.user = @source_user
+        message.save
+        Message.handle(@dest_user, [*message.id]) { |m| m.change_to_request }
+
+        # Create System Message to inform user
+        message = Message.new(:title => "User Request", :body => "User:#{@source_user.login} has add you as friend")
+        message.receivers << @dest_user
+        message.save
+        flash[:success] = t('manage.request_has_been_sent')
+      end
     end
     redirect_back_or_default "/user/#{@dest_user.login}"
   end
@@ -247,6 +253,9 @@ class UsersController < ApplicationController
   end
 
   def send_message
+    if params[:id]
+      session[:target_user_id] = params[:id]
+    end
     session[:message_type] = 'message'
     redirect_to :controller => "messages", :action => "new"
   end

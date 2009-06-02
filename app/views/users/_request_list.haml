@@ -1,4 +1,14 @@
 %table
+  - if @user.strangers.count > 0
+    %thead
+      %tr
+        %th{:width=>'3%'}
+        %th{:width=>'15%'}
+          = t 'site.login_name'
+        %th
+          = t 'global.content'
+  %tfoot
+  %tbody
   - for req in @user.strangers
     %tr
       %td

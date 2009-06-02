@@ -8,6 +8,7 @@ en:
     edit: "Edit"
     back: "Back"
     post: "Post"
+    reply: "Reply"
     create: "Create"
     delete: "Delete"
     description: "Description"
@@ -15,12 +16,15 @@ en:
     after: " after"
     links: "Links"
     follow: "Follow"
+    operation: "Action"
 
   system:
     password_error: "Wrong Password!"
     login_success: "Login Successful!"
     login_failed: "Login Failed"
     logout_success: "Logout Successful!"
+    message: "System Message"
+    unread_message: "Unread Message"
 
   site:
     label: "Site"
@@ -60,9 +64,10 @@ en:
     message_has_been_delete: "Message has been deleted"
     request_has_been_sent: "The request has been sent"
     has_been_blocked: "You are in the user's blocklist"
+    already_friend: "The use is already your friend"
 
   admin:
-    label: "Administrator Page"
+    label: "Admin"
 
   page:
     submit: "Submit"
@@ -83,6 +88,7 @@ en:
     new_user: "New Users"
     comments: "Comments"
     title: "Title"
+    content: "Content"
     comment: "Comment"
     comment_count: "Comments"
     comment_at: "comment at"

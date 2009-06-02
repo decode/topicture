@@ -11,33 +11,10 @@
   %h4
     = t 'manage.message_list'
   #message_list
-    = render :partial => 'message_list'#, :object => @user
+    = render :partial => 'message_list'
 
--#
   %h4 Sended Messages
   #send_message_list
-    %table
-      %tr
-        %th{:width=>'%1'}
-        %th{:width=>'%20'} Title
-        %th{:width=>'%30'} Content
-        %th{:width=>'%20'} Target
-        %th{:width=>'%20'} Time
-      - for msg in @user.sent_messages
-        %tr
-          %td
-            = check_box_tag "messages[]", msg.id
-          %td
-            = link_to msg.title, message_path(msg)
-          %td
-            = h msg.body
-          %td
-            - targets = msg.receivers
-            - targets.each do |t|
-              = link_to t.login, user_path(t)
-              = ' '
-          %td
-            = msg.created_at
+    = render :partial => 'send_message_list'
 
-  -#
-    = render :active_scaffold => 'messages', :constraints => {:user_id => @user.id, :message_type => 'sms'}, :label => ''
+    /= render :active_scaffold => 'messages', :constraints => {:user_id => @user.id, :message_type => 'message'}, :label => ''

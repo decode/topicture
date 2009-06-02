@@ -54,4 +54,21 @@ module ApplicationHelper
     return str
   end
   
+  def inform_message
+    if current_user 
+      path = ''
+      if current_user.system_messages.count > 0 
+        url = 'message'
+        pre = t 'system.message'
+        path = "#{pre}:<a href=\"#{url}\">#{current_user.system_messages.count}</a>"
+      end
+      if current_user.unread_messages.count > 0
+        url = 'message'
+        pre = t 'system.unread_message'
+        path += " #{pre}:<a href=\"#{url}\">#{current_user.unread_messages.count}</a>"
+      end
+      return path
+    end
+  end
+  
 end

@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   
   layout "site"
-  include AccessFilter
+  #include AccessFilter
 
   active_scaffold
   active_scaffold :messages do | config |
@@ -10,9 +10,8 @@ class MessagesController < ApplicationController
   end
   
   def conditions_for_collection
-    #['login != ?', 'admin'] unless current_user.has_role? 'admin'
     return '' if session[:message_type].nil?
-    ['message_type = ?', session[:message_type]]
+    ['message_type = ? and user_id = ?', session[:message_type], current_user]
   end
 
   # GET /messages

@@ -20,6 +20,7 @@ class BlogController < ApplicationController
   def manage
     session[:return_to] = "/blog/manage"
     session[:view_style] = 'blog'
+    session[:target_user_id] = nil
     begin
       @articles = Message.paginate :all, :conditions => ['user_id=? and follow_id is null and message_type=?', current_user.id, 'blog'], :order => 'created_at DESC', :page => params[:page]
     rescue
