@@ -1,0 +1,81 @@
+#talk
+  .span-3
+    .user
+      = user_info @root_message.user
+      = image_tag @root_message.user.avatar.url(:thumb)
+  .span-21.last
+    .dialog
+      %div{:id => "message-#{@root_message.id}", :class=>'message'}
+        = @root_message.title
+      .talk
+        %br
+      .body
+        = textilize(@root_message.body)
+      .position
+        = h distance_before_now(@root_message.created_at)
+      .toolbox
+        = link_to t('topic.quote'), :action => 'quote', :id => @root_message
+        = #link_to_function t('topic.reply'), "fastreply('reply #{@message.user.login} post')"
+        = #link_to t('global.edit'), edit_message_path(@message) if @message.user == current_user
+- pos = 1
+- for m in @replies
+  - if m.user == @root_message.user
+    #talk
+      .span-3
+        .user
+          = link_to m.user.login, m.user
+          = image_tag m.user.avatar.url(:thumb)
+      .span-21.last
+        .dialog
+          %div{:id => "message-#{m.id}", :class=>'message'}
+            = "##{pos}"
+            - pos += 1
+            = link_to m.user.login, m.user
+            = h m.title
+          .talk
+            %br
+          .body
+            = textilize(m.body) unless m.body.nil?
+          .position
+            = h distance_before_now(m.created_at)
+          .toolbox
+            = link_to t('topic.quote'), :action => 'quote', :id => m
+  - else
+    #talk_reply
+      .span-3
+        .user
+          = link_to m.user.login, m.user
+          = image_tag m.user.avatar.url(:thumb)
+      .span-21.last
+        .dialog
+          %div{:id => "message-#{m.id}", :class=>'message'}
+            = "##{pos}"
+            - pos += 1
+            = link_to m.user.login, m.user
+            = h m.title
+          .talk
+            %br
+          .body
+            = textilize(m.body) unless m.body.nil?
+          .position
+            = h distance_before_now(m.created_at)
+          .toolbox
+            = link_to t('topic.quote'), :action => 'quote', :id => m
+= will_paginate @replies
+= link_to t('global.post'), :action => "reply", :id => @root_message
+%hr
+
+.span-24
+  #post_box
+    - form_for :message, @reply, :url => {:action => 'create'} do |f|
+      = f.hidden_field :follow_id, :value => @root_message.id
+      %p
+        = f.label t('global.title')
+        = f.text_field :title
+      %p
+        = f.label t('global.content')
+        %br
+        = f.text_area :body
+      %p
+        = submit_tag t('global.post')
+

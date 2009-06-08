@@ -133,6 +133,82 @@
 #topic .message {
   background-color: #b7e0ff; }
 
+#talk .user {
+ }
+#talk .dialog {
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #c9c2c1;
+  position: relative;
+  width: 84%;
+  -moz-border-radius: 1ex;
+  -webkit-border-radius: 1ex; }
+  #talk .dialog .talk {
+    position: relative;
+    top: 0px;
+    margin: 0px;
+    padding: 0px 0px 0px 2px;
+    left: -12px;
+    background: transparent url(../images/talk.gif) no-repeat left bottom; }
+  #talk .dialog .message {
+    position: relative;
+    -moz-border-radius-topleft: 1ex;
+    -webkit-border-top-left-radius: 1ex;
+    -moz-border-radius-topright: 1ex;
+    -webkit-border-top-right-radius: 1ex; }
+  #talk .dialog .body {
+    position: relative;
+    top: -15px;
+    left: 5%; }
+  #talk .dialog .position {
+    position: relative;
+    top: 20px; }
+  #talk .dialog .toolbox {
+    width: 15%;
+    position: relative;
+    left: 90%; }
+#talk .message {
+  background-color: #b7e0ff; }
+
+#talk_reply .user {
+ }
+#talk_reply .dialog {
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #c9c2c1;
+  position: relative;
+  width: 84%;
+  -moz-border-radius: 1ex;
+  -webkit-border-radius: 1ex; }
+  #talk_reply .dialog .talk {
+    position: relative;
+    top: 0px;
+    margin: 0px;
+    padding: 0px 0px 0px 2px;
+    left: -12px;
+    background: transparent url(../images/talk.gif) no-repeat left bottom; }
+  #talk_reply .dialog .message {
+    position: relative;
+    -moz-border-radius-topleft: 1ex;
+    -webkit-border-top-left-radius: 1ex;
+    -moz-border-radius-topright: 1ex;
+    -webkit-border-top-right-radius: 1ex; }
+  #talk_reply .dialog .body {
+    position: relative;
+    top: -15px;
+    left: 5%; }
+  #talk_reply .dialog .position {
+    position: relative;
+    top: 20px; }
+  #talk_reply .dialog .toolbox {
+    width: 15%;
+    position: relative;
+    left: 90%; }
+#talk_reply .message {
+  background-color: #E6FFDC; }
+
 .rounded {
   -moz-border-radius: 1ex;
   -webkit-border-radius: 1ex;

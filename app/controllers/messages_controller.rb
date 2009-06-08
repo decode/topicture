@@ -93,7 +93,11 @@ class MessagesController < ApplicationController
     target_id = session[:target_message_id]
     unless target_id.nil?
       #@message.follow_id = target_id 
-      @message.message_type ||= Message.find_by_id(target_id).message_type
+      msg = Message.find_by_id(target_id)
+      @message.message_type ||= msg.message_type
+      if session[:message_type] == "message"
+        @message.receivers << msg.user
+      end
       session[:target_message_id] = nil
     end
 
@@ -186,7 +190,7 @@ class MessagesController < ApplicationController
   def reply
     unless params[:id].nil?
       session[:target_message_id] = params[:id]
-      session[:return_to] = message_path(params[:id])
+      #session[:return_to] = message_path(params[:id])
       redirect_to :action => "new"
     else
       redirect_to :action => "show"
@@ -212,6 +216,15 @@ class MessagesController < ApplicationController
     @message = Message.new
     @message.body = "Quote content: " + source.body
     render :action => 'new'
+  end
+  
+  # Show private message in talk mode
+  def talk
+    session[:message_type] = 'message'
+    msg = Message.find params[:id]
+    @root_message = msg.follow_message || msg
+    @replies = Message.paginate :conditions => ['follow_id=?', @root_message.id], :order => 'created_at ASC', :page => params[:page], :per_page => 15
+    session[:return_to] = "/messages/talk/#{@root_message.id}"
   end
   
 end

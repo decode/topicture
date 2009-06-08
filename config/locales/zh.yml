@@ -40,6 +40,7 @@ zh:
     no_topics: "没有新的话题"
     no_articles: "没有新的文章"
     update: "更新"
+    talk_mode: "聊天模式"
 
   manage:
     message_box: "收件箱"

@@ -43,6 +43,7 @@ en:
     no_topics: "No recently topic news"
     no_articles: "No recently blog news"
     update: "News"
+    talk_mode: "Talk"
 
   manage:
     message_box: "Inbox"

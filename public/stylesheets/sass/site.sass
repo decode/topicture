@@ -107,6 +107,51 @@
       :position relative
       :left = (100 - !blog_info + 5) + !percent
 
+=message_talk
+  .user
+    //:position relative
+    //:width = (!blog_info - !talk)+ !percent
+
+  .dialog
+    :background-color #fff
+    :border-width 1px
+    :border-style solid
+    :border-color #c9c2c1
+    :position relative
+    //:top -110px
+    //:left = (!blog_info) + !percent
+    :width = (100 - !blog_info - 1) + !percent
+    :-moz-border-radius 1ex
+    :-webkit-border-radius 1ex
+
+    .talk
+      :position relative
+      :top 0px
+      :margin 0px
+      :padding 0px 0px 0px 2px
+      :left = -12px
+      :background transparent url(../images/talk.gif) no-repeat left bottom
+
+    .message
+      :position relative
+      :-moz-border-radius-topleft 1ex
+      :-webkit-border-top-left-radius 1ex
+      :-moz-border-radius-topright 1ex
+      :-webkit-border-top-right-radius 1ex
+    .body
+      :position relative
+      :top -15px
+      :left 5%
+
+    .position
+      :position relative
+      :top 20px
+
+    .toolbox
+      :width = (!blog_info) + !percent
+      :position relative
+      :left = (100 - !blog_info + 5) + !percent
+
 #topic_reply
   +topic_talk
   .message
@@ -116,6 +161,16 @@
   +topic_talk
   .message
     :background-color #b7e0ff
+
+#talk
+  +message_talk
+  .message
+    :background-color #b7e0ff
+
+#talk_reply
+  +message_talk
+  .message
+    :background-color #E6FFDC
 
 .rounded 
   +round_style

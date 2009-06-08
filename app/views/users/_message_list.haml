@@ -10,6 +10,7 @@
         %td{:width=>'12%'}
           = link_to h(msg.user.login), user_path(msg.user)
         %td{:width=>'45%'}
+          = link_to t('site.talk_mode'), :controller => 'messages', :action => 'talk', :id => msg
           - if box.state == :unread
             %b
               = link_to msg.title, message_path(msg)#:controller => "message", :action => "show", :id => msg
