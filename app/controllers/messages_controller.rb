@@ -85,6 +85,8 @@ class MessagesController < ApplicationController
 
   # POST /messages
   # POST /messages.xml
+  # Create method for some conditions. But a lot of buggy codes exist.
+  # re-implement in the next time.
   def create
     @message = Message.new(params[:message])
     @message.message_type = session[:message_type]
@@ -96,7 +98,12 @@ class MessagesController < ApplicationController
       msg = Message.find_by_id(target_id)
       @message.message_type ||= msg.message_type
       if session[:message_type] == "message"
-        @message.receivers << msg.user
+        blocked = msg.user.blocked_users.include?(current_user)
+        if blocked
+          flash[:notice] = "You are blocked"
+        else
+          @message.receivers << msg.user
+        end
       end
       session[:target_message_id] = nil
     end
@@ -120,7 +127,7 @@ class MessagesController < ApplicationController
         if blocked
           flash[:notice] = "You are blocked"
         else
-          @message.receivers << receiver
+          @message.receivers << receiver unless @message.receivers.include? receiver
         end
       end
     end

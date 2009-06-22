@@ -1,11 +1,13 @@
 %table
   %thead
     %tr
-      %th{:width=>'%1'}
-      %th{:width=>'%20'} Title
-      %th{:width=>'%30'} Content
-      %th{:width=>'%20'} Target
-      %th{:width=>'%20'} Time
+      %th{:width=>'10%'}
+      %th{:width=>'50%'}
+        = t 'global.title'
+      %th{:width=>'20%'}
+        = t 'manage.receiver'
+      %th{:width=>'20%'}
+        = t 'manage.send_time'
   %tfoot
   %tbody
     - for msg in @sent_messages
@@ -14,8 +16,6 @@
           = check_box_tag "messages[]", msg.id
         %td
           = link_to msg.title, message_path(msg)
-        %td
-          = h msg.body
         %td
           - targets = msg.receivers
           - targets.each do |t|

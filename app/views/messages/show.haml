@@ -7,14 +7,15 @@
   %p
     %b
       = t 'global.content'
-    = h @message.body
+    .rounded
+      = @message.body
 
   %p
     %b Follow:
     = h Message.find_by_id(@message.follow_id).title unless @message.follow_id.nil?
 
   = link_to 'Back', :back
-  = link_to 'Edit', edit_message_path(@message)
+  = #link_to 'Edit', edit_message_path(@message)
 
 - else
   #topic_path
@@ -84,19 +85,19 @@
 
   = will_paginate @replies
 
-%hr
+  %hr
 
-.span-24
-  #post_box
-    - form_for :message, @reply, :url => {:action => 'create'} do |f|
-      = f.hidden_field :follow_id, :value => @message.id
-      %p
-        = f.label t('global.title')
-        = f.text_field :title
-      %p
-        = f.label t('global.content')
-        %br
-        = f.text_area :body
-      %p
-        = submit_tag t('global.post')
+  .span-24
+    #post_box
+      - form_for :message, @reply, :url => {:action => 'create'} do |f|
+        = f.hidden_field :follow_id, :value => @message.id
+        %p
+          = f.label t('global.title')
+          = f.text_field :title
+        %p
+          = f.label t('global.content')
+          %br
+          = f.text_area :body
+        %p
+          = submit_tag t('global.post')
 

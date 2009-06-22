@@ -68,6 +68,9 @@ en:
     request_has_been_sent: "The request has been sent"
     has_been_blocked: "You are in the user's blocklist"
     already_friend: "The use is already your friend"
+    sender: "Sender"
+    send_time: "Time"
+    receiver: "Receiver"
 
   admin:
     label: "Admin"

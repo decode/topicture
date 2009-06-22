@@ -65,6 +65,9 @@ zh:
     request_has_been_sent: "请求己发送"
     has_been_blocked: "己进入黑名单"
     already_friend: "该用户己在好友名单中"
+    sender: "发送者"
+    send_time: "发送时间"
+    receiver: "接收人"
 
   admin:
     label: "网站管理"
