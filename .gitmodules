@@ -25,3 +25,6 @@
 [submodule "vendor/plugins/textile-editor-helper"]
 	path = vendor/plugins/textile-editor-helper
 	url = git://github.com/decode/textile-editor-helper.git
+[submodule "vendor/plugins/active_scaffold"]
+	path = vendor/plugins/active_scaffold
+	url = git://github.com/activescaffold/active_scaffold.git

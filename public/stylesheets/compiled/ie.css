@@ -1,18 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 body {
   text-align: center; }
   * html body legend {
@@ -36,5 +21,40 @@ sub {
 hr {
   margin: -8px auto 11px; }
 
+img {
+  -ms-interpolation-mode: bicubic; }
+
 fieldset {
   padding-top: 0; }
+
+input.text {
+  margin: 0.5em 0;
+  background-color: #fff;
+  border: 1px solid #bbb; }
+  input.text:focus {
+    border: 1px solid #666; }
+input.title {
+  margin: 0.5em 0;
+  background-color: #fff;
+  border: 1px solid #bbb; }
+  input.title:focus {
+    border: 1px solid #666; }
+input.checkbox {
+  position: relative;
+  top: 0.25em; }
+input.radio {
+  position: relative;
+  top: 0.25em; }
+input.button {
+  position: relative;
+  top: 0.25em; }
+
+textarea {
+  margin: 0.5em 0; }
+
+select {
+  margin: 0.5em 0; }
+
+button {
+  position: relative;
+  top: 0.25em; }
